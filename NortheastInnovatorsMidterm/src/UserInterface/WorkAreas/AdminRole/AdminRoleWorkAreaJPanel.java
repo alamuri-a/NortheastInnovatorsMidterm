@@ -13,6 +13,7 @@ package UserInterface.WorkAreas.AdminRole;
 import Business.Business;
 import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.ManageUserAccountsJPanel;
 import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.ManagePersonsJPanel;
+import java.awt.CardLayout;
 
 import javax.swing.JPanel;
 
@@ -21,20 +22,23 @@ import javax.swing.JPanel;
  * @author kal
  */
 public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
-
-    javax.swing.JPanel CardSequencePanel;
+    
+    
+    // ATTRIBUTES
+    JPanel CardSequencePanel;
     Business business;
-
+    
+    
+    // CONSTRUCTOR
     /**
-     * Creates new form UnitRiskWorkArea
+     * Creates new form AdminRoleWorkAreaJPanel
+     * @param b
+     * @param clp
      */
-
     public AdminRoleWorkAreaJPanel(Business b, JPanel clp) {
-
         business = b;
         this.CardSequencePanel = clp;
         initComponents();
-
     }
 
     /**
@@ -160,28 +164,25 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAdminUserAccountsIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminUserAccountsIdentifyResourceAssetsActionPerformed
-        // TODO add your handling code here:
-
+        // Load user management pane
+        
         ManageUserAccountsJPanel aos = new ManageUserAccountsJPanel(business, CardSequencePanel);
-
-        CardSequencePanel.add("ManageVulns", aos);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        CardSequencePanel.add("ManageUsers", aos);
+        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_btnAdminUserAccountsIdentifyResourceAssetsActionPerformed
 
     private void btnRegisterPersonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterPersonsActionPerformed
-        // TODO add your handling code here:
+        // Load person registration pane
 
         ManagePersonsJPanel aos = new ManagePersonsJPanel(business, CardSequencePanel);
-
-        CardSequencePanel.add("Manage Persons", aos);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        CardSequencePanel.add("ManagePersons", aos);
+        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
     }//GEN-LAST:event_btnRegisterPersonsActionPerformed
 
     private void btnManageStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageStudentsActionPerformed
-        // TODO add your handling code here:
-
+        // Load student management pane
     }//GEN-LAST:event_btnManageStudentsActionPerformed
 
     private void btnMyProfileIdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileIdentifyEventsActionPerformed
@@ -189,7 +190,6 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnManageFacultyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageFacultyActionPerformed
     }//GEN-LAST:event_btnManageFacultyActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdminUserAccounts;
@@ -199,4 +199,6 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnRegisterPersons;
     // End of variables declaration//GEN-END:variables
 
+    
+    // EXTRA METHODS
 }

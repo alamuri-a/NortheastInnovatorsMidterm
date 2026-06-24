@@ -15,29 +15,26 @@ import Business.UserAccounts.UserAccountDirectory;
 import UserInterface.WorkAreas.AdminRole.AdminRoleWorkAreaJPanel;
 import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
 import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
-import javax.swing.JPanel;
+import java.awt.CardLayout;
 
 /**
  *
  * @author kal bugrara
  */
 public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
-
+    
+    
+    // ATTRIBUTE
     Business business;
 
+    
+    // CONSTRUCTOR
     /**
-     * Creates new form PricingMainFrame
+     * Creates new form ProfileWorkAreaMainFrame
      */
-
     public ProfileWorkAreaMainFrame() {
         initComponents();
         business = ConfigureABusiness.initialize();
-        
-
-    }
-
-    public void insert(JPanel jpanel) {
-
     }
 
     /**
@@ -130,9 +127,10 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
-        // TODO add your handling code here:
-        //      WorkAreaJPanel ura = new WorkAreaJPanel(workareajpanl);
+        // Authenicate and load user's specific work area
 
+        
+        // Get Username/Password and authenticate
         String un = UserNameTextField.getText();
         String pw = PasswordTextField.getText();
 
@@ -141,40 +139,44 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         if (useraccount == null) {
             return;
         }
+        
+        // Initialize panels for access + get profile
         StudentWorkAreaJPanel studentworkareajpanel;
         FacultyWorkAreaJPanel facultyworkarea;
         AdminRoleWorkAreaJPanel adminworkarea;
-        String r = useraccount.getRole();
+        
         Profile profile = useraccount.getAssociatedPersonProfile();
 
-
+        // Instance profile based off profile type
+        
+            // ADMIN
         if (profile instanceof EmployeeProfile) {
-
             adminworkarea = new AdminRoleWorkAreaJPanel(business, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("Admin", adminworkarea);
-            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
+            ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
         }
         
+            // STUDENT
         if (profile instanceof StudentProfile) {
-
             StudentProfile spp = (StudentProfile) profile;
             studentworkareajpanel = new StudentWorkAreaJPanel(business, spp, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("student", studentworkareajpanel);
-            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
+            ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
         }
 
- /*      if (profile instanceof FacultyProfile) {
+            // FACULTY
+        
+            /*
+        if (profile instanceof FacultyProfile) {
             facultyworkarea = new FacultyWorkAreaJPanel(business, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
-            ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+            ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
         }
-*/
+            */
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 
@@ -231,4 +233,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblUserName;
     private javax.swing.JLabel lblWelcome;
     // End of variables declaration//GEN-END:variables
+    
+    
+    // EXTRA METHODS
 }

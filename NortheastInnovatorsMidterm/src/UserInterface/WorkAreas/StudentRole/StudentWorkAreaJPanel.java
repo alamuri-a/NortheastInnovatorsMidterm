@@ -20,24 +20,26 @@ import javax.swing.JPanel;
  */
 public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 
+    
+    // ATTRIBUTES
     javax.swing.JPanel CardSequencePanel;
     Business business;
     StudentProfile student;
 
+    
+    // CONSTRUCTOR
+
     /**
-     * Creates new form UnitRiskWorkArea
+     * Creates new form StudentWorkAreaJPanel
      * @param b
      * @param spp
      * @param clp
      */
-
     public StudentWorkAreaJPanel(Business b, StudentProfile spp, JPanel clp) {
-
         business = b;
         this.CardSequencePanel = clp;
         student = spp;
         initComponents();
-
     }
 
     /**
@@ -170,33 +172,24 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCourseWorkIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseWorkIdentifyResourceAssetsActionPerformed
-        
-
+        // Load course work pane
     }//GEN-LAST:event_btnCourseWorkIdentifyResourceAssetsActionPerformed
 
     private void btnManageProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageProfileActionPerformed
-        // TODO add your handling code here:
-
-
-
+        // Load profile management pane
 }//GEN-LAST:event_btnManageProfileActionPerformed
 
     private void btnGraduationAuditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraduationAuditActionPerformed
-        // TODO add your handling code here:
-
-
+        // Load graduation audit pane
     }//GEN-LAST:event_btnGraduationAuditActionPerformed
 
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
-        // TODO add your handling code here:
-
-        CardSequencePanel.removeAll();
+        // Load registration pane
 }//GEN-LAST:event_btnRegistrationActionPerformed
 
     private void btnTranscriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTranscriptActionPerformed
-        // TODO add your handling code here:
+        // Load transcript pane
     }//GEN-LAST:event_btnTranscriptActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCourseWork;
@@ -207,4 +200,6 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 
+    
+    // EXTRA METHODS
 }

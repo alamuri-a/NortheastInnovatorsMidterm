@@ -6,6 +6,7 @@
 package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
 import Business.Business;
+import java.awt.CardLayout;
 
 
 import javax.swing.JPanel;
@@ -15,21 +16,25 @@ import javax.swing.JPanel;
  * @author kal bugrara
  */
 public class ManagePersonsJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form ManageSuppliersJPanel
-     */
+    
+    
+    // ATTRIBUTES
     JPanel CardSequencePanel;
     Business business;
 
 
+    // CONSTRUCTOR
+    
+    /**
+     * Creates new form ManagePersonsJPanel
+     * @param bz
+     * @param jp
+     */
     public ManagePersonsJPanel(Business bz, JPanel jp) {
         CardSequencePanel = jp;
         this.business = bz;
         initComponents();
-
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -77,22 +82,19 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
+        // Return to previous page
         CardSequencePanel.remove(this);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
- //       ((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
-
+        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        //((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // TODO add your handling code here:
-        
+        // Load person management pane
+
         AdministerPersonJPanel mppd = new AdministerPersonJPanel(business, CardSequencePanel);
         CardSequencePanel.add(mppd);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
+        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnNextActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -101,4 +103,6 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 
+    
+    // EXTRA METHODS
 }

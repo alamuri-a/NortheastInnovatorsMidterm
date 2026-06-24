@@ -6,6 +6,7 @@
 package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
 import Business.UserAccounts.UserAccount;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -14,21 +15,25 @@ import javax.swing.JPanel;
  */
 
 public class AdminUserAccount extends javax.swing.JPanel {
-
-    /**
-     * Creates new form ManageSuppliersJPanel
-     */
+    
+    
+    // ATTRIBUTES
     JPanel CardSequencePanel;
-
     UserAccount selecteduseraccount;
 
+    
+    // CONSTRUCTOR
+    
+    /**
+     * Creates new form AdminUserAccount
+     * @param sua
+     * @param jp
+     */
     public AdminUserAccount(UserAccount sua, JPanel jp) {
-
         CardSequencePanel = jp;
         selecteduseraccount= sua;
         initComponents();
         //display user details here
-
     }
 
     /**
@@ -72,21 +77,18 @@ public class AdminUserAccount extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+        // Update fields and notify user, then return to user account table page
 
         CardSequencePanel.remove(this);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
+        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        // TODO add your handling code here:
-         CardSequencePanel.remove(this);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
-
+        // Return to previous page
+        
+        CardSequencePanel.remove(this);
+        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -94,4 +96,6 @@ public class AdminUserAccount extends javax.swing.JPanel {
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 
+    
+    // EXTRA METHODS
 }

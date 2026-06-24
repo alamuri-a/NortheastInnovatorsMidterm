@@ -11,7 +11,7 @@
 package UserInterface.WorkAreas.FacultyRole;
 
 import Business.Business;
-import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.ManagePersonsJPanel;
+import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
@@ -19,20 +19,24 @@ import javax.swing.JPanel;
  * @author kal
  */
 public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
-
-    javax.swing.JPanel CardSequencePanel;
+    
+    
+    // ATTRIBUTES
+    JPanel CardSequencePanel;
     Business business;
 
+    
+    // CONSTRUCTOR
+    
     /**
-     * Creates new form UnitRiskWorkArea
+     * Creates new form FacultyWorkAreaJPanel
+     * @param b
+     * @param clp
      */
-
     public FacultyWorkAreaJPanel(Business b, JPanel clp) {
-
         business = b;
         this.CardSequencePanel = clp;
         initComponents();
-
     }
 
     /**
@@ -148,37 +152,20 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageCoursesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCoursesIdentifyResourceAssetsActionPerformed
-        // TODO add your handling code here:
-        CardSequencePanel.removeAll();
-
-        ManagePersonsJPanel aos = new ManagePersonsJPanel(business, CardSequencePanel);
-
-        CardSequencePanel.add("Manage Persons", aos);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
+        // Load course management pane
     }//GEN-LAST:event_btnManageCoursesIdentifyResourceAssetsActionPerformed
 
     private void btnManageStudentsProfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageStudentsProfilesActionPerformed
-        // TODO add your handling code here:
-
-  
+        // Load student management pane
     }//GEN-LAST:event_btnManageStudentsProfilesActionPerformed
 
     private void btnMyProfileIdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileIdentifyEventsActionPerformed
-        // TODO add your handling code here:
-        CardSequencePanel.removeAll();
-        //    IdentifyEventTypes iet= new IdentifyEventTypes(businessunit, CardSequencePanel);
-
-        //    CardSequencePanel.add("IdentifyEventTypes", iet);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-        //((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
+        // Load my profile pane
 }//GEN-LAST:event_btnMyProfileIdentifyEventsActionPerformed
 
     private void btnPerformanceReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerformanceReportsActionPerformed
-        // TODO add your handling code here:
-
+        // Load performance reports pane
 }//GEN-LAST:event_btnPerformanceReportsActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManageCourses;
@@ -188,4 +175,6 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 
+    
+    // EXTRA METHODS
 }
