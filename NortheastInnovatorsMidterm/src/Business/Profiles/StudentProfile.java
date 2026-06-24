@@ -13,24 +13,26 @@ import Business.Person.Person;
  */
 public class StudentProfile extends Profile {
 
+    
+    // ATTRIBUTES
     Person person;
-//    Transcript transcript;
-    //   EmploymentHistroy employmenthistory;
+    //Transcript transcript;
+    //EmploymentHistroy employmenthistory;
 
+    
+    // CONSTRUCTOR
     public StudentProfile(Person p) {
         super(p);
 
-//        transcript = new Transcript(this);
-//        employmenthistory = new EmploymentHistroy();
+        //transcript = new Transcript(this);
+        //employmenthistory = new EmploymentHistroy();
     }
 
+    
+    // METHODS
     @Override
     public String getRole() {
         return "Student";
-    }
-
-    public boolean isMatch(String id) {
-        return person.getPersonId().equals(id);
     }
 
 }

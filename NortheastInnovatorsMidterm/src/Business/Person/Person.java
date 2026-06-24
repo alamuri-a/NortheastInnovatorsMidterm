@@ -11,22 +11,26 @@ package Business.Person;
  */
 public class Person {
 
-    String id;
+    
+    // ATTRIBUTE
+    String id; // Person name
 
+    
+    // CONSTRUCTOR
     public Person(String id) {
-
         this.id = id;
     }
 
+    
+    // GETTER
     public String getPersonId() {
         return id;
     }
 
+    
+    // EXTRA METHODS
     public boolean isMatch(String id) {
-        if (getPersonId().equals(id)) {
-            return true;
-        }
-        return false;
+        return getPersonId().equals(id);
     }
 
     @Override

@@ -16,9 +16,13 @@ import java.util.ArrayList;
  */
 public class EmployeeDirectory {
 
+    
+    // ATTRIBUTES
     Business business;
     ArrayList<EmployeeProfile> employeelist;
 
+    
+    // CONSTRUCTOR
     public EmployeeDirectory(Business d) {
 
         business = d;
@@ -26,22 +30,21 @@ public class EmployeeDirectory {
 
     }
 
+    
+    // METHODS
     public EmployeeProfile newEmployeeProfile(Person p) {
-
         EmployeeProfile sp = new EmployeeProfile(p);
         employeelist.add(sp);
         return sp;
     }
 
     public EmployeeProfile findEmployee(String id) {
-
         for (EmployeeProfile sp : employeelist) {
-
             if (sp.isMatch(id)) {
                 return sp;
             }
         }
-            return null; //not found after going through the whole list
-         }
+        return null; //not found after going through the whole list
+    }
     
 }
