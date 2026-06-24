@@ -14,25 +14,24 @@ import javax.swing.JPanel;
  * @author kal bugrara
  */
 public class AdministerPersonJPanel extends javax.swing.JPanel {
-
-    /**
-     * Creates new form ManageSuppliersJPanel
-     */
+    
+    
+    // ATTRIBUTES
     JPanel CardSequencePanel;
-
     Business business;
 
+    
+    // CONSTRUCTOR
+    
+    /**
+     * Creates new form AdministerPersonJPanel
+     * @param bz
+     * @param jp
+     */
     public AdministerPersonJPanel(Business bz, JPanel jp) {
-
         CardSequencePanel = jp;
         this.business = bz;
         initComponents();
-
-
-    }
-
-    public void refreshTable() {
-
     }
 
     /**
@@ -44,39 +43,39 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Back = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
 
-        Back.setText("<< Back");
-        Back.addActionListener(new java.awt.event.ActionListener() {
+        btnBack.setText("<< Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BackActionPerformed(evt);
+                btnBackActionPerformed(evt);
             }
         });
-        add(Back);
-        Back.setBounds(30, 290, 76, 32);
+        add(btnBack);
+        btnBack.setBounds(30, 290, 74, 23);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        jLabel2.setText("Manage Person Profile");
-        add(jLabel2);
-        jLabel2.setBounds(21, 20, 550, 29);
+        lblTitle.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblTitle.setText("Manage Person Profile");
+        add(lblTitle);
+        lblTitle.setBounds(21, 20, 550, 28);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackActionPerformed
-        // TODO add your handling code here:
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        // Return to previous page
+        
         CardSequencePanel.remove(this);
         ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
-
-    }//GEN-LAST:event_BackActionPerformed
-
+    }//GEN-LAST:event_btnBackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton Back;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton btnBack;
+    private javax.swing.JLabel lblTitle;
     // End of variables declaration//GEN-END:variables
 
+    
+    // EXTRA METHODS
 }

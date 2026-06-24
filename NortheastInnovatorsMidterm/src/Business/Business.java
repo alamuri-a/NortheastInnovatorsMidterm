@@ -17,15 +17,16 @@ import Business.UserAccounts.UserAccountDirectory;
  */
 public class Business {
 
-    String name;
-    PersonDirectory persondirectory; //all people profiles regardless of the role
-
-    EmployeeDirectory employeedirectory;
-    UserAccountDirectory useraccountdirectory;
-    StudentDirectory studentdirectory;
     
-
-
+    // ATTRIBUTES
+    String name;
+    PersonDirectory persondirectory; // All Person profiles regardless of the role
+    EmployeeDirectory employeedirectory; // Admin profile list
+    UserAccountDirectory useraccountdirectory; // User account list
+    StudentDirectory studentdirectory; // Student profile list
+    
+    
+    // CONSTRUCTOR
     public Business(String n) {
         name = n;
 
@@ -33,14 +34,13 @@ public class Business {
         employeedirectory = new EmployeeDirectory(this);
         useraccountdirectory = new UserAccountDirectory();
         studentdirectory = new StudentDirectory();
-
-
     }
 
+    
+    // GETTERS AND SETTERS
     public PersonDirectory getPersonDirectory() {
         return persondirectory;
     }
-
     public UserAccountDirectory getUserAccountDirectory() {
         return useraccountdirectory;
     }
@@ -49,9 +49,10 @@ public class Business {
     public EmployeeDirectory getEmployeeDirectory() {
         return employeedirectory;
     }
-
     public StudentDirectory getStudentDirectory(){
         return studentdirectory;
     }
 
+    
+    // EXTRA METHODS
 }

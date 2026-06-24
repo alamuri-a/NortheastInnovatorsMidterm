@@ -13,13 +13,14 @@ import Business.Person.Person;
  */
 public class EmployeeProfile extends Profile {
 
-
-
+    
+    // CONSTRUCTORS
     public EmployeeProfile(Person p) {
-
-        super(p); 
-
+        super(p);
     }
+    
+    
+    // METHODS
     @Override
     public String getRole(){
         return  "Admin";

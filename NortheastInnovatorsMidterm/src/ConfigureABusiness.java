@@ -26,36 +26,32 @@ class ConfigureABusiness {
     static Business initialize() {
         Business business = new Business("Information Systems");
 
-// Create Persons
-      PersonDirectory persondirectory = business.getPersonDirectory();
-// person representing sales organization        
+        // Create Person Directory (Container for Persons)
+        PersonDirectory persondirectory = business.getPersonDirectory();
+        
+        // Initialize demo Person data
         Person person001 = persondirectory.newPerson("John Smith");
         Person person002 = persondirectory.newPerson("Gina Montana");
         Person person003 = persondirectory.newPerson("Adam Rollen");
- 
-        Person person005 = persondirectory.newPerson("Jim Dellon");
-        Person person006 = persondirectory.newPerson("Anna Shnider");
-        Person person007 = persondirectory.newPerson("Laura Brown");
-        Person person008 = persondirectory.newPerson("Jack While");
-        Person person009 = persondirectory.newPerson("Fidelity"); //we use this as customer
+        Person person004 = persondirectory.newPerson("Jim Dellon");
+        Person person005 = persondirectory.newPerson("Anna Shnider");
+        Person person006 = persondirectory.newPerson("Laura Brown");
+        Person person007 = persondirectory.newPerson("Jack While");
 
-// Create Admins to manage the business
+        // Create Admin (Employee) directory + initialize demo Admin profile
         EmployeeDirectory employeedirectory = business.getEmployeeDirectory();
         EmployeeProfile employeeprofile0 = employeedirectory.newEmployeeProfile(person001);
         
+        // Create Student directory + initialize demo Student profile
         StudentDirectory studentdirectory = business.getStudentDirectory();
         StudentProfile studentprofile0 = studentdirectory.newStudentProfile(person003);
-        
-
-
    
-// Create User accounts that link to specific profiles
+        // Create User accounts for demo profiles
         UserAccountDirectory uadirectory = business.getUserAccountDirectory();
-        UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); /// order products for one of the customers and performed by a sales person
-        UserAccount ua4 = uadirectory.newUserAccount(studentprofile0, "adam", "****"); /// order products for one of the customers and performed by a sales person
+        UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); // Admin
+        UserAccount ua4 = uadirectory.newUserAccount(studentprofile0, "adam", "****"); // Student
 
         return business;
-
     }
 
 }

@@ -16,30 +16,30 @@ import java.util.ArrayList;
 public class StudentDirectory {
 
 
+    // ATTRIBUTE
     ArrayList<StudentProfile> studentlist;
 
+    
+    // CONSTRUCTOR
     public StudentDirectory() {
-
-     studentlist = new ArrayList();
-
+        studentlist = new ArrayList();
     }
 
+    
+    // METHODS
     public StudentProfile newStudentProfile(Person p) {
-
         StudentProfile sp = new StudentProfile(p);
         studentlist.add(sp);
         return sp;
     }
 
     public StudentProfile findStudent(String id) {
-
         for (StudentProfile sp : studentlist) {
-
             if (sp.isMatch(id)) {
                 return sp;
             }
         }
-            return null; //not found after going through the whole list
-         }
+        return null; //not found after going through the whole list
+    }
     
 }

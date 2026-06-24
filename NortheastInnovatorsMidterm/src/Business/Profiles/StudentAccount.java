@@ -11,4 +11,12 @@ package Business.Profiles;
  */
 public class StudentAccount {
     
+    
+    // ATTRIBUTES
+    
+    
+    // CONSTRUCTOR
+    
+    
+    // METHODS
 }

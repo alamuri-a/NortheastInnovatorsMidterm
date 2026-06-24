@@ -12,24 +12,28 @@ import Business.Person.Person;
  * @author kal bugrara
  */
 public abstract class Profile {
+    
+    // ATTRIBUTE
     Person person;
-     public Profile(Person p){
+    
+    
+    // CONSTRUCTOR
+    public Profile(Person p){
         person = p;
         
     }
     
-     public abstract String getRole();
+    
+    // METHODS
+    public abstract String getRole(); // Must be implemented in subclasses
     
     public Person getPerson(){
         return person;
     }
      
 
-        public boolean isMatch(String id) {
-        if (person.getPersonId().equals(id)) {
-            return true;
-        }
-        return false;
+    public boolean isMatch(String id) {
+        return person.getPersonId().equals(id);
     }
 
 }
