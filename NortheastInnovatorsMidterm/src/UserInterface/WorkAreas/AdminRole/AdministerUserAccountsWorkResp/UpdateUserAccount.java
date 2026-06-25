@@ -5,6 +5,7 @@
  */
 package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
+import Business.Profiles.StudentAccount;
 import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -63,6 +64,8 @@ public class UpdateUserAccount extends javax.swing.JPanel {
         lblID = new javax.swing.JLabel();
         txtProfileType = new javax.swing.JTextField();
         txtID = new javax.swing.JTextField();
+        lblNUID = new javax.swing.JLabel();
+        txtNUID = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -133,6 +136,14 @@ public class UpdateUserAccount extends javax.swing.JPanel {
         txtID.setEditable(false);
         add(txtID);
         txtID.setBounds(140, 230, 110, 22);
+
+        lblNUID.setText("NUID:");
+        add(lblNUID);
+        lblNUID.setBounds(60, 290, 60, 20);
+
+        txtNUID.setEditable(false);
+        add(txtNUID);
+        txtNUID.setBounds(140, 290, 110, 22);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -179,6 +190,7 @@ public class UpdateUserAccount extends javax.swing.JPanel {
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel lblActivity;
     private javax.swing.JLabel lblID;
+    private javax.swing.JLabel lblNUID;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblProfile;
     private javax.swing.JLabel lblTitle;
@@ -186,6 +198,7 @@ public class UpdateUserAccount extends javax.swing.JPanel {
     private javax.swing.JLabel lblUsername;
     private javax.swing.JTextField txtActivity;
     private javax.swing.JTextField txtID;
+    private javax.swing.JTextField txtNUID;
     private javax.swing.JTextField txtPassword;
     private javax.swing.JTextField txtProfileType;
     private javax.swing.JTextField txtUpdated;
@@ -197,11 +210,23 @@ public class UpdateUserAccount extends javax.swing.JPanel {
     private void updateFields() {
         // Load updated data into fields
         
+        String role = selecteduseraccount.getRole();
+        
         txtActivity.setText(selecteduseraccount.getActivity());
         txtUpdated.setText(selecteduseraccount.getUpdated());
-        txtProfileType.setText(selecteduseraccount.getRole());
+        txtProfileType.setText(role);
         txtID.setText(selecteduseraccount.getPersonId());
         txtUsername.setText(selecteduseraccount.getUserLoginName());
         txtPassword.setText(selecteduseraccount.getPassword());
+        
+        if (selecteduseraccount instanceof StudentAccount) {
+            lblNUID.setVisible(true);
+            txtNUID.setVisible(true);
+            
+            txtNUID.setText(String.valueOf(((StudentAccount)selecteduseraccount).getNUID()));
+        } else {
+            lblNUID.setVisible(false);
+            txtNUID.setVisible(false);
+        }
     }
 }
