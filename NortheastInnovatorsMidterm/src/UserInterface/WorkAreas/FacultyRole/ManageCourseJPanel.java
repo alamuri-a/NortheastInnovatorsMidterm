@@ -89,7 +89,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         }
 
         // Push your customized matrix blueprint onto your UI table object
-        ManageCourses.setModel(model);
+        ManageCoursesTable.setModel(model);
     }
 
 
@@ -103,11 +103,11 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        ManageCourses = new javax.swing.JTable();
+        ManageCoursesTable = new javax.swing.JTable();
         btnNext = new javax.swing.JButton();
         Back = new javax.swing.JButton();
 
-        ManageCourses.setModel(new javax.swing.table.DefaultTableModel(
+        ManageCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -118,7 +118,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(ManageCourses);
+        jScrollPane1.setViewportView(ManageCoursesTable);
 
         btnNext.setText("Next");
 
@@ -165,7 +165,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JTable ManageCourses;
+    private javax.swing.JTable ManageCoursesTable;
     private javax.swing.JButton btnNext;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
