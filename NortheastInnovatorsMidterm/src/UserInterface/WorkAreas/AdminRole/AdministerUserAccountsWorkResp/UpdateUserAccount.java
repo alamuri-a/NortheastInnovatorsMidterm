@@ -13,8 +13,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- *h
- * @author kal bugrara
+ *
+ * @author Ajay Alamuri
  */
 
 public class UpdateUserAccount extends javax.swing.JPanel {
