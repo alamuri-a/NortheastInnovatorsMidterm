@@ -5,18 +5,34 @@
  */
 package Business.Profiles;
 
+import Business.UserAccounts.UserAccount;
+
 /**
  *
  * @author kal bugrara
  */
-public class StudentAccount {
+public class StudentAccount extends UserAccount {
     
     
     // ATTRIBUTES
+    private int NUID;
     
     
     // CONSTRUCTOR
+    public StudentAccount(StudentProfile p, String un, String pw, int id) {
+        super(p,un, pw);
+        
+        NUID = id;
+    }
     
     
     // METHODS
+    public int getNUID() {
+        return NUID;
+    }
+    
+    public void setNUID(int NUID) {
+        this.NUID = NUID;
+    }
+    
 }
