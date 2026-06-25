@@ -49,7 +49,7 @@ class ConfigureABusiness {
         // Create User accounts for demo profiles
         UserAccountDirectory uadirectory = business.getUserAccountDirectory();
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); // Admin
-        UserAccount ua4 = uadirectory.newUserAccount(studentprofile0, "adam", "****"); // Student
+        UserAccount ua4 = uadirectory.newStudentAccount(studentprofile0, "adam", "****", 1); // Student
 
         return business;
     }

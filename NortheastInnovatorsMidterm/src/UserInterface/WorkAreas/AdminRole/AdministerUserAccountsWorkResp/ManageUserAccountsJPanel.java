@@ -9,6 +9,7 @@ import Business.Business;
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 
 
 import javax.swing.JPanel;
@@ -16,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author kal bugrara
+ * @author Ajay Alamuri
  */
 public class ManageUserAccountsJPanel extends javax.swing.JPanel {
     
@@ -26,7 +27,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
     Business business;
     UserAccount selecteduseraccount;
 
-
+    
     // CONSTRUCTOR
     
     /**
@@ -56,6 +57,8 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         lblTitle = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblUserAccounts = new javax.swing.JTable();
+        btnDelete = new javax.swing.JButton();
+        btnAdd = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -107,7 +110,25 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         jScrollPane1.setViewportView(tblUserAccounts);
 
         add(jScrollPane1);
-        jScrollPane1.setBounds(30, 110, 550, 130);
+        jScrollPane1.setBounds(30, 110, 570, 130);
+
+        btnDelete.setText("Delete Account");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
+            }
+        });
+        add(btnDelete);
+        btnDelete.setBounds(250, 300, 120, 23);
+
+        btnAdd.setText("Add >>");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        add(btnAdd);
+        btnAdd.setBounds(500, 340, 80, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -115,17 +136,21 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         
         CardSequencePanel.remove(this);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-        //((CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // Load account update pane with selected user
         
-        if(selecteduseraccount==null) return;
-        AdminUserAccount mppd = new AdminUserAccount(selecteduseraccount, CardSequencePanel);
+        // Notify if user is not selected
+        if(selecteduseraccount==null) {
+            JOptionPane.showMessageDialog(null, "Please select an account from the table.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // Load next page with user account if selected
+        UpdateUserAccount mppd = new UpdateUserAccount(selecteduseraccount, CardSequencePanel);
         CardSequencePanel.add(mppd);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void tblUserAccountsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserAccountsMousePressed
@@ -140,8 +165,39 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         selecteduseraccount = (UserAccount) tblUserAccounts.getValueAt(selectedrow, 0);            
     }//GEN-LAST:event_tblUserAccountsMousePressed
 
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // Remove selected account from user directory + update table
+        
+        // Notify if no user is selected / if user is currently logged in
+        if (selecteduseraccount == null) {
+            JOptionPane.showMessageDialog(null, "Please select an account from the table.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        } else if (selecteduseraccount.getStatus()) {
+            JOptionPane.showMessageDialog(null, "Cannot delete account as user is currently logged in.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // Display confirmation dialog for deletion
+        int dialogResult = JOptionPane.showConfirmDialog(null,"Are you sure you want to delete the selected account?", "Warning", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            UserAccountDirectory uad = business.getUserAccountDirectory();
+            uad.deleteUserAccount(selecteduseraccount);
+            selecteduseraccount = null;
+            refreshTable();
+        }
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // Load user account creation page
+        CreateUserAccount cua = new CreateUserAccount(business, CardSequencePanel);
+        CardSequencePanel.add(cua);
+        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+    }//GEN-LAST:event_btnAddActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNext;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
@@ -163,9 +219,9 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         for (UserAccount ua : uad.getUserAccountList()) {
             Object[] row = new Object[5];
             row[0] = ua;
-            //row[1] = ua.getStatus(); //complete this..
-            //row[2] = ua.getLastUpdated()
-            //row[3] = 
+            row[1] = (ua.getStatus()) ? "Logged In" : "Disconnected";
+            row[2] = ua.getActivity();
+            row[3] = ua.getUpdated();
             
             model.addRow(row);
         }

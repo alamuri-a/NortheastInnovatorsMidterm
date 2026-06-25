@@ -140,6 +140,10 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             return;
         }
         
+        // Trip for login activity + status
+        useraccount.setActivity();
+        useraccount.setStatus(true);
+        
         // Initialize panels for access + get profile
         StudentWorkAreaJPanel studentworkareajpanel;
         FacultyWorkAreaJPanel facultyworkarea;
