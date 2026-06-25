@@ -20,10 +20,7 @@ public class StudentAccount extends UserAccount {
     
     // CONSTRUCTOR
     public StudentAccount(StudentProfile p, String un, String pw, int id) {
-        super(p,
-                (un == null) ? "-1" : un,
-                (pw == null) ? "-1" : pw
-        );
+        super(p,un, pw);
         
         NUID = id;
     }

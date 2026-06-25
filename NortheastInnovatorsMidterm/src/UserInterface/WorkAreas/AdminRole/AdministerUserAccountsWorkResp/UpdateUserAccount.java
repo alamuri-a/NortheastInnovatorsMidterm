@@ -219,6 +219,7 @@ public class UpdateUserAccount extends javax.swing.JPanel {
         txtUsername.setText(selecteduseraccount.getUserLoginName());
         txtPassword.setText(selecteduseraccount.getPassword());
         
+        // Show/Hide NUID based on account type
         if (selecteduseraccount instanceof StudentAccount) {
             lblNUID.setVisible(true);
             txtNUID.setVisible(true);
