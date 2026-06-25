@@ -138,7 +138,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         }
         
         // Load next page with user account if selected
-        AdminUserAccount mppd = new AdminUserAccount(selecteduseraccount, CardSequencePanel);
+        UpdateUserAccount mppd = new UpdateUserAccount(selecteduseraccount, CardSequencePanel);
         CardSequencePanel.add(mppd);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnNextActionPerformed

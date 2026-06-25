@@ -43,6 +43,10 @@ public class UserAccount {
         return username;
     }
     
+    public void setUserLoginName(String un){
+        username = un;
+    }
+    
     public Profile getAssociatedPersonProfile(){
         return profile;
     }
@@ -77,6 +81,14 @@ public class UserAccount {
     
     public void setStatus(boolean stat) {
         this.status = stat;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     
