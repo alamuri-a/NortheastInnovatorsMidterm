@@ -22,6 +22,7 @@ public class UserAccount {
     Profile profile;
     String username;
     String password;
+    boolean status;
     LocalDateTime activity;
     LocalDateTime updated;
     
@@ -33,6 +34,7 @@ public class UserAccount {
         this.profile = profile;
         activity = LocalDateTime.now();
         updated = LocalDateTime.now();
+        status = false;
     }
 
     
@@ -67,6 +69,14 @@ public class UserAccount {
     
     public void setUpdated() {
         this.updated = LocalDateTime.now();
+    }
+    
+    public boolean getStatus() {
+        return this.status;
+    }
+    
+    public void setStatus(boolean stat) {
+        this.status = stat;
     }
     
     
