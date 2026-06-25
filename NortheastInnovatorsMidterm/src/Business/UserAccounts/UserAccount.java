@@ -6,6 +6,8 @@
 package Business.UserAccounts;
 
 import Business.Profiles.Profile;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 
@@ -20,6 +22,8 @@ public class UserAccount {
     Profile profile;
     String username;
     String password;
+    LocalDateTime activity;
+    LocalDateTime updated;
     
     
     // CONSTRUCTOR
@@ -27,10 +31,12 @@ public class UserAccount {
         username = un;
         password = pw;
         this.profile = profile;
+        activity = LocalDateTime.now();
+        updated = LocalDateTime.now();
     }
 
     
-    // GETTERS
+    // GETTERS AND SETTERS
     public String getUserLoginName(){
         return username;
     }
@@ -45,6 +51,22 @@ public class UserAccount {
     
     public String getRole(){
         return profile.getRole();
+    }
+    
+    public String getActivity() {
+        return this.activity.format(DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm:ss"));
+    }
+    
+    public void setActivity() {
+        this.activity = LocalDateTime.now();
+    }
+    
+    public String getUpdated() {
+        return this.updated.format(DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm:ss"));
+    }
+    
+    public void setUpdated() {
+        this.updated = LocalDateTime.now();
     }
     
     

@@ -96,7 +96,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "User Name", "Status", "Last Activity", "Last Updated"
+                "User Name", "Role", "Last Activity", "Last Updated"
             }
         ));
         tblUserAccounts.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,12 +120,10 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         // Load account update pane with selected user
-        
         if(selecteduseraccount==null) return;
         AdminUserAccount mppd = new AdminUserAccount(selecteduseraccount, CardSequencePanel);
         CardSequencePanel.add(mppd);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
     }//GEN-LAST:event_btnNextActionPerformed
 
     private void tblUserAccountsMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblUserAccountsMousePressed
@@ -163,9 +161,9 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         for (UserAccount ua : uad.getUserAccountList()) {
             Object[] row = new Object[5];
             row[0] = ua;
-            //row[1] = ua.getStatus(); //complete this..
-            //row[2] = ua.getLastUpdated()
-            //row[3] = 
+            row[1] = ua.getRole();
+            row[2] = ua.getActivity();
+            row[3] = ua.getUpdated();
             
             model.addRow(row);
         }

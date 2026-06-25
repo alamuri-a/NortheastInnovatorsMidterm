@@ -5,7 +5,7 @@
 |-------------|------|---------------|------------------|
 | Nicholas Woodward | 002478780 | Student | README |
 | Meredith Molyneux| 003978998 | Faculty| XXXX |
-| Ajay Alamuri | XXXXXXXX | Admin | XXXXX |
+| Ajay Alamuri | 003915177 | Admin | Formatting |
 
 ## Project Overview
 The purpose of this project is to integrate a Digital University System with a role-based Access Control Layer to provide secure authentication and authorization for different university users. The application was developed using Java Swing and object-oriented programming principles to create a secure, modular, and user-friendly university management system.
