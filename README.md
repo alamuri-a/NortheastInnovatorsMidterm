@@ -3,9 +3,9 @@
 ## Team Information
 | Team Member | NUID | Assigned Role | Responsibilities |
 |-------------|------|---------------|------------------|
-| Nicholas Woodward | 002478780 | XXXX| XXXX |
-| Meredith Molyneux| XXXXXXXX | XXXX| XXXX |
-| Ajay Alamuri | XXXXXXXX | XXXX | XXXXX |
+| Nicholas Woodward | 002478780 | Student | README |
+| Meredith Molyneux| 003978998 | Faculty| XXXX |
+| Ajay Alamuri | XXXXXXXX | Admin | XXXXX |
 
 ## Project Overview
 The purpose of this project is to integrate a Digital University System with a role-based Access Control Layer to provide secure authentication and authorization for different university users. The application was developed using Java Swing and object-oriented programming principles to create a secure, modular, and user-friendly university management system.
@@ -216,8 +216,8 @@ The following table summarizes each team member's responsibilities and contribut
 
 | Team Member | Assigned Use Case | Coding Contributions | Documentation | Testing | Other Contributions |
 |-------------|-------------------|----------------------|---------------|---------|---------------------|
-| Nicholas Woodward | TBD | TBD | TBD | TBD | TBD |
-| Meredith Molyneux | TBD | TBD | TBD | TBD | TBD |
-| Ajay Alamuri | TBD | TBD | TBD | TBD | TBD |
+| Nicholas Woodward | Student | README | TBD | TBD | TBD |
+| Meredith Molyneux | Faculty | TBD | TBD | TBD | TBD |
+| Ajay Alamuri | Admin | TBD | TBD | TBD | TBD |
 
 Each team member contributed to project planning, GitHub collaboration, code reviews, and integration testing throughout the development of the Digital University System.
