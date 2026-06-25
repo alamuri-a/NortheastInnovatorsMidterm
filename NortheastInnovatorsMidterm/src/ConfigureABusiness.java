@@ -57,6 +57,7 @@ class ConfigureABusiness {
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); // Admin
         UserAccount ua4 = uadirectory.newUserAccount(studentprofile0, "adam", "****"); // Student
         UserAccount ua5 = uadirectory.newUserAccount(facultyprofile0, "jackW", "****");//Faculty
+        UserAccount ua4 = uadirectory.newStudentAccount(studentprofile0, "adam", "****", 1); // Student
 
         return business;
     }

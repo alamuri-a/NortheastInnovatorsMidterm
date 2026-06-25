@@ -6,12 +6,15 @@
 package Business.UserAccounts;
 
 import Business.Profiles.Profile;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 
 
 /**
  *
  * @author kal bugrara
+ * @author Ajay Alamuri
  */
 public class UserAccount {
     
@@ -20,6 +23,9 @@ public class UserAccount {
     Profile profile;
     String username;
     String password;
+    boolean status;
+    LocalDateTime activity;
+    LocalDateTime updated;
     
     
     // CONSTRUCTOR
@@ -27,12 +33,19 @@ public class UserAccount {
         username = un;
         password = pw;
         this.profile = profile;
+        activity = LocalDateTime.now();
+        updated = LocalDateTime.now();
+        status = false;
     }
 
     
-    // GETTERS
+    // GETTERS AND SETTERS
     public String getUserLoginName(){
         return username;
+    }
+    
+    public void setUserLoginName(String un){
+        username = un;
     }
     
     public Profile getAssociatedPersonProfile(){
@@ -45,6 +58,38 @@ public class UserAccount {
     
     public String getRole(){
         return profile.getRole();
+    }
+    
+    public String getActivity() {
+        return this.activity.format(DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm:ss"));
+    }
+    
+    public void setActivity() {
+        this.activity = LocalDateTime.now();
+    }
+    
+    public String getUpdated() {
+        return this.updated.format(DateTimeFormatter.ofPattern("MMM dd, yyyy HH:mm:ss"));
+    }
+    
+    public void setUpdated() {
+        this.updated = LocalDateTime.now();
+    }
+    
+    public boolean getStatus() {
+        return this.status;
+    }
+    
+    public void setStatus(boolean stat) {
+        this.status = stat;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
     
     
