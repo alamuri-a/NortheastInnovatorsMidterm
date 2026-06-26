@@ -24,20 +24,20 @@ import university.Department.Department;
  *
  * @author mmoly
  */
-public class ManageCourseJPanel extends javax.swing.JPanel {
+public class ManageStudentProfileJPanel extends javax.swing.JPanel {
 
        JPanel CardSequencePanel;
         Business business;
     /**
      * Creates new form ManageCourse
      */
-    public ManageCourseJPanel(Business bz, JPanel jp) {
+    public ManageStudentProfileJPanel(Business bz, JPanel jp) {
         CardSequencePanel = jp;
         this.business = bz;
         initComponents();
     }
 
-   public void populateFacultyCourses(CourseSchedule schedule, FacultyProfile faculty, JTable targetTable) {
+   public void populateStudentProfiles(CourseSchedule schedule, FacultyProfile faculty, JTable targetTable) {
         // Your explicit table layout definition
         String[] columnHeaders = {"Course Name", "CRN", "Credits", "NUID", "Enrolled", "Open Seats"};
         
@@ -89,7 +89,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
         }
 
         // Push your customized matrix blueprint onto your UI table object
-        ManageCoursesTable.setModel(model);
+        ManageStudentTable.setModel(model);
     }
 
 
@@ -103,11 +103,11 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        ManageCoursesTable = new javax.swing.JTable();
+        ManageStudentTable = new javax.swing.JTable();
         btnNext = new javax.swing.JButton();
         Back = new javax.swing.JButton();
 
-        ManageCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
+        ManageStudentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -118,7 +118,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(ManageCoursesTable);
+        jScrollPane1.setViewportView(ManageStudentTable);
 
         btnNext.setText("Next");
 
@@ -165,7 +165,7 @@ public class ManageCourseJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JTable ManageCoursesTable;
+    private javax.swing.JTable ManageStudentTable;
     private javax.swing.JButton btnNext;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

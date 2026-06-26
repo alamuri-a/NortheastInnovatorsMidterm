@@ -10,6 +10,8 @@ import Business.Person.Person;
 import Business.Person.PersonDirectory;
 import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.EmployeeProfile;
+import Business.Profiles.FacultyDirectory;
+import Business.Profiles.FacultyProfile;
 import Business.Profiles.StudentDirectory;
 import Business.Profiles.StudentProfile;
 
@@ -45,13 +47,20 @@ class ConfigureABusiness {
         // Create Student directory + initialize demo Student profile
         StudentDirectory studentdirectory = business.getStudentDirectory();
         StudentProfile studentprofile0 = studentdirectory.newStudentProfile(person003);
+        
+          // Create Faculty directory + initialize demo Faculty profile
+        FacultyDirectory facultydirectory = business.getFacultyDirectory();
+        FacultyProfile facultyprofile0 = facultydirectory.newFacultyProfile(person007);
    
         // Create User accounts for demo profiles
         UserAccountDirectory uadirectory = business.getUserAccountDirectory();
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); // Admin
+        UserAccount ua4 = uadirectory.newUserAccount(studentprofile0, "adam", "****"); // Student
+        UserAccount ua5 = uadirectory.newUserAccount(facultyprofile0, "jackW", "****");//Faculty
         UserAccount ua4 = uadirectory.newStudentAccount(studentprofile0, "adam", "****", 1); // Student
 
         return business;
     }
 
 }
+;
