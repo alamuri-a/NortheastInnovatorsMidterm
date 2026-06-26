@@ -8,7 +8,6 @@ package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 import Business.Business;
 import Business.Person.Person;
 import java.awt.CardLayout;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 
 
@@ -121,9 +120,17 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // Load person management pane
+        // Ensure person is selected then load person management pane
+        
+        int selectedRow = tblPersons.getSelectedRow();
+        if (selectedRow < 0 || selectedRow > tblPersons.getRowCount()) {
+            JOptionPane.showMessageDialog(null, "Please select a person from the table first.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-        AdministerPersonJPanel mppd = new AdministerPersonJPanel(business, CardSequencePanel);
+        Person selectedPerson = (Person) tblPersons.getValueAt(selectedRow, 0);
+        
+        AdministerPersonJPanel mppd = new AdministerPersonJPanel(business, selectedPerson, CardSequencePanel);
         CardSequencePanel.add(mppd);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnNextActionPerformed

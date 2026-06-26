@@ -6,12 +6,16 @@
 package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
 import Business.Business;
+import Business.Person.Person;
+import java.awt.CardLayout;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 
 import javax.swing.JPanel;
 
 /**
  *
- * @author kal bugrara
+ * @author Ajay Alamuri
  */
 public class AdministerPersonJPanel extends javax.swing.JPanel {
     
@@ -19,19 +23,23 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
     // ATTRIBUTES
     JPanel CardSequencePanel;
     Business business;
-
+    Person person;
     
     // CONSTRUCTOR
     
     /**
      * Creates new form AdministerPersonJPanel
      * @param bz
+     * @param p
      * @param jp
      */
-    public AdministerPersonJPanel(Business bz, JPanel jp) {
+    public AdministerPersonJPanel(Business bz, Person p, JPanel jp) {
         CardSequencePanel = jp;
+        this.person = p;
         this.business = bz;
         initComponents();
+        populateComboBox();
+        txtName.setText(person.getPersonId());
     }
 
     /**
@@ -43,11 +51,31 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnBack = new javax.swing.JButton();
         lblTitle = new javax.swing.JLabel();
+        lblRole = new javax.swing.JLabel();
+        txtName = new javax.swing.JTextField();
+        lblName = new javax.swing.JLabel();
+        cmbRole = new javax.swing.JComboBox<>();
+        btnRegister = new javax.swing.JButton();
+        btnBack = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
-        setLayout(null);
+
+        lblTitle.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
+        lblTitle.setText("Manage Person Profile");
+
+        lblRole.setText("Profile Type:");
+
+        txtName.setEditable(false);
+
+        lblName.setText("Name:");
+
+        btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -55,27 +83,102 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack);
-        btnBack.setBounds(30, 290, 74, 23);
 
-        lblTitle.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        lblTitle.setText("Manage Person Profile");
-        add(lblTitle);
-        lblTitle.setBounds(21, 20, 550, 28);
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 550, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(190, 190, 190)
+                .addComponent(lblRole, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(cmbRole, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(260, 260, 260)
+                .addComponent(btnRegister, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(lblTitle)
+                .addGap(112, 112, 112)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblName, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblRole, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(58, 58, 58)
+                .addComponent(btnRegister)
+                .addGap(67, 67, 67)
+                .addComponent(btnBack))
+        );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // Register user for selected profile type
+        
+        String role = (String) cmbRole.getSelectedItem();
+        
+        switch (role) {
+            case "Student":
+                business.getStudentDirectory().newStudentProfile(person);
+                break;
+            case "Faculty":
+                business.getFacultyDirectory().newFacultyProfile(person);
+                break;
+            case "Admin":
+                business.getEmployeeDirectory().newEmployeeProfile(person);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Failed to create profile, please select a valid role.", "Warning", JOptionPane.WARNING_MESSAGE);
+                return;
+        }
+        
+        JOptionPane.showMessageDialog(null, "Successfully registered profile!", "Success", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_btnRegisterActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // Return to previous page
         
         CardSequencePanel.remove(this);
-        ((java.awt.CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+        ((CardLayout) CardSequencePanel.getLayout()).previous(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnRegister;
+    private javax.swing.JComboBox<String> cmbRole;
+    private javax.swing.JLabel lblName;
+    private javax.swing.JLabel lblRole;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 
     
     // EXTRA METHODS
+    private void populateComboBox() {
+        // Fill role combo box with options
+        
+        DefaultComboBoxModel model = (DefaultComboBoxModel) cmbRole.getModel();
+        
+        model.removeAllElements();
+        
+        model.addElement("Student");
+        model.addElement("Faculty");
+        model.addElement("Admin");
+    }
 }
