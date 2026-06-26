@@ -6,14 +6,18 @@
 package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
 import Business.Business;
+import Business.Person.Person;
 import java.awt.CardLayout;
+import javax.swing.JOptionPane;
 
 
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author kal bugrara
+ * @author Ajay Alamuri
  */
 public class ManagePersonsJPanel extends javax.swing.JPanel {
     
@@ -34,6 +38,8 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         CardSequencePanel = jp;
         this.business = bz;
         initComponents();
+        
+        refreshTable();
     }
 
     /**
@@ -47,8 +53,11 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
 
         btnBack = new javax.swing.JButton();
         btnNext = new javax.swing.JButton();
-        lblName = new javax.swing.JLabel();
         lblTitle = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblPersons = new javax.swing.JTable();
+        txtName = new javax.swing.JTextField();
+        btnRegister = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(0, 153, 153));
         setLayout(null);
@@ -69,40 +78,107 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
             }
         });
         add(btnNext);
-        btnNext.setBounds(500, 260, 80, 23);
-
-        lblName.setText("Name");
-        add(lblName);
-        lblName.setBounds(20, 60, 190, 16);
+        btnNext.setBounds(510, 260, 100, 23);
 
         lblTitle.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
         lblTitle.setText("Manage Personnel (HR)");
         add(lblTitle);
         lblTitle.setBounds(21, 20, 550, 28);
+
+        tblPersons.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Name"
+            }
+        ));
+        jScrollPane1.setViewportView(tblPersons);
+
+        add(jScrollPane1);
+        jScrollPane1.setBounds(20, 90, 590, 150);
+        add(txtName);
+        txtName.setBounds(220, 330, 200, 30);
+
+        btnRegister.setText("Register");
+        btnRegister.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegisterActionPerformed(evt);
+            }
+        });
+        add(btnRegister);
+        btnRegister.setBounds(270, 380, 100, 23);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // Return to previous page
         CardSequencePanel.remove(this);
-        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-        //((java.awt.CardLayout)CardSequencePanel.getLayout()).show(CardSequencePanel, "IdentifyEventTypes");
+        ((CardLayout) CardSequencePanel.getLayout()).previous(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
-        // Load person management pane
+        // Ensure person is selected then load person management pane
+        
+        int selectedRow = tblPersons.getSelectedRow();
+        if (selectedRow < 0 || selectedRow > tblPersons.getRowCount()) {
+            JOptionPane.showMessageDialog(null, "Please select a person from the table first.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
-        AdministerPersonJPanel mppd = new AdministerPersonJPanel(business, CardSequencePanel);
+        Person selectedPerson = (Person) tblPersons.getValueAt(selectedRow, 0);
+        
+        AdministerPersonJPanel mppd = new AdministerPersonJPanel(business, selectedPerson, CardSequencePanel);
         CardSequencePanel.add(mppd);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnNextActionPerformed
 
+    private void btnRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterActionPerformed
+        // Validate and add person to person directory, then refresh table
+        
+        String name = txtName.getText();
+        
+        // Blank check
+        if (name.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Please enter the name of the person you would like to register.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        // Add to directory
+        business.getPersonDirectory().newPerson(name);
+        
+        // Notify success
+        JOptionPane.showMessageDialog(null, "Successfully registered person!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        refreshTable();
+    }//GEN-LAST:event_btnRegisterActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnNext;
-    private javax.swing.JLabel lblName;
+    private javax.swing.JButton btnRegister;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblTitle;
+    private javax.swing.JTable tblPersons;
+    private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 
     
     // EXTRA METHODS
+    public void refreshTable() {
+        // Populate table
+        
+        DefaultTableModel model = (DefaultTableModel) tblPersons.getModel();
+        
+        model.setRowCount(0);
+        
+        for (Person p : business.getPersonDirectory().getList()) {
+            Object[] row = new Object[1];
+            
+            row[0] = p;
+            
+            model.addRow(row);
+        }
+    }
 }
