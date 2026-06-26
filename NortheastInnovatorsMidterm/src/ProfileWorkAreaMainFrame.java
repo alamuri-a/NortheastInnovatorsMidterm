@@ -16,10 +16,13 @@ import UserInterface.WorkAreas.AdminRole.AdminRoleWorkAreaJPanel;
 import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
 import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 import java.awt.CardLayout;
+import java.awt.Component;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author kal bugrara
+ * @author Ajay Alamuri
  */
 public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     
@@ -53,6 +56,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         UserNameTextField = new javax.swing.JTextField();
         PasswordTextField = new javax.swing.JTextField();
         lblPassword = new javax.swing.JLabel();
+        btnLogout = new javax.swing.JButton();
         CardSequencePanel = new javax.swing.JPanel();
         lblWelcome = new javax.swing.JLabel();
 
@@ -71,9 +75,6 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
         lblUserName.setText("User Name");
 
-        UserNameTextField.setText("admin");
-
-        PasswordTextField.setText("****");
         PasswordTextField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PasswordTextFieldActionPerformed(evt);
@@ -82,6 +83,13 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
 
         lblPassword.setText("Password");
 
+        btnLogout.setText("Logout");
+        btnLogout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLogoutActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout actionsidejpanelLayout = new javax.swing.GroupLayout(actionsidejpanel);
         actionsidejpanel.setLayout(actionsidejpanelLayout);
         actionsidejpanelLayout.setHorizontalGroup(
@@ -89,6 +97,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             .addGroup(actionsidejpanelLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addGroup(actionsidejpanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblUserName)
                     .addComponent(UserNameTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblPassword)
@@ -107,7 +116,10 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(PasswordTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(16, 16, 16)
-                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         SplitHomeArea.setLeftComponent(actionsidejpanel);
@@ -137,10 +149,12 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         UserAccountDirectory uad = business.getUserAccountDirectory();
         UserAccount useraccount = uad.AuthenticateUser(un, pw);
         if (useraccount == null) {
+            JOptionPane.showMessageDialog(null, "Failed to authenticate user.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
         // Trip for login activity + status
+        JOptionPane.showMessageDialog(null, "Successfully logged in!", "Success", JOptionPane.INFORMATION_MESSAGE);
         useraccount.setActivity();
         useraccount.setStatus(true);
         
@@ -188,6 +202,30 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_PasswordTextFieldActionPerformed
 
+    private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
+        // Clear work area and username/password fields
+        
+        // Do nothing if already logged out
+        Component[] components = CardSequencePanel.getComponents();
+        if (components[components.length - 1] == lblWelcome) {
+            return;
+        }
+        
+        // Confirm if user wants to logout
+        int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Warning", JOptionPane.YES_NO_OPTION);
+        if (dialogResult == JOptionPane.YES_OPTION) {
+            // Reset work area container, username and password fields
+            CardSequencePanel.removeAll();
+            CardSequencePanel.add(lblWelcome);
+            CardSequencePanel.revalidate();
+            CardSequencePanel.repaint();
+            UserNameTextField.setText("");
+            PasswordTextField.setText("");
+            // Show success message
+            JOptionPane.showMessageDialog(null, "You have successfully been logged out.", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_btnLogoutActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -233,6 +271,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField UserNameTextField;
     private javax.swing.JPanel actionsidejpanel;
     private javax.swing.JButton btnLogin;
+    private javax.swing.JButton btnLogout;
     private javax.swing.JLabel lblPassword;
     private javax.swing.JLabel lblUserName;
     private javax.swing.JLabel lblWelcome;
