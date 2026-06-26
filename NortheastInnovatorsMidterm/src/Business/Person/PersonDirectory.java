@@ -24,7 +24,11 @@ public class PersonDirectory {
     }
 
     
-    // METHOFS
+    // METHODS
+    public ArrayList<Person> getList() {
+        return this.personlist;
+    }
+    
     public Person newPerson(String id) {
         Person p = new Person(id);
         personlist.add(p);
