@@ -149,6 +149,12 @@ public class UpdateUserAccount extends javax.swing.JPanel {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // Update fields and notify user, then return to user account table page
 
+        // Notify and don't update if user is currently logged in
+        if (selecteduseraccount.getStatus()) {
+            JOptionPane.showMessageDialog(null, "Cannot update as user is currently logged in.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         
