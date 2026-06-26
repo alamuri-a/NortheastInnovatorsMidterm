@@ -218,6 +218,6 @@ The following table summarizes each team member's responsibilities and contribut
 |-------------|-------------------|----------------------|---------------|---------|---------------------|
 | Nicholas Woodward | Student | README | TBD | TBD | TBD |
 | Meredith Molyneux | Faculty | TBD | TBD | TBD | TBD |
-| Ajay Alamuri | Admin | TBD | TBD | TBD | TBD |
+| Ajay Alamuri | Admin | Logout | TBD | TBD | TBD |
 
 Each team member contributed to project planning, GitHub collaboration, code reviews, and integration testing throughout the development of the Digital University System.
