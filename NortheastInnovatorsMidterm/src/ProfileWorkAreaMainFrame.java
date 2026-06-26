@@ -29,7 +29,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     
     // ATTRIBUTE
     Business business;
-
+    UserAccount loggedIn;
     
     // CONSTRUCTOR
     /**
@@ -38,6 +38,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     public ProfileWorkAreaMainFrame() {
         initComponents();
         business = ConfigureABusiness.initialize();
+        loggedIn = null;
     }
 
     /**
@@ -157,6 +158,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "Successfully logged in!", "Success", JOptionPane.INFORMATION_MESSAGE);
         useraccount.setActivity();
         useraccount.setStatus(true);
+        this.loggedIn = useraccount;
         
         // Initialize panels for access + get profile
         StudentWorkAreaJPanel studentworkareajpanel;
@@ -214,13 +216,15 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         // Confirm if user wants to logout
         int dialogResult = JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Warning", JOptionPane.YES_NO_OPTION);
         if (dialogResult == JOptionPane.YES_OPTION) {
-            // Reset work area container, username and password fields
+            // Reset work area container and username and password fields, set logged in user state to false and unbind
             CardSequencePanel.removeAll();
             CardSequencePanel.add(lblWelcome);
             CardSequencePanel.revalidate();
             CardSequencePanel.repaint();
             UserNameTextField.setText("");
             PasswordTextField.setText("");
+            this.loggedIn.setStatus(false);
+            this.loggedIn = null;
             // Show success message
             JOptionPane.showMessageDialog(null, "You have successfully been logged out.", "Success", JOptionPane.INFORMATION_MESSAGE);
         }
