@@ -13,7 +13,7 @@ package UserInterface.WorkAreas.StudentRole;
 import Business.Business;
 import Business.Profiles.StudentProfile;
 import javax.swing.JPanel;
-
+import java.awt.CardLayout;
 /**
  *
  * @author kal
@@ -176,7 +176,11 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCourseWorkIdentifyResourceAssetsActionPerformed
 
     private void btnManageProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageProfileActionPerformed
-        // Load profile management pane
+   StudentManageProfileJPanel profilePanel = new StudentManageProfileJPanel(business, student, CardSequencePanel);
+
+    CardSequencePanel.add("StudentManageProfile", profilePanel);
+
+    ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel); 
 }//GEN-LAST:event_btnManageProfileActionPerformed
 
     private void btnGraduationAuditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraduationAuditActionPerformed
