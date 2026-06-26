@@ -171,7 +171,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         
             // ADMIN
         if (profile instanceof EmployeeProfile) {
-            adminworkarea = new AdminRoleWorkAreaJPanel(business, CardSequencePanel);
+            adminworkarea = new AdminRoleWorkAreaJPanel(business, useraccount, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("Admin", adminworkarea);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);

@@ -22,9 +22,13 @@ public class Person {
     }
 
     
-    // GETTER
+    // GETTER AND SETTER
     public String getPersonId() {
         return id;
+    }
+    
+    public void setPersonId(String ID) {
+        this.id = ID;
     }
 
     
