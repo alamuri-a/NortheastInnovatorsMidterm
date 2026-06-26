@@ -9,7 +9,6 @@ import Business.Profiles.FacultyProfile;
 import Business.UserAccounts.UserAccount;
 import javax.swing.table.DefaultTableModel;
 import Business.Business;
-import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.AdminUserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTable;
