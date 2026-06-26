@@ -189,4 +189,5 @@ public class StudentCourseworkJPanel extends javax.swing.JPanel {
     private void goBack() {
         CardSequencePanel.remove(this);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-    }}
+    }
+}

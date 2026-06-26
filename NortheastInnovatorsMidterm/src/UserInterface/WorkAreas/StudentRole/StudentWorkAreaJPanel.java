@@ -194,7 +194,13 @@ StudentCourseworkJPanel courseworkPanel =
     }//GEN-LAST:event_btnGraduationAuditActionPerformed
 
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
-        // Load registration pane
+    StudentRegistrationJPanel registrationPanel =
+
+            new StudentRegistrationJPanel(business, student, CardSequencePanel);
+
+    CardSequencePanel.add("StudentRegistration", registrationPanel);
+
+    ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 }//GEN-LAST:event_btnRegistrationActionPerformed
 
     private void btnTranscriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTranscriptActionPerformed
