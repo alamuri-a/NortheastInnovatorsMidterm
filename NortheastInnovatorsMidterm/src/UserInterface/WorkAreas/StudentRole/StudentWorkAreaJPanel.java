@@ -190,7 +190,12 @@ StudentCourseworkJPanel courseworkPanel =
 }//GEN-LAST:event_btnManageProfileActionPerformed
 
     private void btnGraduationAuditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraduationAuditActionPerformed
-        // Load graduation audit pane
+    StudentGraduationAuditJPanel graduationPanel =
+        new StudentGraduationAuditJPanel(business, student, CardSequencePanel);
+
+CardSequencePanel.add("StudentGraduationAudit", graduationPanel);
+
+((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnGraduationAuditActionPerformed
 
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
