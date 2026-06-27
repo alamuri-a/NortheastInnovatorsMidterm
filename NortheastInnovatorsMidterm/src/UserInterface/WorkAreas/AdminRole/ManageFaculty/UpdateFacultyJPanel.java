@@ -2,11 +2,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
-package UserInterface.WorkAreas.AdminRole.ManageStudents;
+package UserInterface.WorkAreas.AdminRole.ManageFaculty;
 
 import Business.Business;
-import Business.Profiles.StudentAccount;
-import Business.Profiles.StudentProfile;
+import Business.Profiles.FacultyProfile;
 import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -17,24 +16,25 @@ import javax.swing.JPanel;
  *
  * @author abala
  */
-public class UpdateStudentJPanel extends javax.swing.JPanel {
+public class UpdateFacultyJPanel extends javax.swing.JPanel {
 
     
     // ATTRIBUTES
     Business business;
-    StudentProfile student;
+    FacultyProfile Faculty;
     JPanel CardSequencePanel;
-    StudentAccount studentUser;
+    UserAccount user;
     
     /**
-     * Creates new form UpdateStudentJPanel
+     * Creates new form UpdateFacultyJPanel
      * @param bz
-     * @param sp
+     * @param fp
      * @param csp
      */
-    public UpdateStudentJPanel(Business bz, StudentProfile sp, JPanel csp) {
+    public UpdateFacultyJPanel(Business bz, UserAccount u, FacultyProfile fp, JPanel csp) {
+        this.user = u;
         this.business = bz;
-        this.student = sp;
+        this.Faculty = fp;
         CardSequencePanel = csp;
         initComponents();
         
@@ -55,8 +55,6 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         lblID = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
-        lblNUID = new javax.swing.JLabel();
-        txtNUID = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(0, 153, 153));
 
@@ -68,7 +66,7 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
         });
 
         lblTitle.setFont(new java.awt.Font("Arial", 0, 24)); // NOI18N
-        lblTitle.setText("Update Student Record");
+        lblTitle.setText("Update Faculty Record");
 
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -78,8 +76,6 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
         });
 
         lblID.setText("Name:");
-
-        lblNUID.setText("NUID:");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -98,15 +94,9 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
                                 .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(218, 218, 218)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(10, 10, 10)
-                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(lblNUID, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(20, 20, 20)
-                                .addComponent(txtNUID, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,11 +108,7 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNUID, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNUID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(157, 157, 157)
+                .addGap(185, 185, 185)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnBack)
                     .addComponent(btnUpdate))
@@ -131,43 +117,28 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // Update fields and notify user, then return to student management page
+        // Update fields and notify user, then return to Faculty management page
 
         String name = txtName.getText();
-        Integer id = null;
 
-        // Blank checks
+        // Blank check
         if (name.isBlank()) {
             JOptionPane.showMessageDialog(null, "Name cannot be blank.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
-        
-        // NUID check if student already has account
-        if (studentUser != null) {
-            try {
-                id = Integer.valueOf(txtNUID.getText());
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(null, "NUID must be an integer.", "Warning", JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-        }
 
         // Update valid fields and display confirmation
-        student.getPerson().setPersonId(name);
-        if (studentUser != null) {
-            studentUser.setNUID(id);
-        }
+        Faculty.getPerson().setPersonId(name);
         
-        JOptionPane.showMessageDialog(null, "Student record successfully updated!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Faculty record successfully updated!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
         // Update table on previous page and return
         CardSequencePanel.remove(this);
 
         Component[] panelStack = CardSequencePanel.getComponents();
         JPanel lastPanel = (JPanel) panelStack[panelStack.length - 1];
-        ManageStudentsJPanel manageStudentsJPanel = (ManageStudentsJPanel) lastPanel;
-        manageStudentsJPanel.refreshTable(); // Update table
+        ManageFacultyJPanel manageFacultyJPanel = (ManageFacultyJPanel) lastPanel;
+        manageFacultyJPanel.refreshTable(); // Update table
 
         CardLayout layout = (CardLayout) CardSequencePanel.getLayout();
         layout.previous(CardSequencePanel);
@@ -186,35 +157,17 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel lblID;
-    private javax.swing.JLabel lblNUID;
     private javax.swing.JLabel lblTitle;
-    private javax.swing.JTextField txtNUID;
     private javax.swing.JTextField txtName;
     // End of variables declaration//GEN-END:variables
 
     
     // EXTRA METHODS
     private void updateFields() {
-        // Load name and NUID if student has an account
+        // Load name and NUID if Faculty has an account
         
         // Display name
-        String name = student.getPerson().getPersonId();
+        String name = Faculty.getPerson().getPersonId();
         txtName.setText(name);
-        
-        // Display NUID if applicable
-        UserAccount ua = business.getUserAccountDirectory().findUserAccount(name);
-        if (ua instanceof StudentAccount) {
-            txtNUID.setVisible(true);
-            lblNUID.setVisible(true);
-            
-            studentUser = (StudentAccount) ua;
-            
-            txtNUID.setText(String.valueOf(studentUser.getNUID()));
-        } else {
-            txtNUID.setVisible(false);
-            lblNUID.setVisible(false);
-            
-            studentUser = null;
-        }
     }
 }
