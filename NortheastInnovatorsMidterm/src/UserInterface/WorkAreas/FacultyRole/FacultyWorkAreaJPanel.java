@@ -11,12 +11,14 @@
 package UserInterface.WorkAreas.FacultyRole;
 
 import Business.Business;
+import Business.Profiles.StudentProfile;
+import UserInterface.WorkAreas.StudentRole.StudentManageProfileJPanel;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
 /**
  *
- * @author kal
+ * @author meredith molyneux
  */
 public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     
@@ -24,6 +26,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     // ATTRIBUTES
     JPanel CardSequencePanel;
     Business business;
+    StudentProfile student;
 
     
     // CONSTRUCTOR
@@ -152,19 +155,38 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageCoursesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCoursesIdentifyResourceAssetsActionPerformed
-        // Load course management pane
+    ManageCourseJPanel profilePanel = new ManageCourseJPanel(business, CardSequencePanel);
+
+    CardSequencePanel.add("ManageCourse", profilePanel);
+
+    ((CardLayout) CardSequencePanel.getLayout()).show(CardSequencePanel,"ManageCourse"); 
     }//GEN-LAST:event_btnManageCoursesIdentifyResourceAssetsActionPerformed
 
     private void btnManageStudentsProfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageStudentsProfilesActionPerformed
-        // Load student management pane
+    ManageStudentProfileJPanel profilePanel = new ManageStudentProfileJPanel(business, CardSequencePanel);
+
+    CardSequencePanel.add("ManageStudentProfile", profilePanel);
+
+    ((CardLayout) CardSequencePanel.getLayout()).show(CardSequencePanel,"ManageStudentProfile"); 
     }//GEN-LAST:event_btnManageStudentsProfilesActionPerformed
 
     private void btnMyProfileIdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileIdentifyEventsActionPerformed
         // Load my profile pane
+     MyFacultyProfile profilePanel = new MyFacultyProfile(business, CardSequencePanel);
+
+    CardSequencePanel.add("MyFacultyProfile", profilePanel);
+
+    ((CardLayout) CardSequencePanel.getLayout()).show(CardSequencePanel,"MyFacultyProfile"); 
 }//GEN-LAST:event_btnMyProfileIdentifyEventsActionPerformed
 
     private void btnPerformanceReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerformanceReportsActionPerformed
         // Load performance reports pane
+                // Load my profile pane
+     PerformanceReportsPanel profilePanel = new PerformanceReportsPanel(business, CardSequencePanel);
+
+    CardSequencePanel.add("PerformanceReports", profilePanel);
+
+    ((CardLayout) CardSequencePanel.getLayout()).show(CardSequencePanel,"PerformanceReports"); 
 }//GEN-LAST:event_btnPerformanceReportsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
