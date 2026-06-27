@@ -126,18 +126,50 @@ private void populateGraduationAuditTable() {
     model.setRowCount(0);
     model.setColumnIdentifiers(new Object[]{"Requirement", "Completed", "Required", "Status"});
 
-    model.addRow(new Object[]{"Core Credits", "32", "32", "Complete"});
-    model.addRow(new Object[]{"Elective Credits", "12", "16", "In Progress"});
-    model.addRow(new Object[]{"Capstone Requirement", "0", "4", "Not Complete"});
-    model.addRow(new Object[]{"Total Credits", "44", "52", "Not Eligible"});
+    int registeredCredits = student.getRegisteredCreditTotal();
+    int completedCredits = 44 + registeredCredits;
+    int requiredCredits = 52;
+    int remainingCredits = requiredCredits - completedCredits;
+
+    if (remainingCredits < 0) {
+        remainingCredits = 0;
+    }
+
+    String status = completedCredits >= requiredCredits ? "Eligible" : "Not Eligible";
+
+    model.addRow(new Object[]{"Completed Credits", completedCredits, requiredCredits, status});
+    model.addRow(new Object[]{"Registered Current Credits", registeredCredits, "N/A", "In Progress"});
+    model.addRow(new Object[]{"Remaining Credits", remainingCredits, "0", remainingCredits == 0 ? "Complete" : "Incomplete"});
+    model.addRow(new Object[]{"Graduation Status", status, "Eligible", status});
 }
 private void checkEligibility() {
-    JOptionPane.showMessageDialog(this,
-            "Graduation Audit Summary\n\n"
-            + "Status: NOT ELIGIBLE\n"
-            + "Reason: Remaining elective credits and capstone requirement.",
-            "Graduation Audit",
-            JOptionPane.INFORMATION_MESSAGE);
+    int registeredCredits = student.getRegisteredCreditTotal();
+    int completedCredits = 44 + registeredCredits;
+    int requiredCredits = 52;
+    int remainingCredits = requiredCredits - completedCredits;
+
+    if (remainingCredits < 0) {
+        remainingCredits = 0;
+    }
+
+    if (completedCredits >= requiredCredits) {
+        JOptionPane.showMessageDialog(this,
+                "Graduation Audit Summary\n\n"
+                + "Status: ELIGIBLE\n"
+                + "Completed Credits: " + completedCredits + "\n"
+                + "Required Credits: " + requiredCredits,
+                "Graduation Audit",
+                JOptionPane.INFORMATION_MESSAGE);
+    } else {
+        JOptionPane.showMessageDialog(this,
+                "Graduation Audit Summary\n\n"
+                + "Status: NOT ELIGIBLE\n"
+                + "Completed Credits: " + completedCredits + "\n"
+                + "Required Credits: " + requiredCredits + "\n"
+                + "Remaining Credits: " + remainingCredits,
+                "Graduation Audit",
+                JOptionPane.INFORMATION_MESSAGE);
+    }
 }
 
 private void goBack() {
