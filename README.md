@@ -5,7 +5,7 @@
 |-------------|------|---------------|------------------|
 | Nicholas Woodward | 002478780 | Student | README, Student Use Case Functionality |
 | Meredith Molyneux| 003978998 | Faculty| XXXX |
-| Ajay Alamuri | 003915177 | Admin | Formatting |
+| Ajay Alamuri | 003915177 | Admin | Formatting, Admin Use Case Functionality, Authentication/Authorization |
 
 ## Project Overview
 The purpose of this project is to integrate a Digital University System with a role-based Access Control Layer to provide secure authentication and authorization for different university users. The application was developed using Java Swing and object-oriented programming principles to create a secure, modular, and user-friendly university management system.
@@ -218,6 +218,6 @@ The following table summarizes each team member's responsibilities and contribut
 |-------------|-------------------|----------------------|---------------|---------|---------------------|
 | Nicholas Woodward | Student | README, student-coursework, student-graduation-audit, student-manage-profile | TBD |   Tested Student UX | TBD |
 | Meredith Molyneux | Faculty | TBD | TBD | TBD | TBD |
-| Ajay Alamuri | Admin | Logout | TBD | TBD | TBD |
+| Ajay Alamuri | Admin | clean-formatting, logout, manage-user, manage-persons, admin-profile, admin-manage-students | TBD | Tested Login/Logout Process, Admin UX | TBD |
 
 Each team member contributed to project planning, GitHub collaboration, code reviews, and integration testing throughout the development of the Digital University System.
