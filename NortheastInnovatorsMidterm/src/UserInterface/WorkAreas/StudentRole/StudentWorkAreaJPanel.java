@@ -12,6 +12,7 @@ package UserInterface.WorkAreas.StudentRole;
 
 import Business.Business;
 import Business.Profiles.StudentProfile;
+import Business.UserAccounts.UserAccount;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 /**
@@ -25,6 +26,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     javax.swing.JPanel CardSequencePanel;
     Business business;
     StudentProfile student;
+    final UserAccount user;
 
     
     // CONSTRUCTOR
@@ -32,14 +34,16 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form StudentWorkAreaJPanel
      * @param b
+     * @param u
      * @param spp
      * @param clp
      */
-    public StudentWorkAreaJPanel(Business b, StudentProfile spp, JPanel clp) {
+    public StudentWorkAreaJPanel(Business b, UserAccount u, StudentProfile spp, JPanel clp) {
+        this.user = u;
         business = b;
         this.CardSequencePanel = clp;
         student = spp;
-        initComponents();
+        if (Business.Authorize(u,"Student")) initComponents();
     }
 
     /**
@@ -174,7 +178,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     private void btnCourseWorkIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseWorkIdentifyResourceAssetsActionPerformed
 StudentCourseworkJPanel courseworkPanel =
 
-            new StudentCourseworkJPanel(business, student, CardSequencePanel);
+            new StudentCourseworkJPanel(business, user, student, CardSequencePanel);
 
     CardSequencePanel.add("StudentCoursework", courseworkPanel);
 
@@ -182,7 +186,7 @@ StudentCourseworkJPanel courseworkPanel =
     }//GEN-LAST:event_btnCourseWorkIdentifyResourceAssetsActionPerformed
 
     private void btnManageProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageProfileActionPerformed
-   StudentManageProfileJPanel profilePanel = new StudentManageProfileJPanel(business, student, CardSequencePanel);
+   StudentManageProfileJPanel profilePanel = new StudentManageProfileJPanel(business, user, student, CardSequencePanel);
 
     CardSequencePanel.add("StudentManageProfile", profilePanel);
 
@@ -191,7 +195,7 @@ StudentCourseworkJPanel courseworkPanel =
 
     private void btnGraduationAuditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraduationAuditActionPerformed
     StudentGraduationAuditJPanel graduationPanel =
-        new StudentGraduationAuditJPanel(business, student, CardSequencePanel);
+        new StudentGraduationAuditJPanel(business, user, student, CardSequencePanel);
 
 CardSequencePanel.add("StudentGraduationAudit", graduationPanel);
 
@@ -201,7 +205,7 @@ CardSequencePanel.add("StudentGraduationAudit", graduationPanel);
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
     StudentRegistrationJPanel registrationPanel =
 
-            new StudentRegistrationJPanel(business, student, CardSequencePanel);
+            new StudentRegistrationJPanel(business, user, student, CardSequencePanel);
 
     CardSequencePanel.add("StudentRegistration", registrationPanel);
 

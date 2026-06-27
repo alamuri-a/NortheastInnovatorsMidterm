@@ -5,6 +5,7 @@
 package UserInterface.WorkAreas.StudentRole;
 import Business.Business;
 import Business.Profiles.StudentProfile;
+import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JOptionPane;
@@ -17,15 +18,17 @@ public class StudentRegistrationJPanel extends javax.swing.JPanel {
 Business business;
 StudentProfile student;
 JPanel CardSequencePanel;
+final UserAccount user;
     /**
      * Creates new form StudentRegistrationJPanel
      */
-public StudentRegistrationJPanel(Business b, StudentProfile sp, JPanel csp) {
+public StudentRegistrationJPanel(Business b, UserAccount u, StudentProfile sp, JPanel csp) {
     business = b;
     student = sp;
     CardSequencePanel = csp;
+    this.user = u;
 
-    initComponents();
+    if (Business.Authorize(u,"Student")) initComponents();
 
     populateCourseTable();
 }

@@ -8,7 +8,9 @@ package Business;
 import Business.Person.PersonDirectory;
 import Business.Profiles.EmployeeDirectory;
 import Business.Profiles.FacultyDirectory;
+import Business.Profiles.StudentAccount;
 import Business.Profiles.StudentDirectory;
+import Business.UserAccounts.UserAccount;
 
 import Business.UserAccounts.UserAccountDirectory;
 
@@ -56,8 +58,24 @@ public class Business {
     public StudentDirectory getStudentDirectory(){
         return studentdirectory;
     }
-        public FacultyDirectory getFacultyDirectory() {
-        return facultydirectory;}
+    public FacultyDirectory getFacultyDirectory() {
+        return facultydirectory;
+    }
     
     // EXTRA METHODS
+    public static boolean Authorize(UserAccount ua, String role) {
+        // Check whether or not user is authorized for specific area
+
+        if (role.equalsIgnoreCase("Admin")) {
+            return ua.getRole().equals("Admin");
+        } else if (role.equalsIgnoreCase("Faculty")) {
+            return ua.getRole().equals("Faculty");
+        } else if (role.equalsIgnoreCase("Student")) {
+            // If student, check to make sure user account is a StudentAccount first
+            if (ua instanceof StudentAccount) {
+                return ua.getRole().equals("Student");
+            }
+        }
+        return false;
+    }
 }
