@@ -27,6 +27,14 @@ public class StudentDirectory {
 
     
     // METHODS
+    public ArrayList<StudentProfile> getList() {
+        return this.studentlist;
+    }
+    
+    public void deleteStudentProfile(StudentProfile sp) {
+        this.studentlist.remove(sp);
+    }
+    
     public StudentProfile newStudentProfile(Person p) {
         StudentProfile sp = new StudentProfile(p);
         studentlist.add(sp);

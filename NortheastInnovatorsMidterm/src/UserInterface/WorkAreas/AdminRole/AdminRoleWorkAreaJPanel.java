@@ -14,6 +14,7 @@ import Business.Business;
 import Business.UserAccounts.UserAccount;
 import UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp.ManageUserAccountsJPanel;
 import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.ManagePersonsJPanel;
+import UserInterface.WorkAreas.AdminRole.ManageStudents.ManageStudentsJPanel;
 import java.awt.CardLayout;
 
 import javax.swing.JPanel;
@@ -182,11 +183,14 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
         ManagePersonsJPanel aos = new ManagePersonsJPanel(business, CardSequencePanel);
         CardSequencePanel.add("ManagePersons", aos);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
     }//GEN-LAST:event_btnRegisterPersonsActionPerformed
 
     private void btnManageStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageStudentsActionPerformed
         // Load student management pane
+        
+        ManageStudentsJPanel msp = new ManageStudentsJPanel(business, CardSequencePanel);
+        CardSequencePanel.add("ManageStudents", msp);
+        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnManageStudentsActionPerformed
 
     private void btnMyProfileIdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileIdentifyEventsActionPerformed
