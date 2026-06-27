@@ -6,6 +6,7 @@
 package Business;
 
 import Business.Profiles.EmployeeProfile;
+import Business.Profiles.FacultyProfile;
 import Business.Profiles.Profile;
 import Business.Profiles.StudentProfile;
 import Business.Profiles.StudentAccount;
@@ -189,16 +190,12 @@ studentworkareajpanel = new StudentWorkAreaJPanel(business, spp, studentAccount,
         }
 
             // FACULTY
-        
-            /*
         if (profile instanceof FacultyProfile) {
-            facultyworkarea = new FacultyWorkAreaJPanel(business, CardSequencePanel);
+            facultyworkarea = new FacultyWorkAreaJPanel(business, useraccount, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
         }
-            */
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 

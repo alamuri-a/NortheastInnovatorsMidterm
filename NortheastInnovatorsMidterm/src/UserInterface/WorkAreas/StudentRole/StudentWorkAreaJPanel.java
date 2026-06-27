@@ -34,6 +34,7 @@ StudentAccount studentAccount;
     /**
      * Creates new form StudentWorkAreaJPanel
      * @param b
+     * @param u
      * @param spp
      * @param clp
      */
@@ -177,7 +178,7 @@ StudentAccount studentAccount;
     private void btnCourseWorkIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseWorkIdentifyResourceAssetsActionPerformed
 StudentCourseworkJPanel courseworkPanel =
 
-            new StudentCourseworkJPanel(business, student, CardSequencePanel);
+            new StudentCourseworkJPanel(business, user, student, CardSequencePanel);
 
     CardSequencePanel.add("StudentCoursework", courseworkPanel);
 
@@ -195,7 +196,7 @@ StudentCourseworkJPanel courseworkPanel =
 
     private void btnGraduationAuditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraduationAuditActionPerformed
     StudentGraduationAuditJPanel graduationPanel =
-        new StudentGraduationAuditJPanel(business, student, CardSequencePanel);
+        new StudentGraduationAuditJPanel(business, user, student, CardSequencePanel);
 
 CardSequencePanel.add("StudentGraduationAudit", graduationPanel);
 
@@ -205,7 +206,7 @@ CardSequencePanel.add("StudentGraduationAudit", graduationPanel);
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
     StudentRegistrationJPanel registrationPanel =
 
-            new StudentRegistrationJPanel(business, student, CardSequencePanel);
+            new StudentRegistrationJPanel(business, user, student, CardSequencePanel);
 
     CardSequencePanel.add("StudentRegistration", registrationPanel);
 

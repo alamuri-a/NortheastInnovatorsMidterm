@@ -7,6 +7,7 @@ package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
 import Business.Business;
 import Business.Person.Person;
+import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
@@ -24,20 +25,23 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     Business business;
     Person person;
+    final UserAccount user;
     
     // CONSTRUCTOR
     
     /**
      * Creates new form AdministerPersonJPanel
      * @param bz
+     * @param u
      * @param p
      * @param jp
      */
-    public AdministerPersonJPanel(Business bz, Person p, JPanel jp) {
+    public AdministerPersonJPanel(Business bz, UserAccount u, Person p, JPanel jp) {
+        this.user = u;
         CardSequencePanel = jp;
         this.person = p;
         this.business = bz;
-        initComponents();
+        if (Business.Authorize(u,"Admin")) initComponents();
         populateComboBox();
         txtName.setText(person.getPersonId());
     }

@@ -19,7 +19,7 @@ public class MyProfile extends javax.swing.JPanel {
     
     // ATTRIBUTES
     Business business;
-    UserAccount user;
+    final UserAccount user;
     JPanel CardSequencePanel;
     
     

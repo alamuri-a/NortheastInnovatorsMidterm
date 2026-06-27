@@ -7,6 +7,7 @@ package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 import Business.Business;
 import Business.Profiles.Profile;
 import Business.Profiles.StudentProfile;
+import Business.UserAccounts.UserAccount;
 
 import java.awt.CardLayout;
 import java.awt.Component;
@@ -24,16 +25,19 @@ public class CreateUserAccount extends javax.swing.JPanel {
     // ATTRIBUTES
     Business business;
     JPanel CardSequencePanel;
+    final UserAccount user;
     
     /**
      * Creates new form CreateUserAccount
      * @param b
+     * @param u
      * @param csp
      */
-    public CreateUserAccount(Business b, JPanel csp) {
+    public CreateUserAccount(Business b, UserAccount u, JPanel csp) {
+        this.user = u;
         business = b;
         CardSequencePanel = csp;
-        initComponents();
+        if (Business.Authorize(u,"Admin")) initComponents();
         
         populateComboBox();
     }

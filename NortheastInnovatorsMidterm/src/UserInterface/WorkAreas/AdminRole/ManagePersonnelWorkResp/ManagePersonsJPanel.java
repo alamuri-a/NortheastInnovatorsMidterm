@@ -7,6 +7,7 @@ package UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp;
 
 import Business.Business;
 import Business.Person.Person;
+import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 
@@ -25,6 +26,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
     // ATTRIBUTES
     JPanel CardSequencePanel;
     Business business;
+    final UserAccount user;
 
 
     // CONSTRUCTOR
@@ -32,12 +34,14 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManagePersonsJPanel
      * @param bz
+     * @param u
      * @param jp
      */
-    public ManagePersonsJPanel(Business bz, JPanel jp) {
+    public ManagePersonsJPanel(Business bz, UserAccount u, JPanel jp) {
+        this.user = u;
         CardSequencePanel = jp;
         this.business = bz;
-        initComponents();
+        if (Business.Authorize(u,"Admin")) initComponents();
         
         refreshTable();
     }
@@ -130,7 +134,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
 
         Person selectedPerson = (Person) tblPersons.getValueAt(selectedRow, 0);
         
-        AdministerPersonJPanel mppd = new AdministerPersonJPanel(business, selectedPerson, CardSequencePanel);
+        AdministerPersonJPanel mppd = new AdministerPersonJPanel(business, user, selectedPerson, CardSequencePanel);
         CardSequencePanel.add(mppd);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnNextActionPerformed
