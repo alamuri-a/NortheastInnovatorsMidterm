@@ -24,7 +24,7 @@ public class UpdateUserAccount extends javax.swing.JPanel {
     // ATTRIBUTES
     JPanel CardSequencePanel;
     UserAccount selecteduseraccount;
-    UserAccount user;
+    final UserAccount user;
     
     // CONSTRUCTOR
     

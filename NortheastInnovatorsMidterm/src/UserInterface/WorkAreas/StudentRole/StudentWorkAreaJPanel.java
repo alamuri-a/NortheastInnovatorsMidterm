@@ -26,7 +26,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     javax.swing.JPanel CardSequencePanel;
     Business business;
     StudentProfile student;
-    UserAccount user;
+    final UserAccount user;
 
     
     // CONSTRUCTOR

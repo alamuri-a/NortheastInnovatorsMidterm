@@ -18,7 +18,7 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
     Business business;
     StudentProfile student;
     JPanel CardSequencePanel;
-    UserAccount user;
+    final UserAccount user;
 
     /**
      * Creates new form StudentManageProfileJPanel

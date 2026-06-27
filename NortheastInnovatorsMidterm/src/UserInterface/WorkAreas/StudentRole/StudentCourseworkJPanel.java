@@ -19,7 +19,7 @@ public class StudentCourseworkJPanel extends javax.swing.JPanel {
     Business business;
     StudentProfile student;
     JPanel CardSequencePanel;
-    UserAccount user;
+    final UserAccount user;
 
     /**
      * Creates new form StudentCourseworkJPanel

@@ -26,7 +26,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
     // ATTRIBUTES
     JPanel CardSequencePanel;
     Business business;
-    UserAccount user;
+    final UserAccount user;
 
 
     // CONSTRUCTOR

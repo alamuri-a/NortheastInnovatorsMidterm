@@ -25,7 +25,7 @@ public class CreateUserAccount extends javax.swing.JPanel {
     // ATTRIBUTES
     Business business;
     JPanel CardSequencePanel;
-    UserAccount user;
+    final UserAccount user;
     
     /**
      * Creates new form CreateUserAccount
