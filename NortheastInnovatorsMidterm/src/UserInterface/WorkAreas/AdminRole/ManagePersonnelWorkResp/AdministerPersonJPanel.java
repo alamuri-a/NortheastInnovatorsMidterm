@@ -41,7 +41,7 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
         CardSequencePanel = jp;
         this.person = p;
         this.business = bz;
-        initComponents();
+        if (Business.Authorize(u,"Admin")) initComponents();
         populateComboBox();
         txtName.setText(person.getPersonId());
     }
