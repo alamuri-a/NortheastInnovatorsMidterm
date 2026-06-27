@@ -9,6 +9,7 @@ import Business.Profiles.EmployeeProfile;
 import Business.Profiles.FacultyProfile;
 import Business.Profiles.Profile;
 import Business.Profiles.StudentProfile;
+import Business.Profiles.StudentAccount;
 
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
@@ -181,7 +182,8 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             // STUDENT
         if (profile instanceof StudentProfile) {
             StudentProfile spp = (StudentProfile) profile;
-            studentworkareajpanel = new StudentWorkAreaJPanel(business, useraccount, spp, CardSequencePanel);
+            StudentAccount studentAccount = (StudentAccount) useraccount;
+studentworkareajpanel = new StudentWorkAreaJPanel(business, spp, studentAccount, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("student", studentworkareajpanel);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);

@@ -6,7 +6,7 @@ package UserInterface.WorkAreas.StudentRole;
 import Business.Business;
 import Business.Person.Person;
 import Business.Profiles.StudentProfile;
-import Business.UserAccounts.UserAccount;
+import Business.Profiles.StudentAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 /**
@@ -15,22 +15,22 @@ import javax.swing.JPanel;
  */
 public class StudentManageProfileJPanel extends javax.swing.JPanel {
 
-    Business business;
-    StudentProfile student;
-    JPanel CardSequencePanel;
-    final UserAccount user;
+Business business;
+StudentProfile student;
+StudentAccount studentAccount;
+JPanel CardSequencePanel;
 
     /**
      * Creates new form StudentManageProfileJPanel
      */
-    public StudentManageProfileJPanel(Business b, UserAccount u, StudentProfile sp, JPanel csp) {
-        this.user = u;
-        business = b;
-        student = sp;
-        CardSequencePanel = csp;
-        if (Business.Authorize(u,"Student")) initComponents();
-        populateProfileFields();
-    }
+    public StudentManageProfileJPanel(Business b, StudentProfile sp, StudentAccount sa, JPanel csp) {
+    business = b;
+    student = sp;
+    studentAccount = sa;
+    CardSequencePanel = csp;
+    initComponents();
+    populateProfileFields();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -49,6 +49,8 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
         txtName = new javax.swing.JTextField();
         txtRole = new javax.swing.JTextField();
         btnBack = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        txtNUID = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Helvetica Neue", 1, 24)); // NOI18N
         jLabel1.setText("Student Profile");
@@ -72,6 +74,8 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
             }
         });
 
+        jLabel5.setText("NUID");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -79,8 +83,15 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnBack))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtNUID))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -93,10 +104,7 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtPersonId))
-                            .addComponent(jLabel1)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnBack)))
+                            .addComponent(jLabel1))))
                 .addContainerGap(193, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -114,9 +122,13 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
                     .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(txtNUID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 119, Short.MAX_VALUE)
                 .addComponent(btnBack)
                 .addContainerGap())
         );
@@ -137,6 +149,8 @@ goBack();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JTextField txtNUID;
     private javax.swing.JTextField txtName;
     private javax.swing.JTextField txtPersonId;
     private javax.swing.JTextField txtRole;
@@ -149,12 +163,20 @@ goBack();
         Person p = student.getPerson();
 
         txtPersonId.setText(p.getPersonId());
-        txtName.setText(p.toString());
-        txtRole.setText(student.getRole());
+txtName.setText(p.toString());
 
-        txtPersonId.setEditable(false);
-        txtName.setEditable(false);
-        txtRole.setEditable(false);
+if (studentAccount != null) {
+    txtNUID.setText(String.valueOf(studentAccount.getNUID()));
+} else {
+    txtNUID.setText("Unavailable");
+}
+
+txtRole.setText(student.getRole());
+
+txtPersonId.setEditable(false);
+txtName.setEditable(false);
+txtNUID.setEditable(false);
+txtRole.setEditable(false);
     }
 
     private void goBack() {
