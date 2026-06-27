@@ -27,6 +27,9 @@ public class CreateUserAccount extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     final UserAccount user;
     
+    
+    // CONSTRUCTOR
+    
     /**
      * Creates new form CreateUserAccount
      * @param b
@@ -222,7 +225,6 @@ public class CreateUserAccount extends javax.swing.JPanel {
         } else {
             business.getUserAccountDirectory().newUserAccount(p, username, password);
         }
-        
         JOptionPane.showMessageDialog(null, "User account successfully created!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
         // Update table on previous page and return

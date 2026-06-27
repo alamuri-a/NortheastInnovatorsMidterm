@@ -33,6 +33,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     Business business;
     final UserAccount user;
     
+    
     // CONSTRUCTOR
     /**
      * Creates new form AdminRoleWorkAreaJPanel
@@ -175,7 +176,6 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
         ManageUserAccountsJPanel aos = new ManageUserAccountsJPanel(business, user, CardSequencePanel);
         CardSequencePanel.add("ManageUsers", aos);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
     }//GEN-LAST:event_btnAdminUserAccountsIdentifyResourceAssetsActionPerformed
 
     private void btnRegisterPersonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterPersonsActionPerformed
