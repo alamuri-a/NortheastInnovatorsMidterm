@@ -3,7 +3,7 @@
 ## Team Information
 | Team Member | NUID | Assigned Role | Responsibilities |
 |-------------|------|---------------|------------------|
-| Nicholas Woodward | 002478780 | Student | README |
+| Nicholas Woodward | 002478780 | Student | README, Student Use Case Functionality |
 | Meredith Molyneux| 003978998 | Faculty| XXXX |
 | Ajay Alamuri | 003915177 | Admin | Formatting |
 
@@ -216,7 +216,7 @@ The following table summarizes each team member's responsibilities and contribut
 
 | Team Member | Assigned Use Case | Coding Contributions | Documentation | Testing | Other Contributions |
 |-------------|-------------------|----------------------|---------------|---------|---------------------|
-| Nicholas Woodward | Student | README | TBD | TBD | TBD |
+| Nicholas Woodward | Student | README, student-coursework, student-graduation-audit, student-manage-profile | TBD |   Tested Student UX | TBD |
 | Meredith Molyneux | Faculty | TBD | TBD | TBD | TBD |
 | Ajay Alamuri | Admin | Logout | TBD | TBD | TBD |
 
