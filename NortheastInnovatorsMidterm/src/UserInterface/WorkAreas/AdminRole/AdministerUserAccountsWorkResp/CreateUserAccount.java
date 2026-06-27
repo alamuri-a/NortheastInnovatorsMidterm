@@ -184,7 +184,7 @@ public class CreateUserAccount extends javax.swing.JPanel {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         String nuidString = txtNUID.getText();
-        int nuid;
+        Integer nuid = null;
 
         // Null/Blank checks
         if (nuidString == null || person == null || username == null || password == null ||
