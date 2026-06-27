@@ -177,8 +177,8 @@ public class MyProfile extends javax.swing.JPanel {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         
-        // Blank checks
-        if (name.isBlank() || username.isBlank() || password.isBlank()) {
+        // Null/Blank checks
+        if (name == null || username == null || password == null || name.isBlank() || username.isBlank() || password.isBlank()) {
             JOptionPane.showMessageDialog(null, "Name/Username/Password cannot be blank.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
