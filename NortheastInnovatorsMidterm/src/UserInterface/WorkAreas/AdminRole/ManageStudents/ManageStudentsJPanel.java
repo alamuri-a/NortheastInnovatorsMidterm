@@ -5,10 +5,8 @@
 package UserInterface.WorkAreas.AdminRole.ManageStudents;
 
 import Business.Business;
-import Business.Person.Person;
 import Business.Profiles.StudentDirectory;
 import Business.Profiles.StudentProfile;
-import UserInterface.WorkAreas.AdminRole.ManagePersonnelWorkResp.AdministerPersonJPanel;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -169,7 +167,7 @@ public class ManageStudentsJPanel extends javax.swing.JPanel {
         // Notify if no user is selected
         int selectedRow = tblStudents.getSelectedRow();
         if (selectedRow < 0 || selectedRow > tblStudents.getRowCount()) {
-            JOptionPane.showMessageDialog(null, "Please select a row from the table.", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Please select a student from the table.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
