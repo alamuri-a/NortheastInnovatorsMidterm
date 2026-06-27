@@ -27,13 +27,15 @@ public class ManageStudentProfileJPanel extends javax.swing.JPanel {
 
        JPanel CardSequencePanel;
         Business business;
+        UserAccount user;
     /**
      * Creates new form ManageCourse
      */
-    public ManageStudentProfileJPanel(Business bz, JPanel jp) {
+    public ManageStudentProfileJPanel(Business bz, UserAccount u, JPanel jp) {
+        this.user = u;
         CardSequencePanel = jp;
         this.business = bz;
-        initComponents();
+        if (Business.Authorize(u,"Faculty")) initComponents();
     }
 
    public void populateStudentProfiles(CourseSchedule schedule, FacultyProfile faculty, JTable targetTable) {

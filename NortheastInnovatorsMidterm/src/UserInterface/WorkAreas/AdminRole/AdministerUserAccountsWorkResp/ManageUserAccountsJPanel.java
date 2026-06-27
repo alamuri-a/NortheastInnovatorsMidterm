@@ -26,7 +26,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     Business business;
     UserAccount selecteduseraccount;
-
+    UserAccount user;
     
     // CONSTRUCTOR
     
@@ -35,10 +35,11 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
      * @param bz
      * @param jp
      */
-    public ManageUserAccountsJPanel(Business bz, JPanel jp) {
+    public ManageUserAccountsJPanel(Business bz, UserAccount u, JPanel jp) {
         CardSequencePanel = jp;
         this.business = bz;
-        initComponents();
+        this.user = u;
+        if (Business.Authorize(u,"Admin")) initComponents();
         refreshTable();
     }
     
@@ -148,7 +149,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
         }
         
         // Load next page with user account if selected
-        UpdateUserAccount mppd = new UpdateUserAccount(selecteduseraccount, CardSequencePanel);
+        UpdateUserAccount mppd = new UpdateUserAccount(user, selecteduseraccount, CardSequencePanel);
         CardSequencePanel.add(mppd);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnNextActionPerformed
@@ -189,7 +190,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // Load user account creation page
-        CreateUserAccount cua = new CreateUserAccount(business, CardSequencePanel);
+        CreateUserAccount cua = new CreateUserAccount(business, user, CardSequencePanel);
         CardSequencePanel.add(cua);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnAddActionPerformed

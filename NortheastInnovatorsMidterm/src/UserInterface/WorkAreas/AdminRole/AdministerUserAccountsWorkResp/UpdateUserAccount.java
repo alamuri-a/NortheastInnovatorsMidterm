@@ -5,6 +5,7 @@
  */
 package UserInterface.WorkAreas.AdminRole.AdministerUserAccountsWorkResp;
 
+import Business.Business;
 import Business.Profiles.StudentAccount;
 import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
@@ -23,19 +24,21 @@ public class UpdateUserAccount extends javax.swing.JPanel {
     // ATTRIBUTES
     JPanel CardSequencePanel;
     UserAccount selecteduseraccount;
-
+    UserAccount user;
     
     // CONSTRUCTOR
     
     /**
      * Creates new form AdminUserAccount
+     * @param u
      * @param sua
      * @param jp
      */
-    public UpdateUserAccount(UserAccount sua, JPanel jp) {
+    public UpdateUserAccount(UserAccount u, UserAccount sua, JPanel jp) {
+        this.user = u;
         CardSequencePanel = jp;
         selecteduseraccount= sua;
-        initComponents();
+        if (Business.Authorize(u,"Admin")) initComponents();
         //display user details here
         updateFields();
     }

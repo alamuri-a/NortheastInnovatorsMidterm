@@ -35,14 +35,14 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AdminRoleWorkAreaJPanel
      * @param b
-     * @param ua
+     * @param u
      * @param clp
      */
-    public AdminRoleWorkAreaJPanel(Business b, UserAccount ua, JPanel clp) {
+    public AdminRoleWorkAreaJPanel(Business b, UserAccount u, JPanel clp) {
         business = b;
-        this.user = ua;
+        this.user = u;
         this.CardSequencePanel = clp;
-        initComponents();
+        if (Business.Authorize(u,"Admin")) initComponents();
     }
 
     /**
@@ -170,7 +170,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void btnAdminUserAccountsIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdminUserAccountsIdentifyResourceAssetsActionPerformed
         // Load user management pane
         
-        ManageUserAccountsJPanel aos = new ManageUserAccountsJPanel(business, CardSequencePanel);
+        ManageUserAccountsJPanel aos = new ManageUserAccountsJPanel(business, user, CardSequencePanel);
         CardSequencePanel.add("ManageUsers", aos);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
@@ -179,7 +179,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void btnRegisterPersonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterPersonsActionPerformed
         // Load person registration pane
 
-        ManagePersonsJPanel aos = new ManagePersonsJPanel(business, CardSequencePanel);
+        ManagePersonsJPanel aos = new ManagePersonsJPanel(business, user, CardSequencePanel);
         CardSequencePanel.add("ManagePersons", aos);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 

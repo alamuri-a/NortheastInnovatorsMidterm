@@ -6,6 +6,7 @@
 package Business;
 
 import Business.Profiles.EmployeeProfile;
+import Business.Profiles.FacultyProfile;
 import Business.Profiles.Profile;
 import Business.Profiles.StudentProfile;
 
@@ -180,23 +181,19 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             // STUDENT
         if (profile instanceof StudentProfile) {
             StudentProfile spp = (StudentProfile) profile;
-            studentworkareajpanel = new StudentWorkAreaJPanel(business, spp, CardSequencePanel);
+            studentworkareajpanel = new StudentWorkAreaJPanel(business, useraccount, spp, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("student", studentworkareajpanel);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
         }
 
             // FACULTY
-        
-            /*
         if (profile instanceof FacultyProfile) {
-            facultyworkarea = new FacultyWorkAreaJPanel(business, CardSequencePanel);
+            facultyworkarea = new FacultyWorkAreaJPanel(business, useraccount, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
         }
-            */
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 

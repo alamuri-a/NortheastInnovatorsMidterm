@@ -11,8 +11,7 @@
 package UserInterface.WorkAreas.FacultyRole;
 
 import Business.Business;
-import Business.Profiles.StudentProfile;
-import UserInterface.WorkAreas.StudentRole.StudentManageProfileJPanel;
+import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 
@@ -26,7 +25,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     // ATTRIBUTES
     JPanel CardSequencePanel;
     Business business;
-    StudentProfile student;
+    UserAccount user;
 
     
     // CONSTRUCTOR
@@ -34,12 +33,14 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form FacultyWorkAreaJPanel
      * @param b
+     * @param u
      * @param clp
      */
-    public FacultyWorkAreaJPanel(Business b, JPanel clp) {
+    public FacultyWorkAreaJPanel(Business b, UserAccount u, JPanel clp) {
+        this.user = u;
         business = b;
         this.CardSequencePanel = clp;
-        initComponents();
+        if (Business.Authorize(u,"Faculty")) initComponents();
     }
 
     /**
@@ -155,7 +156,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageCoursesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCoursesIdentifyResourceAssetsActionPerformed
-    ManageCourseJPanel profilePanel = new ManageCourseJPanel(business, CardSequencePanel);
+    ManageCourseJPanel profilePanel = new ManageCourseJPanel(business, user, CardSequencePanel);
 
     CardSequencePanel.add("ManageCourse", profilePanel);
 
@@ -163,7 +164,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnManageCoursesIdentifyResourceAssetsActionPerformed
 
     private void btnManageStudentsProfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageStudentsProfilesActionPerformed
-    ManageStudentProfileJPanel profilePanel = new ManageStudentProfileJPanel(business, CardSequencePanel);
+    ManageStudentProfileJPanel profilePanel = new ManageStudentProfileJPanel(business, user, CardSequencePanel);
 
     CardSequencePanel.add("ManageStudentProfile", profilePanel);
 
@@ -172,7 +173,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnMyProfileIdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileIdentifyEventsActionPerformed
         // Load my profile pane
-     MyFacultyProfile profilePanel = new MyFacultyProfile(business, CardSequencePanel);
+     MyFacultyProfile profilePanel = new MyFacultyProfile(business, user, CardSequencePanel);
 
     CardSequencePanel.add("MyFacultyProfile", profilePanel);
 
@@ -182,7 +183,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     private void btnPerformanceReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerformanceReportsActionPerformed
         // Load performance reports pane
                 // Load my profile pane
-     PerformanceReportsPanel profilePanel = new PerformanceReportsPanel(business, CardSequencePanel);
+     PerformanceReportsPanel profilePanel = new PerformanceReportsPanel(business, user, CardSequencePanel);
 
     CardSequencePanel.add("PerformanceReports", profilePanel);
 

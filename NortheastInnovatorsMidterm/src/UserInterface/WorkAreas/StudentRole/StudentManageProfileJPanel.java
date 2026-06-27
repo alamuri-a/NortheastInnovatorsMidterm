@@ -6,6 +6,7 @@ package UserInterface.WorkAreas.StudentRole;
 import Business.Business;
 import Business.Person.Person;
 import Business.Profiles.StudentProfile;
+import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 /**
@@ -17,15 +18,17 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
     Business business;
     StudentProfile student;
     JPanel CardSequencePanel;
+    UserAccount user;
 
     /**
      * Creates new form StudentManageProfileJPanel
      */
-    public StudentManageProfileJPanel(Business b, StudentProfile sp, JPanel csp) {
+    public StudentManageProfileJPanel(Business b, UserAccount u, StudentProfile sp, JPanel csp) {
+        this.user = u;
         business = b;
         student = sp;
         CardSequencePanel = csp;
-        initComponents();
+        if (Business.Authorize(u,"Student")) initComponents();
         populateProfileFields();
     }
 
