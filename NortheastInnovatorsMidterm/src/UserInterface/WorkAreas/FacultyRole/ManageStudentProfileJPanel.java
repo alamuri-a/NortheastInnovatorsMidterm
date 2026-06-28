@@ -9,6 +9,7 @@ import Business.Profiles.FacultyProfile;
 import Business.UserAccounts.UserAccount;
 import javax.swing.table.DefaultTableModel;
 import Business.Business;
+import Business.UniversityModel;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -27,13 +28,18 @@ public class ManageStudentProfileJPanel extends javax.swing.JPanel {
 
        JPanel CardSequencePanel;
         Business business;
+          private UniversityModel sharedData;
+           FacultyProfile facultyProfile;
     /**
      * Creates new form ManageCourse
      */
-    public ManageStudentProfileJPanel(Business bz, JPanel jp) {
-        CardSequencePanel = jp;
-        this.business = bz;
+    public ManageStudentProfileJPanel(Business b,UniversityModel sharedData,FacultyProfile fpp, JPanel jp) {
+       this.facultyProfile= fpp;
+        business = b;
+        this.CardSequencePanel = jp;
+        this.sharedData = new UniversityModel();       
         initComponents();
+    
     }
 
    public void populateStudentProfiles(CourseSchedule schedule, FacultyProfile faculty, JTable targetTable) {
