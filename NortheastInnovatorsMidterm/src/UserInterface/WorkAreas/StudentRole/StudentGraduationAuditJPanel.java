@@ -4,8 +4,8 @@
  */
 package UserInterface.WorkAreas.StudentRole;
 import Business.Business;
+import Business.Profiles.StudentAccount;
 import Business.Profiles.StudentProfile;
-import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -18,17 +18,17 @@ public class StudentGraduationAuditJPanel extends javax.swing.JPanel {
 Business business;
 StudentProfile student;
 JPanel CardSequencePanel;
-final UserAccount user;
+final StudentAccount studentAccount;
     /**
      * Creates new form StudentGraduationAuditJPanel
      */
-    public StudentGraduationAuditJPanel(Business b, UserAccount u, StudentProfile sp, JPanel csp) {
-    this.user = u;
+    public StudentGraduationAuditJPanel(Business b, StudentAccount sa, StudentProfile sp, JPanel csp) {
+    this.studentAccount = sa;
         business = b;
     student = sp;
     CardSequencePanel = csp;
 
-    if (Business.Authorize(u,"Student")) initComponents();
+    if (Business.Authorize(sa, "Student")) initComponents();
 
     populateGraduationAuditTable();
 }

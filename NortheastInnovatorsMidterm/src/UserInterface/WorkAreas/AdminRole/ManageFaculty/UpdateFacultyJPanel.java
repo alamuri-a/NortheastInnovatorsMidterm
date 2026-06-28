@@ -14,7 +14,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author abala
+ * @author Ajay Alamuri
  */
 public class UpdateFacultyJPanel extends javax.swing.JPanel {
 
@@ -23,7 +23,7 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
     Business business;
     FacultyProfile Faculty;
     JPanel CardSequencePanel;
-    UserAccount user;
+    final UserAccount user;
     
     /**
      * Creates new form UpdateFacultyJPanel
@@ -36,7 +36,7 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
         this.business = bz;
         this.Faculty = fp;
         CardSequencePanel = csp;
-        initComponents();
+        if (Business.Authorize(u,"Admin")) initComponents();
         
         updateFields();
     }

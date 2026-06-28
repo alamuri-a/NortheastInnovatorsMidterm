@@ -4,6 +4,7 @@
  */
 package UserInterface.WorkAreas.StudentRole;
 import Business.Business;
+import Business.Profiles.StudentAccount;
 import Business.Profiles.StudentProfile;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -17,15 +18,17 @@ public class StudentTranscriptJPanel extends javax.swing.JPanel {
 Business business;
 StudentProfile student;
 JPanel CardSequencePanel;
+final StudentAccount studentAccount;
     /**
      * Creates new form StudentTranscriptJPanel
      */
-    public StudentTranscriptJPanel(Business b, StudentProfile sp, JPanel csp) {
+    public StudentTranscriptJPanel(Business b, StudentAccount sa, StudentProfile sp, JPanel csp) {
     business = b;
     student = sp;
     CardSequencePanel = csp;
+    this.studentAccount = sa;
 
-    initComponents();
+    if (Business.Authorize(sa, "Student")) initComponents();
 
     populateTranscriptTable();
 }

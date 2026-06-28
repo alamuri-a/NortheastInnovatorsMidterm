@@ -17,7 +17,7 @@ public class StudentManageProfileJPanel extends javax.swing.JPanel {
 
 Business business;
 StudentProfile student;
-StudentAccount studentAccount;
+final StudentAccount studentAccount;
 JPanel CardSequencePanel;
 
     /**
@@ -26,9 +26,9 @@ JPanel CardSequencePanel;
     public StudentManageProfileJPanel(Business b, StudentProfile sp, StudentAccount sa, JPanel csp) {
     business = b;
     student = sp;
-    studentAccount = sa;
+    this.studentAccount = sa;
     CardSequencePanel = csp;
-    initComponents();
+    if (Business.Authorize(sa, "Student")) initComponents();
     populateProfileFields();
 }
 
