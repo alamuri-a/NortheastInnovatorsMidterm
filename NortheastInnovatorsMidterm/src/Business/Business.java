@@ -43,7 +43,7 @@ public class Business {
     }
 
     
-    // GETTERS AND SETTERS
+    // METHODS
     public PersonDirectory getPersonDirectory() {
         return persondirectory;
     }
@@ -51,18 +51,19 @@ public class Business {
         return useraccountdirectory;
     }
 
-
     public EmployeeDirectory getEmployeeDirectory() {
         return employeedirectory;
     }
+    
     public StudentDirectory getStudentDirectory(){
         return studentdirectory;
     }
+    
     public FacultyDirectory getFacultyDirectory() {
         return facultydirectory;
     }
     
-    // EXTRA METHODS
+    // @author Ajay Alamuri
     public static boolean Authorize(UserAccount ua, String role) {
         // Check whether or not user is authorized for specific area
 

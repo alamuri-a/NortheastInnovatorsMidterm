@@ -138,6 +138,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // Return to previous page
+
         CardSequencePanel.remove(this);
         ((CardLayout) CardSequencePanel.getLayout()).previous(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
@@ -189,7 +190,6 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             refreshTable();
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

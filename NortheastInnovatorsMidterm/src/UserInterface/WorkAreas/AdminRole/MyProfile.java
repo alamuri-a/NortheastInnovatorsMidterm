@@ -193,7 +193,6 @@ public class MyProfile extends javax.swing.JPanel {
         JOptionPane.showMessageDialog(null,"Successfully updated information, please remember to use your updated login details", "Success", JOptionPane.INFORMATION_MESSAGE);        
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnUpdate;

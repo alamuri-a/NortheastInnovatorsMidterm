@@ -196,7 +196,7 @@ public class CreateUserAccount extends javax.swing.JPanel {
         if (role.equals("Student")) {
             // NUID check for student account
             try {
-                nuid = Integer.parseInt(nuidString);
+                nuid = Integer.valueOf(nuidString);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "NUID must be an integer.", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -262,7 +262,6 @@ public class CreateUserAccount extends javax.swing.JPanel {
             txtNUID.setVisible(false);
         }
     }//GEN-LAST:event_cmbRoleActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

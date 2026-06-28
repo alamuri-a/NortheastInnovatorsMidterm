@@ -22,7 +22,7 @@ public class Person {
     }
 
     
-    // GETTER AND SETTER
+    // METHODS
     public String getPersonId() {
         return id;
     }
@@ -31,8 +31,6 @@ public class Person {
         this.id = ID;
     }
 
-    
-    // EXTRA METHODS
     public boolean isMatch(String id) {
         return getPersonId().equals(id);
     }

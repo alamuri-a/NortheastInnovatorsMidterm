@@ -24,10 +24,9 @@ public class EmployeeDirectory {
     
     // CONSTRUCTOR
     public EmployeeDirectory(Business d) {
-
         business = d;
+        
         employeelist = new ArrayList();
-
     }
 
     
@@ -46,5 +45,4 @@ public class EmployeeDirectory {
         }
         return null; //not found after going through the whole list
     }
-    
 }

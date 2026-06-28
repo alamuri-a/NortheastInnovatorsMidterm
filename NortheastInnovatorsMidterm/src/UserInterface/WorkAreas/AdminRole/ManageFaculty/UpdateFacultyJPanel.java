@@ -25,6 +25,9 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     final UserAccount user;
     
+    
+    // CONSTRUCTOR
+    
     /**
      * Creates new form UpdateFacultyJPanel
      * @param bz
@@ -164,7 +167,7 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
     
     // EXTRA METHODS
     private void updateFields() {
-        // Load name and NUID if Faculty has an account
+        // Load name
         
         // Display name
         String name = Faculty.getPerson().getPersonId();

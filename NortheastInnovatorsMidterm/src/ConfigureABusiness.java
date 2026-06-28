@@ -24,7 +24,6 @@ import Business.UserAccounts.UserAccountDirectory;
  * @author kal bugrara
  */
 class ConfigureABusiness {
-
     static Business initialize() {
         Business business = new Business("Information Systems");
 
@@ -56,11 +55,8 @@ class ConfigureABusiness {
         UserAccountDirectory uadirectory = business.getUserAccountDirectory();
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); // Admin
         UserAccount ua4 = uadirectory.newStudentAccount(studentprofile0, "adam", "****", 1); // Student
-        UserAccount ua5 = uadirectory.newUserAccount(facultyprofile0, "jackW", "****");//Faculty
-        
+        UserAccount ua5 = uadirectory.newUserAccount(facultyprofile0, "jackW", "****"); //Faculty
 
         return business;
     }
-
 }
-;

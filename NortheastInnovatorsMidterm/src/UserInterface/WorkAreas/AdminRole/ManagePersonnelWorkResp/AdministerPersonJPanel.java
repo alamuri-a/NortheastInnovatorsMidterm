@@ -27,6 +27,7 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
     Person person;
     final UserAccount user;
     
+    
     // CONSTRUCTOR
     
     /**

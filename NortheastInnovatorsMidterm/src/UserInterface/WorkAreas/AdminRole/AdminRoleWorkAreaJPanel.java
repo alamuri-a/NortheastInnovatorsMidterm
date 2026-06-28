@@ -35,6 +35,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     
     
     // CONSTRUCTOR
+    
     /**
      * Creates new form AdminRoleWorkAreaJPanel
      * @param b
@@ -217,7 +218,4 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnMyProfile;
     private javax.swing.JButton btnRegisterPersons;
     // End of variables declaration//GEN-END:variables
-
-    
-    // EXTRA METHODS
 }

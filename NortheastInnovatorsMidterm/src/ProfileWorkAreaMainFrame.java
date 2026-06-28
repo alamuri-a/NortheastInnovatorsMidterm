@@ -33,6 +33,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     Business business;
     UserAccount loggedIn;
     
+    
     // CONSTRUCTOR
     
     /**
@@ -202,7 +203,6 @@ studentworkareajpanel = new StudentWorkAreaJPanel(business, spp, studentAccount,
             CardSequencePanel.add("faculty", facultyworkarea);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
         }
-
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void PasswordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordTextFieldActionPerformed

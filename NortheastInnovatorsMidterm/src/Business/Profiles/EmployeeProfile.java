@@ -25,5 +25,4 @@ public class EmployeeProfile extends Profile {
     public String getRole(){
         return  "Admin";
     }
-
 }
