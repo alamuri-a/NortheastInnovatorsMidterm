@@ -40,7 +40,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
      */
     public FacultyWorkAreaJPanel(Business b,FacultyProfile fpp,UniversityModel sharedData, JPanel jp) {
         this.facultyProfile= fpp;
-        business = b;
+        this.business = b;
         this.CardSequencePanel = jp;
         this.sharedData = new UniversityModel();       
         initComponents();
@@ -169,7 +169,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnManageCoursesIdentifyResourceAssetsActionPerformed
 
     private void btnManageStudentsProfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageStudentsProfilesActionPerformed
-    ManageStudentProfileJPanel profilePanel = new ManageStudentProfileJPanel(business,sharedData, CardSequencePanel);
+    ManageStudentProfileJPanel profilePanel = new ManageStudentProfileJPanel(business,sharedData,facultyProfile, CardSequencePanel);
 
     CardSequencePanel.add("ManageStudentProfile", profilePanel);
 
@@ -178,7 +178,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnMyProfileIdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileIdentifyEventsActionPerformed
         // Load my profile pane
-     MyFacultyProfile profilePanel = new MyFacultyProfile(business,sharedData, CardSequencePanel);
+     MyFacultyProfile profilePanel = new MyFacultyProfile(business,sharedData,facultyProfile, CardSequencePanel);
 
     CardSequencePanel.add("MyFacultyProfile", profilePanel);
 
@@ -188,7 +188,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     private void btnPerformanceReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerformanceReportsActionPerformed
         // Load performance reports pane
                 // Load my profile pane
-     PerformanceReportsPanel profilePanel = new PerformanceReportsPanel(business,sharedData, CardSequencePanel);
+     PerformanceReportsPanel profilePanel = new PerformanceReportsPanel(business,sharedData,facultyProfile, CardSequencePanel);
 
     CardSequencePanel.add("PerformanceReports", profilePanel);
 
