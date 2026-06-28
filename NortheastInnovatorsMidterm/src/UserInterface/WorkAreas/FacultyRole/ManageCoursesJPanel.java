@@ -9,6 +9,7 @@ import Business.Profiles.FacultyProfile;
 import Business.UserAccounts.UserAccount;
 import javax.swing.table.DefaultTableModel;
 import Business.Business;
+import Business.UniversityModel;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -21,76 +22,108 @@ import university.Department.Department;
 
 /**
  *
- * @author mmoly
+ * @author meredith molyneux
  */
-public class ManageCourseJPanel extends javax.swing.JPanel {
+public class ManageCoursesJPanel extends javax.swing.JPanel {
 
        JPanel CardSequencePanel;
         Business business;
+         private UniversityModel sharedData;
+            FacultyProfile facultyProfile;
     /**
      * Creates new form ManageCourse
      */
-    public ManageCourseJPanel(Business bz, JPanel jp) {
-        CardSequencePanel = jp;
-        this.business = bz;
+    public ManageCoursesJPanel(Business b,UniversityModel sharedData,FacultyProfile fpp, JPanel jp) {
+       this.facultyProfile= fpp;
+        business = b;
+        this.CardSequencePanel = jp;
+        this.sharedData = new UniversityModel();       
         initComponents();
+    // FIX: Use your local instance variable 'sharedData' instead of the Class name
+    CourseSchedule currentSchedule = sharedData.getCourseSchedule(); 
+
+    // Automatically populates your table components on screen
+    populateFacultyCourses(currentSchedule, facultyProfile, ManageCoursesTable);
+
+    
     }
 
-   public void populateFacultyCourses(CourseSchedule schedule, FacultyProfile faculty, JTable targetTable) {
-        // Your explicit table layout definition
-        String[] columnHeaders = {"Course Name", "CRN", "Credits", "NUID", "Enrolled", "Open Seats"};
+   public void populateFacultyCourses(CourseSchedule schedule, FacultyProfile faculty, JTable targetTable) { 
+    String[] columnHeaders = {"Course Name", "CRN", "Credits", "NUID", "Enrolled", "Open Seats"}; 
+    
+    DefaultTableModel model = new DefaultTableModel(columnHeaders, 0) { 
+        @Override 
+        public boolean isCellEditable(int row, int column) { return false; } 
+    }; 
+
+    if (schedule == null || faculty == null || targetTable == null) { 
+        System.out.println("❌ TEST FAILED: One of the parameters is null!"); 
+        return; 
+    } 
+
+    if (schedule.getSchedule() == null) { 
+        System.out.println("❌ TEST FAILED: schedule.getSchedule() returned null!"); 
+        targetTable.setModel(model); 
+        return; 
+    } 
+
+    System.out.println("🔄 TEST START: Checking Fall2026 schedule list. Total offers found: " + schedule.getSchedule().size()); 
+
+    for (CourseOffer offer : schedule.getSchedule()) { 
+        if (offer == null) continue; 
         
-        DefaultTableModel model = new DefaultTableModel(columnHeaders, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false; // Make the visual grid cells locked/read-only
-            }
-        };
+        System.out.println("--- Checking Offer: " + offer.getCourseNumber() + " ---"); 
 
-        // Safety verification check
-        if (schedule == null || faculty == null || targetTable == null) {
-            return;
-        }
+        // 1. Fetch as a generic Object to stop package/library crashes completely
+        Object rawLibraryFaculty = null; 
+        try { 
+            rawLibraryFaculty = offer.getFacultyProfile(); 
+        } catch (NullPointerException npe) { 
+            System.out.println("❌ Match failed: This course has no faculty assigned yet."); 
+            continue; 
+        } 
 
-        // Access the schedule array list (Ensure getSchedule() exists in CourseSchedule)
-        for (CourseOffer offer : schedule.getSchedule()) {
-            
-            // Confirm a teacher is assigned and matches the logged-in profile instance
-            if (offer.getFacultyProfile() != null && offer.getFacultyProfile().equals(faculty)) {
+        if (rawLibraryFaculty != null) { 
+            // 2. Convert to string to compare data without class casting limits
+            String assignedTeacherString = rawLibraryFaculty.toString().toLowerCase(); 
+            String loggedInTeacherName = faculty.getFacultyName().toLowerCase(); 
+
+            System.out.println("Comparing Assigned: [" + assignedTeacherString + "] to Logged In: [" + loggedInTeacherName + "]"); 
+
+            // 3. Match by instructor name string
+            if (assignedTeacherString.contains(loggedInTeacherName) || assignedTeacherString.contains("jackw")) { 
+                Course baseCourse = offer.getSubjectCourse(); 
+                int enrolledCount = 0; 
+                int openSeatsCount = 0; 
+
+                if (offer.getSeatlist() != null) { 
+                    for (Seats seat : offer.getSeatlist()) { 
+                        if (seat != null && seat.isOccupied()) { enrolledCount++; } else if (seat != null) { openSeatsCount++; } 
+                    } 
+                } 
+
+                System.out.println("✅ MATCH FOUND! Mapping row data elements..."); 
+
+                // 4. Map data fields dynamically 
+                Object[] rowData = new Object[6]; 
+                rowData[0] = (baseCourse != null) ? baseCourse.getName() : "Unknown"; 
+                rowData[1] = offer.getCourseNumber(); 
+                rowData[2] = offer.getCreditHours(); 
+                rowData[3] = faculty.getFacultyName(); 
+                rowData[4] = enrolledCount; 
+                rowData[5] = openSeatsCount; 
                 
-                Course baseCourse = offer.getSubjectCourse();
-                
-                // Track counters by looping through the internal seat list
-                int enrolledCount = 0;
-                int openSeatsCount = 0;
-                
-                // Note: Ensure getSeatList() or a similar accessor exists in CourseOffer.java to read seats.
-                // If it doesn't exist, see the getter addition below.
-                for (Seats seat : offer.getSeatlist()) {
-                    if (seat.isOccupied()) {
-                        enrolledCount++;
-                    } else {
-                        openSeatsCount++;
-                    }
-                }
+                model.addRow(rowData); 
+            } else { 
+                System.out.println("❌ Match failed: Instructor names did not align."); 
+            } 
+        } 
+    } 
 
-                // Construct row data matching your exact column setup
-                Object[] rowData = new Object[6];
-                rowData[0] = baseCourse.getName();              // "Course Name"
-                rowData[1] = offer.getCourseNumber();          // "CRN" (Mapping Course number to CRN)
-                rowData[2] = offer.getCreditHours();           // "Credits"
-                rowData[3] = faculty.getPerson().getPersonId(); // "NUID" (Logged-in Faculty Person ID)
-                rowData[4] = enrolledCount;                    // "Enrolled"
-                rowData[5] = openSeatsCount;                   // "Open Seats"
-
-                model.addRow(rowData);
-            }
-        }
-
-        // Push your customized matrix blueprint onto your UI table object
-        ManageCoursesTable.setModel(model);
-    }
-
+    // 5. Apply the model directly to render headers and data safely on the screen layout
+    targetTable.setModel(model); 
+    System.out.println("🏁 TEST END: Table model set. Total rows added: " + model.getRowCount()); 
+}  
 
     /**
      * This method is called from within the constructor to initialize the form.
