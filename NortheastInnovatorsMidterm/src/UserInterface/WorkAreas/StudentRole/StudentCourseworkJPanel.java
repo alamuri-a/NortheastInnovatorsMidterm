@@ -142,16 +142,23 @@ public class StudentCourseworkJPanel extends javax.swing.JPanel {
     // End of variables declaration//GEN-END:variables
 
     private void populateCourseworkTable() {
-        DefaultTableModel model = (DefaultTableModel) tblCoursework.getModel();
+    DefaultTableModel model = (DefaultTableModel) tblCoursework.getModel();
 
-        model.setRowCount(0);
-        model.setColumnIdentifiers(new Object[]{"Course", "Assignment", "Status", "Progress"});
+    model.setRowCount(0);
+    model.setColumnIdentifiers(new Object[]{"Course", "Assignment", "Status", "Progress"});
 
-        model.addRow(new Object[]{"INFO5100", "Student Profile Feature", "Submitted", "100%"});
-        model.addRow(new Object[]{"INFO5100", "Coursework Panel", "In Progress", "50%"});
-        model.addRow(new Object[]{"INFO5100", "Registration Feature", "Not Started", "0%"});
-        model.addRow(new Object[]{"INFO5100", "Graduation Audit", "Not Started", "0%"});
-    }
+    addAssignmentRow(model, "INFO5100", "Student Profile Feature");
+    addAssignmentRow(model, "INFO5100", "Coursework Panel");
+    addAssignmentRow(model, "INFO5100", "Registration Feature");
+    addAssignmentRow(model, "INFO5100", "Graduation Audit");
+}
+
+private void addAssignmentRow(DefaultTableModel model, String courseCode, String assignmentName) {
+    String status = student.isAssignmentSubmitted(assignmentName) ? "Submitted" : "Not Submitted";
+    String progress = student.isAssignmentSubmitted(assignmentName) ? "100%" : "0%";
+
+    model.addRow(new Object[]{courseCode, assignmentName, status, progress});
+}
 
     private void submitSelectedAssignment() {
         int selectedRow = tblCoursework.getSelectedRow();
@@ -160,7 +167,8 @@ public class StudentCourseworkJPanel extends javax.swing.JPanel {
             JOptionPane.showMessageDialog(this, "Please select an assignment first.");
             return;
         }
-
+String assignmentName = tblCoursework.getValueAt(selectedRow, 1).toString();
+student.submitAssignment(assignmentName);
         tblCoursework.setValueAt("Submitted", selectedRow, 2);
         tblCoursework.setValueAt("100%", selectedRow, 3);
 
