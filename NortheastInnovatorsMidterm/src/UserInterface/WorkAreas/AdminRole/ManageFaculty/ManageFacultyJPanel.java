@@ -31,12 +31,13 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageFacultyJPanel
      * @param bz
+     * @param u
      * @param csp
      */
     public ManageFacultyJPanel(Business bz, UserAccount u, JPanel csp) {
         this.user = u;
         this.business = bz;
-        CardSequencePanel = csp;
+        this.CardSequencePanel = csp;
         if (Business.Authorize(u,"Admin")) initComponents();
         
         refreshTable();

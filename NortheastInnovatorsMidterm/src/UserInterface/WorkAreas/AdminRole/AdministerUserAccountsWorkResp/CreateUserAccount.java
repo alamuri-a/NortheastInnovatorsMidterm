@@ -38,8 +38,8 @@ public class CreateUserAccount extends javax.swing.JPanel {
      */
     public CreateUserAccount(Business b, UserAccount u, JPanel csp) {
         this.user = u;
-        business = b;
-        CardSequencePanel = csp;
+        this.business = b;
+        this.CardSequencePanel = csp;
         if (Business.Authorize(u,"Admin")) initComponents();
         
         populateComboBox();

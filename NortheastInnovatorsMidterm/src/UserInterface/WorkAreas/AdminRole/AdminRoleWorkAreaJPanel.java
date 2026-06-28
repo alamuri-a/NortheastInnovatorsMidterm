@@ -43,7 +43,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
      * @param clp
      */
     public AdminRoleWorkAreaJPanel(Business b, UserAccount u, JPanel clp) {
-        business = b;
+        this.business = b;
         this.user = u;
         this.CardSequencePanel = clp;
         if (Business.Authorize(u,"Admin")) initComponents();

@@ -36,7 +36,7 @@ public class ManageUserAccountsJPanel extends javax.swing.JPanel {
      * @param jp
      */
     public ManageUserAccountsJPanel(Business bz, UserAccount u, JPanel jp) {
-        CardSequencePanel = jp;
+        this.CardSequencePanel = jp;
         this.business = bz;
         this.user = u;
         if (Business.Authorize(u,"Admin")) initComponents();

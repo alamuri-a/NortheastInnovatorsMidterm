@@ -31,6 +31,7 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
     /**
      * Creates new form UpdateFacultyJPanel
      * @param bz
+     * @param u
      * @param fp
      * @param csp
      */
@@ -38,7 +39,7 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
         this.user = u;
         this.business = bz;
         this.Faculty = fp;
-        CardSequencePanel = csp;
+        this.CardSequencePanel = csp;
         if (Business.Authorize(u,"Admin")) initComponents();
         
         updateFields();
@@ -124,8 +125,8 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
 
         String name = txtName.getText();
 
-        // Blank check
-        if (name.isBlank()) {
+        // Null/Blank check
+        if (name == null || name.isBlank()) {
             JOptionPane.showMessageDialog(null, "Name cannot be blank.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -169,7 +170,6 @@ public class UpdateFacultyJPanel extends javax.swing.JPanel {
     private void updateFields() {
         // Load name
         
-        // Display name
         String name = Faculty.getPerson().getPersonId();
         txtName.setText(name);
     }

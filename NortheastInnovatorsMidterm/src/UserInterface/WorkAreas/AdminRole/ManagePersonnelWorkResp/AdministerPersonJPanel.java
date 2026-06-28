@@ -39,7 +39,7 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
      */
     public AdministerPersonJPanel(Business bz, UserAccount u, Person p, JPanel jp) {
         this.user = u;
-        CardSequencePanel = jp;
+        this.CardSequencePanel = jp;
         this.person = p;
         this.business = bz;
         if (Business.Authorize(u,"Admin")) initComponents();

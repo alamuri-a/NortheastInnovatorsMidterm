@@ -37,8 +37,8 @@ public class UpdateUserAccount extends javax.swing.JPanel {
      */
     public UpdateUserAccount(UserAccount u, UserAccount sua, JPanel jp) {
         this.user = u;
-        CardSequencePanel = jp;
-        selecteduseraccount= sua;
+        this.CardSequencePanel = jp;
+        this.selecteduseraccount= sua;
         if (Business.Authorize(u,"Admin")) initComponents();
         
         updateFields();
