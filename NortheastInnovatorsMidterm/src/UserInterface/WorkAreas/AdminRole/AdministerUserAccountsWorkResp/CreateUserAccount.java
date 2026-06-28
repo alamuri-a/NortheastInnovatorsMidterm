@@ -27,6 +27,9 @@ public class CreateUserAccount extends javax.swing.JPanel {
     JPanel CardSequencePanel;
     final UserAccount user;
     
+    
+    // CONSTRUCTOR
+    
     /**
      * Creates new form CreateUserAccount
      * @param b
@@ -35,8 +38,8 @@ public class CreateUserAccount extends javax.swing.JPanel {
      */
     public CreateUserAccount(Business b, UserAccount u, JPanel csp) {
         this.user = u;
-        business = b;
-        CardSequencePanel = csp;
+        this.business = b;
+        this.CardSequencePanel = csp;
         if (Business.Authorize(u,"Admin")) initComponents();
         
         populateComboBox();
@@ -180,18 +183,20 @@ public class CreateUserAccount extends javax.swing.JPanel {
         String person = txtID.getText();
         String username = txtUsername.getText();
         String password = txtPassword.getText();
+        String nuidString = txtNUID.getText();
         Integer nuid = null;
 
-        // Blank checks
-        if (person.isBlank() || username.isBlank() || password.isBlank()) {
-            JOptionPane.showMessageDialog(null, "Person ID/Username/Password cannot be blank.", "Warning", JOptionPane.WARNING_MESSAGE);
+        // Null/Blank checks
+        if (nuidString == null || person == null || username == null || password == null ||
+                nuidString.isBlank() || person.isBlank() || username.isBlank() || password.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Person ID/Username/Password/NUID cannot be blank.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         String role = (String) cmbRole.getSelectedItem();
         if (role.equals("Student")) {
             // NUID check for student account
             try {
-                nuid = Integer.valueOf(txtNUID.getText());
+                nuid = Integer.valueOf(nuidString);
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, "NUID must be an integer.", "Warning", JOptionPane.WARNING_MESSAGE);
                 return;
@@ -222,7 +227,6 @@ public class CreateUserAccount extends javax.swing.JPanel {
         } else {
             business.getUserAccountDirectory().newUserAccount(p, username, password);
         }
-        
         JOptionPane.showMessageDialog(null, "User account successfully created!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
         // Update table on previous page and return
@@ -258,7 +262,6 @@ public class CreateUserAccount extends javax.swing.JPanel {
             txtNUID.setVisible(false);
         }
     }//GEN-LAST:event_cmbRoleActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

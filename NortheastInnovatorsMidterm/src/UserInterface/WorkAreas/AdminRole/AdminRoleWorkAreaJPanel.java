@@ -33,7 +33,9 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     Business business;
     final UserAccount user;
     
+    
     // CONSTRUCTOR
+    
     /**
      * Creates new form AdminRoleWorkAreaJPanel
      * @param b
@@ -41,7 +43,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
      * @param clp
      */
     public AdminRoleWorkAreaJPanel(Business b, UserAccount u, JPanel clp) {
-        business = b;
+        this.business = b;
         this.user = u;
         this.CardSequencePanel = clp;
         if (Business.Authorize(u,"Admin")) initComponents();
@@ -175,7 +177,6 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
         ManageUserAccountsJPanel aos = new ManageUserAccountsJPanel(business, user, CardSequencePanel);
         CardSequencePanel.add("ManageUsers", aos);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
     }//GEN-LAST:event_btnAdminUserAccountsIdentifyResourceAssetsActionPerformed
 
     private void btnRegisterPersonsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterPersonsActionPerformed
@@ -217,7 +218,4 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnMyProfile;
     private javax.swing.JButton btnRegisterPersons;
     // End of variables declaration//GEN-END:variables
-
-    
-    // EXTRA METHODS
 }

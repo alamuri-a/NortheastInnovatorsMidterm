@@ -31,12 +31,13 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageFacultyJPanel
      * @param bz
+     * @param u
      * @param csp
      */
     public ManageFacultyJPanel(Business bz, UserAccount u, JPanel csp) {
         this.user = u;
         this.business = bz;
-        CardSequencePanel = csp;
+        this.CardSequencePanel = csp;
         if (Business.Authorize(u,"Admin")) initComponents();
         
         refreshTable();
@@ -138,6 +139,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // Return to previous page
+
         CardSequencePanel.remove(this);
         ((CardLayout) CardSequencePanel.getLayout()).previous(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
@@ -189,7 +191,6 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
             refreshTable();
         }
     }//GEN-LAST:event_btnDeleteActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

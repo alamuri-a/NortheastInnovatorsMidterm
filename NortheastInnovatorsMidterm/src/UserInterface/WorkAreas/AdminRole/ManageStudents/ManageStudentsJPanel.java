@@ -31,6 +31,7 @@ public class ManageStudentsJPanel extends javax.swing.JPanel {
     /**
      * Creates new form ManageStudentsJPanel
      * @param bz
+     * @param u
      * @param csp
      */
     public ManageStudentsJPanel(Business bz, UserAccount u, JPanel csp) {

@@ -13,14 +13,14 @@ import Business.Person.Person;
  */
 public abstract class Profile {
     
+    
     // ATTRIBUTE
     Person person;
     
     
     // CONSTRUCTOR
     public Profile(Person p){
-        person = p;
-        
+        person = p;    
     }
     
     
@@ -30,10 +30,8 @@ public abstract class Profile {
     public Person getPerson(){
         return person;
     }
-     
-
+    
     public boolean isMatch(String id) {
         return person.getPersonId().equals(id);
     }
-
 }

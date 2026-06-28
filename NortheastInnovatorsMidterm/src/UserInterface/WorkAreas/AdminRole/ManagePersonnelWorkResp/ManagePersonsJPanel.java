@@ -119,6 +119,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         // Return to previous page
+        
         CardSequencePanel.remove(this);
         ((CardLayout) CardSequencePanel.getLayout()).previous(CardSequencePanel);
     }//GEN-LAST:event_btnBackActionPerformed
@@ -132,7 +133,13 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
             return;
         }
 
+        // Null check
         Person selectedPerson = (Person) tblPersons.getValueAt(selectedRow, 0);
+        if (selectedPerson == null) {
+            JOptionPane.showMessageDialog(null, "Failed to get selected person's information.", "Warning", JOptionPane.WARNING_MESSAGE);
+            refreshTable();
+            return;
+        }
         
         AdministerPersonJPanel mppd = new AdministerPersonJPanel(business, user, selectedPerson, CardSequencePanel);
         CardSequencePanel.add(mppd);
@@ -144,8 +151,8 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         
         String name = txtName.getText();
         
-        // Blank check
-        if (name.isBlank()) {
+        // Null/Blank check
+        if (name == null || name.isBlank()) {
             JOptionPane.showMessageDialog(null, "Please enter the name of the person you would like to register.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
