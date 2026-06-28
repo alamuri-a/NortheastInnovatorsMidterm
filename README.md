@@ -53,7 +53,7 @@ git clone https://github.com/alamuri-a/NortheastInnovatorsMidterm.git
 
 The Digital University System implements a role-based Access Control Layer to provide secure authentication and authorization for all users. Every user must authenticate with a valid username and password before accessing the system.
 
-After successful authentication, the system identifies the user's assigned role and grants access only to the corresponding work area. Unauthorized users are prevented from accessing features outside of their assigned permissions.
+After successful authentication, the system identifies the user's assigned role and grants access only to the corresponding work area. Unauthorized users are prevented from accessing features outside of their assigned permissions. User account must authorize on each panel to ensure only users with the specified role can access functionality, failure to authorize results in a blank pane.
 
 The implemented access control supports the following roles:
 
@@ -124,8 +124,6 @@ The application includes the following security features:
 - Username and password authentication
 - Role-based authorization
 - Separate work areas for each user role
-- Validation of user credentials before access is granted
-- Prevention of unauthorized access to protected functionality
 - Automatic navigation to the appropriate work area after successful login
 
 ## Usage Instructions
@@ -155,15 +153,14 @@ After launching the application, users interact with the system according to the
 
 ### Student
 
-1. New students may register by selecting **Sign Up** and entering a valid NUID provided by the administrator.
-2. Log in using the registered username and password.
-3. Access the Student Work Area.
-4. Manage coursework.
-5. Register for or drop classes.
-6. Perform a graduation audit.
-7. Review the academic transcript.
-8. View and update the student profile.
-9. Log out when finished.
+1. Log in using the registered username and password.
+2. Access the Student Work Area.
+3. Manage coursework.
+4. Register for or drop classes.
+5. Perform a graduation audit.
+6. Review the academic transcript.
+7. View and update the student profile.
+8. Log out when finished.
 
 ## Testing Guide
 
@@ -179,12 +176,17 @@ The following test cases were performed to verify that the application functions
 | Administrator updates a user account | Changes are saved and displayed correctly. |
 | Administrator deletes a user account | Selected user account is removed successfully. |
 | Administrator registers a new student, faculty member, or employee | Personnel record is successfully created. |
-| Student Sign-Up | Student successfully creates an account using a valid NUID. |
-| Role-Based Authorization | Users are only able to access functionality assigned to their authenticated role. |
+| Role-Based Authorization | Users are only able to access functionality assigned to their role. |
 | Input Validation | Required fields and invalid inputs display appropriate validation messages. |
 | Logout | User exits the current work area and returns to the login screen. |
 
 Authentication and authorization were verified by confirming that each user role could access only its assigned work area and that unauthorized access to protected functionality was prevented.
+
+### Demo Accounts
+| Role  | Username  | Password  |
+| Admin | admin | ****  |
+| Student | adam  | ****  |
+| Faculty | jackW | ****  |
 
 ## Challenges & Solutions
 
@@ -192,7 +194,7 @@ Throughout the development of this project, the team encountered several technic
 
 | Challenge | Solution |
 |-----------|----------|
-| TBD | TBD |
+| Lack of familiarity with GitHub-based collaboration | Wrote a master list of relevant commands with examples and explanations of behavior |
 | TBD | TBD |
 | TBD | TBD |
 | TBD | TBD |
@@ -218,6 +220,6 @@ The following table summarizes each team member's responsibilities and contribut
 |-------------|-------------------|----------------------|---------------|---------|---------------------|
 | Nicholas Woodward | Student | README, student-coursework, student-graduation-audit, student-manage-profile | TBD |   Tested Student UX | TBD |
 | Meredith Molyneux | Faculty | TBD | TBD | TBD | TBD |
-| Ajay Alamuri | Admin | clean-formatting, logout, manage-user, manage-persons, admin-profile, admin-manage-students | TBD | Tested Login/Logout Process, Admin UX | TBD |
+| Ajay Alamuri | Admin | clean-formatting, logout, manage-users, manage-persons, admin-profile, admin-manage-students, admin-manage-faculty, admin-formatting-bugfix, authorization | Functional comments | Tested Login/Logout Process, Admin UX | Explained Git commands |
 
 Each team member contributed to project planning, GitHub collaboration, code reviews, and integration testing throughout the development of the Digital University System.
