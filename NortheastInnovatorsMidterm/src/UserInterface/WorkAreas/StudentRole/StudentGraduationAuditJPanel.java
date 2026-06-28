@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UserInterface.WorkAreas.StudentRole;
+
 import Business.Business;
 import Business.Profiles.StudentAccount;
 import Business.Profiles.StudentProfile;
@@ -10,28 +11,41 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+
 /**
+ * Student panel for reviewing graduation progress and eligibility.
  *
- * @author nicholaswoodward
+ * @author Nicholas Woodward
  */
 public class StudentGraduationAuditJPanel extends javax.swing.JPanel {
-Business business;
-StudentProfile student;
-JPanel CardSequencePanel;
-final StudentAccount studentAccount;
+
+    // ATTRIBUTES
+    private Business business;
+    private StudentProfile student;
+    private JPanel CardSequencePanel;
+    private final StudentAccount studentAccount;
+
+    // CONSTRUCTOR
     /**
-     * Creates new form StudentGraduationAuditJPanel
+     * Creates a new StudentGraduationAuditJPanel for an authenticated student.
+     *
+     * @param b business object
+     * @param sa authenticated student account
+     * @param sp student profile
+     * @param csp parent CardLayout panel
      */
     public StudentGraduationAuditJPanel(Business b, StudentAccount sa, StudentProfile sp, JPanel csp) {
-    this.studentAccount = sa;
         business = b;
-    student = sp;
-    CardSequencePanel = csp;
+        student = sp;
+        CardSequencePanel = csp;
+        studentAccount = sa;
 
-    if (Business.Authorize(sa, "Student")) initComponents();
-
-    populateGraduationAuditTable();
-}
+        if (Business.Authorize(sa, "Student")) {
+            initComponents();
+            setBackground(new java.awt.Color(240, 248, 255));
+            populateGraduationAuditTable();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,59 +137,70 @@ final StudentAccount studentAccount;
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblGraduationAudit;
     // End of variables declaration//GEN-END:variables
-private void populateGraduationAuditTable() {
-    DefaultTableModel model = (DefaultTableModel) tblGraduationAudit.getModel();
+    /**
+     * Populates the graduation audit table using completed and registered credits.
+     */
+    private void populateGraduationAuditTable() {
+        DefaultTableModel model = (DefaultTableModel) tblGraduationAudit.getModel();
 
-    model.setRowCount(0);
-    model.setColumnIdentifiers(new Object[]{"Requirement", "Completed", "Required", "Status"});
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new Object[]{"Requirement", "Completed", "Required", "Status"});
 
-    int registeredCredits = student.getRegisteredCreditTotal();
-    int completedCredits = 44 + registeredCredits;
-    int requiredCredits = 52;
-    int remainingCredits = requiredCredits - completedCredits;
+        int registeredCredits = student.getRegisteredCreditTotal();
+        int completedCredits = 44 + registeredCredits;
+        int requiredCredits = 52;
+        int remainingCredits = requiredCredits - completedCredits;
 
-    if (remainingCredits < 0) {
-        remainingCredits = 0;
+        if (remainingCredits < 0) {
+            remainingCredits = 0;
+        }
+
+        String status = completedCredits >= requiredCredits ? "Eligible" : "Not Eligible";
+
+        model.addRow(new Object[]{"Completed Credits", completedCredits, requiredCredits, status});
+        model.addRow(new Object[]{"Registered Current Credits", registeredCredits, "N/A", "In Progress"});
+        model.addRow(new Object[]{"Remaining Credits", remainingCredits, "0", remainingCredits == 0 ? "Complete" : "Incomplete"});
+        model.addRow(new Object[]{"Graduation Status", status, "Eligible", status});
     }
 
-    String status = completedCredits >= requiredCredits ? "Eligible" : "Not Eligible";
+    /**
+     * Displays a graduation eligibility summary for the current student.
+     */
+    private void checkEligibility() {
+        int registeredCredits = student.getRegisteredCreditTotal();
+        int completedCredits = 44 + registeredCredits;
+        int requiredCredits = 52;
+        int remainingCredits = requiredCredits - completedCredits;
 
-    model.addRow(new Object[]{"Completed Credits", completedCredits, requiredCredits, status});
-    model.addRow(new Object[]{"Registered Current Credits", registeredCredits, "N/A", "In Progress"});
-    model.addRow(new Object[]{"Remaining Credits", remainingCredits, "0", remainingCredits == 0 ? "Complete" : "Incomplete"});
-    model.addRow(new Object[]{"Graduation Status", status, "Eligible", status});
+        if (remainingCredits < 0) {
+            remainingCredits = 0;
+        }
+
+        if (completedCredits >= requiredCredits) {
+            JOptionPane.showMessageDialog(this,
+                    "Graduation Audit Summary\n\n"
+                    + "Status: ELIGIBLE\n"
+                    + "Completed Credits: " + completedCredits + "\n"
+                    + "Required Credits: " + requiredCredits,
+                    "Graduation Audit",
+                    JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this,
+                    "Graduation Audit Summary\n\n"
+                    + "Status: NOT ELIGIBLE\n"
+                    + "Completed Credits: " + completedCredits + "\n"
+                    + "Required Credits: " + requiredCredits + "\n"
+                    + "Remaining Credits: " + remainingCredits,
+                    "Graduation Audit",
+                    JOptionPane.INFORMATION_MESSAGE);
+        }
+    }
+
+    /**
+     * Returns the user to the Student Work Area panel.
+     */
+    private void goBack() {
+        CardSequencePanel.remove(this);
+        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+    }
 }
-private void checkEligibility() {
-    int registeredCredits = student.getRegisteredCreditTotal();
-    int completedCredits = 44 + registeredCredits;
-    int requiredCredits = 52;
-    int remainingCredits = requiredCredits - completedCredits;
-
-    if (remainingCredits < 0) {
-        remainingCredits = 0;
-    }
-
-    if (completedCredits >= requiredCredits) {
-        JOptionPane.showMessageDialog(this,
-                "Graduation Audit Summary\n\n"
-                + "Status: ELIGIBLE\n"
-                + "Completed Credits: " + completedCredits + "\n"
-                + "Required Credits: " + requiredCredits,
-                "Graduation Audit",
-                JOptionPane.INFORMATION_MESSAGE);
-    } else {
-        JOptionPane.showMessageDialog(this,
-                "Graduation Audit Summary\n\n"
-                + "Status: NOT ELIGIBLE\n"
-                + "Completed Credits: " + completedCredits + "\n"
-                + "Required Credits: " + requiredCredits + "\n"
-                + "Remaining Credits: " + remainingCredits,
-                "Graduation Audit",
-                JOptionPane.INFORMATION_MESSAGE);
-    }
-}
-
-private void goBack() {
-    CardSequencePanel.remove(this);
-    ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-}}
