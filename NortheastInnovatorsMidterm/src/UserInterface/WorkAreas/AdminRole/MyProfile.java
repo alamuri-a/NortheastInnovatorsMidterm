@@ -32,9 +32,9 @@ public class MyProfile extends javax.swing.JPanel {
      * @param jp
      */
     public MyProfile(Business b, UserAccount ua, JPanel jp) {
-        business = b;
+        this.business = b;
         this.user = ua;
-        CardSequencePanel = jp;
+        this.CardSequencePanel = jp;
         initComponents();
         
         updateFields();
@@ -177,8 +177,8 @@ public class MyProfile extends javax.swing.JPanel {
         String username = txtUsername.getText();
         String password = txtPassword.getText();
         
-        // Blank checks
-        if (name.isBlank() || username.isBlank() || password.isBlank()) {
+        // Null/Blank checks
+        if (name == null || username == null || password == null || name.isBlank() || username.isBlank() || password.isBlank()) {
             JOptionPane.showMessageDialog(null, "Name/Username/Password cannot be blank.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
@@ -192,7 +192,6 @@ public class MyProfile extends javax.swing.JPanel {
         // Notify user
         JOptionPane.showMessageDialog(null,"Successfully updated information, please remember to use your updated login details", "Success", JOptionPane.INFORMATION_MESSAGE);        
     }//GEN-LAST:event_btnUpdateActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
@@ -213,6 +212,8 @@ public class MyProfile extends javax.swing.JPanel {
     
     // EXTRA METHODS
     private void updateFields() {
+        // Load data into fields
+        
         txtUpdated.setText(user.getUpdated());
         txtRole.setText(user.getRole());
         txtName.setText(user.getPersonId());

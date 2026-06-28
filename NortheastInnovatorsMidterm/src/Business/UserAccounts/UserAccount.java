@@ -39,7 +39,7 @@ public class UserAccount {
     }
 
     
-    // GETTERS AND SETTERS
+    // METHODS
     public String getUserLoginName(){
         return username;
     }

@@ -3,34 +3,48 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UserInterface.WorkAreas.StudentRole;
+
 import Business.Business;
 import Business.Person.Person;
-import Business.Profiles.StudentProfile;
 import Business.Profiles.StudentAccount;
+import Business.Profiles.StudentProfile;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+
 /**
+ * Student panel for displaying read-only profile information.
  *
- * @author nicholaswoodward
+ * @author Nicholas Woodward
  */
 public class StudentManageProfileJPanel extends javax.swing.JPanel {
 
-Business business;
-StudentProfile student;
-final StudentAccount studentAccount;
-JPanel CardSequencePanel;
+    // ATTRIBUTES
+    private Business business;
+    private StudentProfile student;
+    private final StudentAccount studentAccount;
+    private JPanel CardSequencePanel;
 
+    // CONSTRUCTOR
     /**
-     * Creates new form StudentManageProfileJPanel
+     * Creates a new StudentManageProfileJPanel for an authenticated student.
+     *
+     * @param b business object
+     * @param sp student profile
+     * @param sa authenticated student account
+     * @param csp parent CardLayout panel
      */
     public StudentManageProfileJPanel(Business b, StudentProfile sp, StudentAccount sa, JPanel csp) {
-    business = b;
-    student = sp;
-    this.studentAccount = sa;
-    CardSequencePanel = csp;
-    if (Business.Authorize(sa, "Student")) initComponents();
-    populateProfileFields();
-}
+        business = b;
+        student = sp;
+        studentAccount = sa;
+        CardSequencePanel = csp;
+
+        if (Business.Authorize(sa, "Student")) {
+            initComponents();
+            setBackground(new java.awt.Color(240, 248, 255));
+            populateProfileFields();
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -155,6 +169,9 @@ goBack();
     private javax.swing.JTextField txtPersonId;
     private javax.swing.JTextField txtRole;
     // End of variables declaration//GEN-END:variables
+    /**
+     * Loads the student's profile information into read-only text fields.
+     */
     private void populateProfileFields() {
         if (student == null || student.getPerson() == null) {
             return;
@@ -163,22 +180,25 @@ goBack();
         Person p = student.getPerson();
 
         txtPersonId.setText(p.getPersonId());
-txtName.setText(p.toString());
+        txtName.setText(p.toString());
 
-if (studentAccount != null) {
-    txtNUID.setText(String.valueOf(studentAccount.getNUID()));
-} else {
-    txtNUID.setText("Unavailable");
-}
+        if (studentAccount != null) {
+            txtNUID.setText(String.valueOf(studentAccount.getNUID()));
+        } else {
+            txtNUID.setText("Unavailable");
+        }
 
-txtRole.setText(student.getRole());
+        txtRole.setText(student.getRole());
 
-txtPersonId.setEditable(false);
-txtName.setEditable(false);
-txtNUID.setEditable(false);
-txtRole.setEditable(false);
+        txtPersonId.setEditable(false);
+        txtName.setEditable(false);
+        txtNUID.setEditable(false);
+        txtRole.setEditable(false);
     }
 
+    /**
+     * Returns the user to the Student Work Area panel.
+     */
     private void goBack() {
         CardSequencePanel.remove(this);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
