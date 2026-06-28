@@ -11,40 +11,44 @@
 package UserInterface.WorkAreas.StudentRole;
 
 import Business.Business;
-import Business.Profiles.StudentProfile;
 import Business.Profiles.StudentAccount;
-import javax.swing.JPanel;
+import Business.Profiles.StudentProfile;
 import java.awt.CardLayout;
+import javax.swing.JPanel;
+
 /**
  *
  * @author kal
+ * @author nicholaswoodward
  */
 public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 
-    
     // ATTRIBUTES
-javax.swing.JPanel CardSequencePanel;
-Business business;
-StudentProfile student;
-final StudentAccount studentAccount;
+    javax.swing.JPanel CardSequencePanel;
+    Business business;
+    StudentProfile student;
+    final StudentAccount studentAccount;
 
-    
     // CONSTRUCTOR
-
     /**
-     * Creates new form StudentWorkAreaJPanel
+     * Creates new form StudentWorkAreaJPanel.
+     *
      * @param b
-     * @param u
      * @param spp
+     * @param sa
      * @param clp
      */
     public StudentWorkAreaJPanel(Business b, StudentProfile spp, StudentAccount sa, JPanel clp) {
-    business = b;
-    this.CardSequencePanel = clp;
-    student = spp;
-    studentAccount = sa;
-    if (Business.Authorize(sa, "Student")) initComponents();
-}
+        business = b;
+        CardSequencePanel = clp;
+        student = spp;
+        studentAccount = sa;
+
+        if (Business.Authorize(sa, "Student")) {
+            initComponents();
+            setBackground(new java.awt.Color(240, 248, 255));
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

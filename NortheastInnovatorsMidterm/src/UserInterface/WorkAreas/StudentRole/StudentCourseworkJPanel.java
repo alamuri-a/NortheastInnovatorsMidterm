@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UserInterface.WorkAreas.StudentRole;
+
 import Business.Business;
 import Business.Profiles.StudentAccount;
 import Business.Profiles.StudentProfile;
@@ -10,29 +11,41 @@ import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+
 /**
+ * Student panel for viewing coursework, tracking progress, and submitting assignments.
  *
- * @author nicholaswoodward
+ * @author Nicholas Woodward
  */
 public class StudentCourseworkJPanel extends javax.swing.JPanel {
 
-    Business business;
-    StudentProfile student;
-    JPanel CardSequencePanel;
-    final StudentAccount studentAccount;
+    // ATTRIBUTES
+    private Business business;
+    private StudentProfile student;
+    private JPanel CardSequencePanel;
+    private final StudentAccount studentAccount;
 
+    // CONSTRUCTOR
     /**
-     * Creates new form StudentCourseworkJPanel
+     * Creates a new StudentCourseworkJPanel for an authenticated student.
+     *
+     * @param b business object
+     * @param sa authenticated student account
+     * @param sp student profile
+     * @param csp parent CardLayout panel
      */
     public StudentCourseworkJPanel(Business b, StudentAccount sa, StudentProfile sp, JPanel csp) {
-        this.studentAccount = sa;
         business = b;
         student = sp;
         CardSequencePanel = csp;
-        if (Business.Authorize(sa, "Student")) initComponents();
-        populateCourseworkTable();
-    }
+        studentAccount = sa;
 
+        if (Business.Authorize(sa, "Student")) {
+            initComponents();
+            setBackground(new java.awt.Color(240, 248, 255));
+            populateCourseworkTable();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -140,26 +153,38 @@ public class StudentCourseworkJPanel extends javax.swing.JPanel {
     private javax.swing.JTable tblCoursework;
     private java.awt.Label tblTitle;
     // End of variables declaration//GEN-END:variables
-
+    /**
+     * Populates the coursework table using saved assignment submission status.
+     */
     private void populateCourseworkTable() {
-    DefaultTableModel model = (DefaultTableModel) tblCoursework.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblCoursework.getModel();
 
-    model.setRowCount(0);
-    model.setColumnIdentifiers(new Object[]{"Course", "Assignment", "Status", "Progress"});
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new Object[]{"Course", "Assignment", "Status", "Progress"});
 
-    addAssignmentRow(model, "INFO5100", "Student Profile Feature");
-    addAssignmentRow(model, "INFO5100", "Coursework Panel");
-    addAssignmentRow(model, "INFO5100", "Registration Feature");
-    addAssignmentRow(model, "INFO5100", "Graduation Audit");
-}
+        addAssignmentRow(model, "INFO5100", "Student Profile Feature");
+        addAssignmentRow(model, "INFO5100", "Coursework Panel");
+        addAssignmentRow(model, "INFO5100", "Registration Feature");
+        addAssignmentRow(model, "INFO5100", "Graduation Audit");
+    }
 
-private void addAssignmentRow(DefaultTableModel model, String courseCode, String assignmentName) {
-    String status = student.isAssignmentSubmitted(assignmentName) ? "Submitted" : "Not Submitted";
-    String progress = student.isAssignmentSubmitted(assignmentName) ? "100%" : "0%";
+    /**
+     * Adds one assignment row to the coursework table.
+     *
+     * @param model coursework table model
+     * @param courseCode course identifier
+     * @param assignmentName assignment title
+     */
+    private void addAssignmentRow(DefaultTableModel model, String courseCode, String assignmentName) {
+        String status = student.isAssignmentSubmitted(assignmentName) ? "Submitted" : "Not Submitted";
+        String progress = student.isAssignmentSubmitted(assignmentName) ? "100%" : "0%";
 
-    model.addRow(new Object[]{courseCode, assignmentName, status, progress});
-}
+        model.addRow(new Object[]{courseCode, assignmentName, status, progress});
+    }
 
+    /**
+     * Marks the selected assignment as submitted for the current student.
+     */
     private void submitSelectedAssignment() {
         int selectedRow = tblCoursework.getSelectedRow();
 
@@ -167,14 +192,19 @@ private void addAssignmentRow(DefaultTableModel model, String courseCode, String
             JOptionPane.showMessageDialog(this, "Please select an assignment first.");
             return;
         }
-String assignmentName = tblCoursework.getValueAt(selectedRow, 1).toString();
-student.submitAssignment(assignmentName);
+
+        String assignmentName = tblCoursework.getValueAt(selectedRow, 1).toString();
+        student.submitAssignment(assignmentName);
+
         tblCoursework.setValueAt("Submitted", selectedRow, 2);
         tblCoursework.setValueAt("100%", selectedRow, 3);
 
         JOptionPane.showMessageDialog(this, "Assignment submitted successfully.");
     }
 
+    /**
+     * Displays progress information for the selected coursework item.
+     */
     private void viewSelectedProgress() {
         int selectedRow = tblCoursework.getSelectedRow();
 
@@ -197,6 +227,9 @@ student.submitAssignment(assignmentName);
                 JOptionPane.INFORMATION_MESSAGE);
     }
 
+    /**
+     * Returns the user to the Student Work Area panel.
+     */
     private void goBack() {
         CardSequencePanel.remove(this);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
