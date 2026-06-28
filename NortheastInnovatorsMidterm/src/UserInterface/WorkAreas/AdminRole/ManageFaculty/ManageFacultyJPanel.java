@@ -15,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author abala
+ * @author Ajay Alamuri
  */
 public class ManageFacultyJPanel extends javax.swing.JPanel {
 
@@ -23,7 +23,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
     // ATTRIBUTES
     Business business;
     JPanel CardSequencePanel;
-    UserAccount user;
+    final UserAccount user;
     
     
     // CONSTRUCTOR
@@ -37,7 +37,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         this.user = u;
         this.business = bz;
         CardSequencePanel = csp;
-        initComponents();
+        if (Business.Authorize(u,"Admin")) initComponents();
         
         refreshTable();
     }

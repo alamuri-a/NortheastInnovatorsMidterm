@@ -7,6 +7,7 @@ package UserInterface.WorkAreas.AdminRole.ManageStudents;
 import Business.Business;
 import Business.Profiles.StudentDirectory;
 import Business.Profiles.StudentProfile;
+import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -14,7 +15,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author abala
+ * @author Ajay Alamuri
  */
 public class ManageStudentsJPanel extends javax.swing.JPanel {
 
@@ -22,6 +23,7 @@ public class ManageStudentsJPanel extends javax.swing.JPanel {
     // ATTRIBUTES
     Business business;
     JPanel CardSequencePanel;
+    final UserAccount user;
     
     
     // CONSTRUCTOR
@@ -31,10 +33,11 @@ public class ManageStudentsJPanel extends javax.swing.JPanel {
      * @param bz
      * @param csp
      */
-    public ManageStudentsJPanel(Business bz, JPanel csp) {
+    public ManageStudentsJPanel(Business bz, UserAccount u, JPanel csp) {
+        this.user = u;
         this.business = bz;
         CardSequencePanel = csp;
-        initComponents();
+        if (Business.Authorize(u,"Admin")) initComponents();
         
         refreshTable();
     }
@@ -156,7 +159,7 @@ public class ManageStudentsJPanel extends javax.swing.JPanel {
             return;
         }
 
-        UpdateStudentJPanel usp = new UpdateStudentJPanel(business, selectedStudent, CardSequencePanel);
+        UpdateStudentJPanel usp = new UpdateStudentJPanel(business, user, selectedStudent, CardSequencePanel);
         CardSequencePanel.add(usp);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnNextActionPerformed

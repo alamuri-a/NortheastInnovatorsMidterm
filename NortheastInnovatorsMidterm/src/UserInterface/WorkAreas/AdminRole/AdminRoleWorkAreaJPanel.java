@@ -189,7 +189,7 @@ public class AdminRoleWorkAreaJPanel extends javax.swing.JPanel {
     private void btnManageStudentsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageStudentsActionPerformed
         // Load student management pane
         
-        ManageStudentsJPanel msp = new ManageStudentsJPanel(business, CardSequencePanel);
+        ManageStudentsJPanel msp = new ManageStudentsJPanel(business, user, CardSequencePanel);
         CardSequencePanel.add("ManageStudents", msp);
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnManageStudentsActionPerformed

@@ -26,7 +26,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 javax.swing.JPanel CardSequencePanel;
 Business business;
 StudentProfile student;
-StudentAccount studentAccount;
+final StudentAccount studentAccount;
 
     
     // CONSTRUCTOR
@@ -43,7 +43,7 @@ StudentAccount studentAccount;
     this.CardSequencePanel = clp;
     student = spp;
     studentAccount = sa;
-    initComponents();
+    if (Business.Authorize(sa, "Student")) initComponents();
 }
 
     /**
@@ -178,7 +178,7 @@ StudentAccount studentAccount;
     private void btnCourseWorkIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseWorkIdentifyResourceAssetsActionPerformed
 StudentCourseworkJPanel courseworkPanel =
 
-            new StudentCourseworkJPanel(business, user, student, CardSequencePanel);
+            new StudentCourseworkJPanel(business, studentAccount, student, CardSequencePanel);
 
     CardSequencePanel.add("StudentCoursework", courseworkPanel);
 
@@ -196,7 +196,7 @@ StudentCourseworkJPanel courseworkPanel =
 
     private void btnGraduationAuditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraduationAuditActionPerformed
     StudentGraduationAuditJPanel graduationPanel =
-        new StudentGraduationAuditJPanel(business, user, student, CardSequencePanel);
+        new StudentGraduationAuditJPanel(business, studentAccount, student, CardSequencePanel);
 
 CardSequencePanel.add("StudentGraduationAudit", graduationPanel);
 
@@ -206,7 +206,7 @@ CardSequencePanel.add("StudentGraduationAudit", graduationPanel);
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
     StudentRegistrationJPanel registrationPanel =
 
-            new StudentRegistrationJPanel(business, user, student, CardSequencePanel);
+            new StudentRegistrationJPanel(business, studentAccount, student, CardSequencePanel);
 
     CardSequencePanel.add("StudentRegistration", registrationPanel);
 
@@ -216,7 +216,7 @@ CardSequencePanel.add("StudentGraduationAudit", graduationPanel);
     private void btnTranscriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTranscriptActionPerformed
     StudentTranscriptJPanel transcriptPanel =
 
-            new StudentTranscriptJPanel(business, student, CardSequencePanel);
+            new StudentTranscriptJPanel(business, studentAccount, student, CardSequencePanel);
 
     CardSequencePanel.add("StudentTranscript", transcriptPanel);
 
