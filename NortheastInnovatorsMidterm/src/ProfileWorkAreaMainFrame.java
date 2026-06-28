@@ -6,23 +6,25 @@
 package Business;
 
 import Business.Profiles.EmployeeProfile;
+import Business.Profiles.FacultyProfile;
 import Business.Profiles.Profile;
 import Business.Profiles.StudentProfile;
-
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
-
 import UserInterface.WorkAreas.AdminRole.AdminRoleWorkAreaJPanel;
 import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
 import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
+import Business.UniversityModel;
+
 
 /**
  *
  * @author kal bugrara
  * @author Ajay Alamuri
+ * @author meredith molyneux
  */
 public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     
@@ -30,7 +32,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     // ATTRIBUTE
     Business business;
     UserAccount loggedIn;
-    
+    UniversityModel sharedData = new UniversityModel();    
     // CONSTRUCTOR
     /**
      * Creates new form ProfileWorkAreaMainFrame
@@ -39,6 +41,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         initComponents();
         business = ConfigureABusiness.initialize();
         loggedIn = null;
+      
     }
 
     /**
@@ -187,16 +190,17 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         }
 
             // FACULTY
-        
-            /*
+       
+           
         if (profile instanceof FacultyProfile) {
-            facultyworkarea = new FacultyWorkAreaJPanel(business, CardSequencePanel);
+            FacultyProfile fpp =(FacultyProfile) profile;
+            facultyworkarea = new FacultyWorkAreaJPanel(business,fpp,sharedData, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
 
         }
-            */
+          
 
     }//GEN-LAST:event_LoginButtonActionPerformed
 
