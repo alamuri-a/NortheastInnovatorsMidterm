@@ -17,11 +17,18 @@ import Business.Profiles.StudentProfile;
 
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
+import university.CourseCatalog.Course;
+import university.CourseCatalog.CourseCatalog;
+import university.CourseSchedule.CourseOffer;
+import university.CourseSchedule.CourseSchedule;
+import university.Department.Department;
+import university.Persona.Faculty.FacultyAssignment;
 
 
 /**
  *
  * @author kal bugrara
+ * @author meredith molyneux
  */
 class ConfigureABusiness {
 
@@ -58,9 +65,20 @@ class ConfigureABusiness {
         UserAccount ua4 = uadirectory.newStudentAccount(studentprofile0, "adam", "****", 1); // Student
         UserAccount ua5 = uadirectory.newUserAccount(facultyprofile0, "jackW", "****");//Faculty
         
+        System.out.println("ConfigureABusiness"+ "FacultyProfile complete: " + facultyprofile0.getFacultyName());
+        
+        // Setup Department, Course, and Schedule
+        Department department = new Department("Information Systems");
+        CourseCatalog coursecatalog = department.getCourseCatalog();
+        Course course = coursecatalog.newCourse("app eng", "info 5100", 4);
+        
+        CourseSchedule courseschedule = department.newCourseSchedule("Fall2020");
+        CourseOffer courseoffer = courseschedule.newCourseOffer("info 5100");
+        
+        //Assign Faculty to course 
+        FacultyAssignment assignment = facultyprofile0.AssignAsTeacher(courseoffer); 
 
-        return business;
+             return business;
     }
 
 }
-;
