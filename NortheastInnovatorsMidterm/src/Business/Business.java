@@ -11,13 +11,14 @@ import Business.Profiles.FacultyDirectory;
 import Business.Profiles.StudentDirectory;
 
 import Business.UserAccounts.UserAccountDirectory;
+import university.Department.Department;
 
 /**
  *
  * @author kal bugrara
  */
 public class Business {
-
+    
     
     // ATTRIBUTES
     String name;
@@ -26,7 +27,7 @@ public class Business {
     UserAccountDirectory useraccountdirectory; // User account list
     StudentDirectory studentdirectory; // Student profile list
     FacultyDirectory facultydirectory;//Faculty profile list 
-    
+    private Department department;
     
     // CONSTRUCTOR
     public Business(String n) {
@@ -60,4 +61,12 @@ public class Business {
         return facultydirectory;}
     
     // EXTRA METHODS
+        // Add this Getter and Setter inside Business.java
+    public Department getDepartment() {
+        return this.department;
+    }
+
+    public void setDepartment(Department department) {
+        this.department = department;
+    }
 }
