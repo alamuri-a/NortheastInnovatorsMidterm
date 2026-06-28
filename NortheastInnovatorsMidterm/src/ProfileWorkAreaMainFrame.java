@@ -18,6 +18,7 @@ import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
 import Business.UniversityModel;
+import university.Department.Department;
 
 
 /**
@@ -39,11 +40,16 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
      */
     public ProfileWorkAreaMainFrame() {
         initComponents();
-        business = ConfigureABusiness.initialize();
+        this.business = ConfigureABusiness.initialize();
         loggedIn = null;
-      
+        this.sharedData = new UniversityModel();;
+      Department liveDept = this.business.getDepartment(); 
+    
+    if (liveDept != null) {
+        this.sharedData.setDepartment(liveDept);
+        this.sharedData.setCourseSchedule(liveDept.getCourseSchedule("Fall2026"));
     }
-
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
