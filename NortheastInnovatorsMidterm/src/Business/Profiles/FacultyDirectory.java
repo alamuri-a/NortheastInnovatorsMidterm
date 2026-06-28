@@ -28,12 +28,14 @@ public class FacultyDirectory {
     }
 
     public FacultyDirectory() {
-
-      ;
         facultylist = new ArrayList();
 
     }
-
+    
+    public void deleteFacultyProfile(FacultyProfile fp) {
+        this.facultylist.remove(fp);
+    }
+    
     public FacultyProfile newFacultyProfile(Person p) {
 
         FacultyProfile sp = new FacultyProfile(p);

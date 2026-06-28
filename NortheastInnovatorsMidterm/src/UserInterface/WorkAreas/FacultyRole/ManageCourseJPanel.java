@@ -9,7 +9,6 @@ import Business.Profiles.FacultyProfile;
 import Business.UserAccounts.UserAccount;
 import javax.swing.table.DefaultTableModel;
 import Business.Business;
-import Business.UniversityModel;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTable;
@@ -24,31 +23,22 @@ import university.Department.Department;
  *
  * @author mmoly
  */
-public class ManageStudentProfileJPanel extends javax.swing.JPanel {
+public class ManageCourseJPanel extends javax.swing.JPanel {
 
        JPanel CardSequencePanel;
         Business business;
-          private UniversityModel sharedData;
-           FacultyProfile facultyProfile;
-        //final UserAccount user;
+        final UserAccount user;
     /**
      * Creates new form ManageCourse
      */
-    public ManageStudentProfileJPanel(Business b,UniversityModel sharedData,FacultyProfile fpp, JPanel jp) {
-       this.facultyProfile= fpp;
-        business = b;
-        this.CardSequencePanel = jp;
-        this.sharedData = new UniversityModel();       
-        initComponents();
-    
-    //public ManageStudentProfileJPanel(Business bz, UserAccount u, JPanel jp) {
-       // this.user = u;
-      //  CardSequencePanel = jp;
-      //  this.business = bz;
-       // if (Business.Authorize(u,"Faculty")) initComponents();
+    public ManageCourseJPanel(Business bz, UserAccount u, JPanel jp) {
+        this.user = u;
+        CardSequencePanel = jp;
+        this.business = bz;
+        if (Business.Authorize(u,"Faculty")) initComponents();
     }
 
-   public void populateStudentProfiles(CourseSchedule schedule, FacultyProfile faculty, JTable targetTable) {
+   public void populateFacultyCourses(CourseSchedule schedule, FacultyProfile faculty, JTable targetTable) {
         // Your explicit table layout definition
         String[] columnHeaders = {"Course Name", "CRN", "Credits", "NUID", "Enrolled", "Open Seats"};
         
@@ -100,7 +90,7 @@ public class ManageStudentProfileJPanel extends javax.swing.JPanel {
         }
 
         // Push your customized matrix blueprint onto your UI table object
-        ManageStudentTable.setModel(model);
+        ManageCoursesTable.setModel(model);
     }
 
 
@@ -114,11 +104,11 @@ public class ManageStudentProfileJPanel extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        ManageStudentTable = new javax.swing.JTable();
+        ManageCoursesTable = new javax.swing.JTable();
         btnNext = new javax.swing.JButton();
         Back = new javax.swing.JButton();
 
-        ManageStudentTable.setModel(new javax.swing.table.DefaultTableModel(
+        ManageCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -129,7 +119,7 @@ public class ManageStudentProfileJPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(ManageStudentTable);
+        jScrollPane1.setViewportView(ManageCoursesTable);
 
         btnNext.setText("Next");
 
@@ -176,7 +166,7 @@ public class ManageStudentProfileJPanel extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
-    private javax.swing.JTable ManageStudentTable;
+    private javax.swing.JTable ManageCoursesTable;
     private javax.swing.JButton btnNext;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables

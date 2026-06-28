@@ -12,6 +12,7 @@ package UserInterface.WorkAreas.StudentRole;
 
 import Business.Business;
 import Business.Profiles.StudentProfile;
+import Business.Profiles.StudentAccount;
 import javax.swing.JPanel;
 import java.awt.CardLayout;
 /**
@@ -22,9 +23,10 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
 
     
     // ATTRIBUTES
-    javax.swing.JPanel CardSequencePanel;
-    Business business;
-    StudentProfile student;
+javax.swing.JPanel CardSequencePanel;
+Business business;
+StudentProfile student;
+final StudentAccount studentAccount;
 
     
     // CONSTRUCTOR
@@ -32,15 +34,17 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form StudentWorkAreaJPanel
      * @param b
+     * @param u
      * @param spp
      * @param clp
      */
-    public StudentWorkAreaJPanel(Business b, StudentProfile spp, JPanel clp) {
-        business = b;
-        this.CardSequencePanel = clp;
-        student = spp;
-        initComponents();
-    }
+    public StudentWorkAreaJPanel(Business b, StudentProfile spp, StudentAccount sa, JPanel clp) {
+    business = b;
+    this.CardSequencePanel = clp;
+    student = spp;
+    studentAccount = sa;
+    if (Business.Authorize(sa, "Student")) initComponents();
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -174,7 +178,7 @@ public class StudentWorkAreaJPanel extends javax.swing.JPanel {
     private void btnCourseWorkIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCourseWorkIdentifyResourceAssetsActionPerformed
 StudentCourseworkJPanel courseworkPanel =
 
-            new StudentCourseworkJPanel(business, student, CardSequencePanel);
+            new StudentCourseworkJPanel(business, studentAccount, student, CardSequencePanel);
 
     CardSequencePanel.add("StudentCoursework", courseworkPanel);
 
@@ -182,7 +186,8 @@ StudentCourseworkJPanel courseworkPanel =
     }//GEN-LAST:event_btnCourseWorkIdentifyResourceAssetsActionPerformed
 
     private void btnManageProfileActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageProfileActionPerformed
-   StudentManageProfileJPanel profilePanel = new StudentManageProfileJPanel(business, student, CardSequencePanel);
+   StudentManageProfileJPanel profilePanel =
+        new StudentManageProfileJPanel(business, student, studentAccount, CardSequencePanel);
 
     CardSequencePanel.add("StudentManageProfile", profilePanel);
 
@@ -190,13 +195,18 @@ StudentCourseworkJPanel courseworkPanel =
 }//GEN-LAST:event_btnManageProfileActionPerformed
 
     private void btnGraduationAuditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGraduationAuditActionPerformed
-        // Load graduation audit pane
+    StudentGraduationAuditJPanel graduationPanel =
+        new StudentGraduationAuditJPanel(business, studentAccount, student, CardSequencePanel);
+
+CardSequencePanel.add("StudentGraduationAudit", graduationPanel);
+
+((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnGraduationAuditActionPerformed
 
     private void btnRegistrationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrationActionPerformed
     StudentRegistrationJPanel registrationPanel =
 
-            new StudentRegistrationJPanel(business, student, CardSequencePanel);
+            new StudentRegistrationJPanel(business, studentAccount, student, CardSequencePanel);
 
     CardSequencePanel.add("StudentRegistration", registrationPanel);
 
@@ -204,7 +214,13 @@ StudentCourseworkJPanel courseworkPanel =
 }//GEN-LAST:event_btnRegistrationActionPerformed
 
     private void btnTranscriptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTranscriptActionPerformed
-        // Load transcript pane
+    StudentTranscriptJPanel transcriptPanel =
+
+            new StudentTranscriptJPanel(business, studentAccount, student, CardSequencePanel);
+
+    CardSequencePanel.add("StudentTranscript", transcriptPanel);
+
+    ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_btnTranscriptActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -13,6 +13,7 @@ package UserInterface.WorkAreas.FacultyRole;
 import Business.Business;
 import Business.Profiles.FacultyProfile;
 import Business.UniversityModel;
+import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import university.CourseSchedule.CourseSchedule;
@@ -29,6 +30,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     Business business;
     FacultyProfile facultyProfile;
     private UniversityModel sharedData;
+    //final UserAccount user;
 
     
     // CONSTRUCTOR
@@ -36,6 +38,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     /**
      * Creates new form FacultyWorkAreaJPanel
      * @param b
+     * @param u
      * @param clp
      */
     public FacultyWorkAreaJPanel(Business b,FacultyProfile fpp,UniversityModel sharedData, JPanel jp) {
@@ -45,8 +48,13 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
         this.sharedData = new UniversityModel();       
         initComponents();
     
-
     }
+    //public FacultyWorkAreaJPanel(Business b, UserAccount u, JPanel clp) {
+     //   this.user = u;
+      //  business = b;
+      //  this.CardSequencePanel = clp;
+       // if (Business.Authorize(u,"Faculty")) initComponents();
+    //}
 
     /**
      * This method is called from within the constructor to initialize the form.

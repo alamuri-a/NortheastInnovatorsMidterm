@@ -8,6 +8,8 @@ package Business.Profiles;
 import Business.Person.Person;
 
 import java.util.ArrayList;
+import Business.Profiles.StudentProfile;
+
 
 /**
  *
@@ -27,6 +29,14 @@ public class StudentDirectory {
 
     
     // METHODS
+    public ArrayList<StudentProfile> getList() {
+        return this.studentlist;
+    }
+    
+    public void deleteStudentProfile(StudentProfile sp) {
+        this.studentlist.remove(sp);
+    }
+    
     public StudentProfile newStudentProfile(Person p) {
         StudentProfile sp = new StudentProfile(p);
         studentlist.add(sp);

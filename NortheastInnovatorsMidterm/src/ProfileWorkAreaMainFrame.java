@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -8,6 +8,7 @@ package Business;
 import Business.Profiles.EmployeeProfile;
 import Business.Profiles.FacultyProfile;
 import Business.Profiles.Profile;
+import Business.Profiles.StudentAccount;
 import Business.Profiles.StudentProfile;
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
@@ -17,7 +18,6 @@ import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
-import Business.UniversityModel;
 import university.Department.Department;
 
 
@@ -43,7 +43,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         this.business = ConfigureABusiness.initialize();
         loggedIn = null;
         this.sharedData = new UniversityModel();;
-      Department liveDept = this.business.getDepartment(); 
+        Department liveDept = this.business.getDepartment(); 
     
     if (liveDept != null) {
         this.sharedData.setDepartment(liveDept);
@@ -189,7 +189,8 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             // STUDENT
         if (profile instanceof StudentProfile) {
             StudentProfile spp = (StudentProfile) profile;
-            studentworkareajpanel = new StudentWorkAreaJPanel(business, spp, CardSequencePanel);
+            StudentAccount studentAccount = (StudentAccount) useraccount;
+            studentworkareajpanel = new StudentWorkAreaJPanel(business, spp, studentAccount, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("student", studentworkareajpanel);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
@@ -204,7 +205,6 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-
         }
           
 

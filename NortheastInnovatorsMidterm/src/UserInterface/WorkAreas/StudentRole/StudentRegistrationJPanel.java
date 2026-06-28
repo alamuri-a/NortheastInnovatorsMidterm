@@ -4,6 +4,7 @@
  */
 package UserInterface.WorkAreas.StudentRole;
 import Business.Business;
+import Business.Profiles.StudentAccount;
 import Business.Profiles.StudentProfile;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
@@ -17,15 +18,17 @@ public class StudentRegistrationJPanel extends javax.swing.JPanel {
 Business business;
 StudentProfile student;
 JPanel CardSequencePanel;
+final StudentAccount studentAccount;
     /**
      * Creates new form StudentRegistrationJPanel
      */
-public StudentRegistrationJPanel(Business b, StudentProfile sp, JPanel csp) {
+public StudentRegistrationJPanel(Business b, StudentAccount sa, StudentProfile sp, JPanel csp) {
     business = b;
     student = sp;
     CardSequencePanel = csp;
+    this.studentAccount = sa;
 
-    initComponents();
+    if (Business.Authorize(sa, "Student")) initComponents();
 
     populateCourseTable();
 }
@@ -137,16 +140,21 @@ public StudentRegistrationJPanel(Business b, StudentProfile sp, JPanel csp) {
     private javax.swing.JTable tblCourses;
     // End of variables declaration//GEN-END:variables
     private void populateCourseTable() {
-        DefaultTableModel model = (DefaultTableModel) tblCourses.getModel();
+    DefaultTableModel model = (DefaultTableModel) tblCourses.getModel();
 
-        model.setRowCount(0);
-        model.setColumnIdentifiers(new Object[]{"Course", "CRN", "Credits", "Status"});
+    model.setRowCount(0);
+    model.setColumnIdentifiers(new Object[]{"Course", "CRN", "Credits", "Status"});
 
-        model.addRow(new Object[]{"INFO5100", "5100", "4", "Available"});
-        model.addRow(new Object[]{"INFO6205", "6205", "4", "Available"});
-        model.addRow(new Object[]{"INFO6105", "6105", "4", "Available"});
-        model.addRow(new Object[]{"DAMG6210", "6210", "4", "Available"});
-    }
+    addCourseRow(model, "INFO5100", "5100", "4");
+    addCourseRow(model, "INFO6205", "6205", "4");
+    addCourseRow(model, "INFO6105", "6105", "4");
+    addCourseRow(model, "DAMG6210", "6210", "4");
+}
+
+private void addCourseRow(DefaultTableModel model, String courseCode, String crn, String credits) {
+    String status = student.isRegisteredForCourse(courseCode) ? "Registered" : "Available";
+    model.addRow(new Object[]{courseCode, crn, credits, status});
+}
 private void registerCourse() {
     int selectedRow = tblCourses.getSelectedRow();
 
@@ -161,7 +169,8 @@ private void registerCourse() {
         JOptionPane.showMessageDialog(this, "You are already registered for this course.");
         return;
     }
-
+String courseCode = tblCourses.getValueAt(selectedRow, 0).toString();
+student.registerCourse(courseCode);
     tblCourses.setValueAt("Registered", selectedRow, 3);
     JOptionPane.showMessageDialog(this, "Course registered successfully.");
 }
@@ -180,7 +189,8 @@ private void dropCourse() {
         JOptionPane.showMessageDialog(this, "You are not registered for this course.");
         return;
     }
-
+String courseCode = tblCourses.getValueAt(selectedRow, 0).toString();
+student.dropCourse(courseCode);
     tblCourses.setValueAt("Available", selectedRow, 3);
     JOptionPane.showMessageDialog(this, "Course dropped successfully.");
 }
