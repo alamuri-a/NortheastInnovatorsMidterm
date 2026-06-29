@@ -1,6 +1,12 @@
 package Business;
 
+import java.util.ArrayList;
+import university.CourseCatalog.Course;
+import university.CourseSchedule.CourseLoad;
+import university.CourseSchedule.CourseOffer;
 import university.CourseSchedule.CourseSchedule;
+import university.CourseSchedule.SeatAssignment;
+import university.CourseSchedule.Seats;
 import university.Department.Department;
 
 /*
@@ -13,35 +19,57 @@ import university.Department.Department;
  * @author meredith molyneux
  */
 public class UniversityModel {
-    
+       
     private Department department;
     private String departmentName;
     private CourseSchedule courseSchedule;
+    private ArrayList<Seats> seatlist = new ArrayList<>();
+    private ArrayList<SeatAssignment> seatassignments = new ArrayList<>();
 
-    // 1. CLEAN CONSTRUCTOR: No longer hardcodes duplicate text objects or runs initializeData()
-    public UniversityModel() {
-        this.departmentName = "Information Systems";
+      // Empty Constructor
+    public UniversityModel() {}
+
+    // Overloaded Constructor to accept the generated configuration data
+    public UniversityModel(CourseSchedule schedule) {
+        this.courseSchedule = schedule;
     }
 
-    // 2. SETTERS: Allows ConfigureABusiness to inject the live memory data at root startup
-    public void setDepartment(Department dept) {
-        this.department = dept;
+    public CourseSchedule getCourseSchedule() {
+        return this.courseSchedule;
     }
 
     public void setCourseSchedule(CourseSchedule schedule) {
         this.courseSchedule = schedule;
     }
 
-    // 3. GETTERS: Allows your dashboard JPanels to pull the valid shared data references cleanly
-    public CourseSchedule getCourseSchedule() {
-        return this.courseSchedule;
+    public String getDepartmentName() {
+        return this.departmentName;
+    }
+
+    public void setDepartment(Department dept) {
+        this.department = dept;
     }
 
     public Department getDepartment() {
         return this.department;
     }
 
-    public String getDepartmentName() {
-        return this.departmentName;
+    public int getEmptySeatCount() {
+        int count = 0;
+        for (Seats seat : seatlist) {
+            if (!seat.isOccupied()) {
+                count++;
+            }
+        }
+        return count; 
     }
+
+    public ArrayList<Seats> getSeatlist() {
+        return seatlist;
+    }
+
+    public ArrayList<SeatAssignment> getSeatAssignments() {
+        return seatassignments;
+    }
+    
 }

@@ -43,7 +43,7 @@ public class UserAccountDirectory {
         useraccountlist.add(ua);
         return ua;
     }
-        public UserAccount newFacultyAccount(FacultyProfile p, String un, String pw, int id) {
+        public UserAccount newFacultyAccount(FacultyProfile p, String un, String pw, String id) {
         UserAccount ua = new FacultyAccount(p,  un,  pw, id);
         useraccountlist.add(ua);
         return ua;

@@ -6,6 +6,7 @@
 package Business;
 
 import Business.Profiles.EmployeeProfile;
+import Business.Profiles.FacultyAccount;
 import Business.Profiles.FacultyProfile;
 import Business.Profiles.Profile;
 import Business.Profiles.StudentAccount;
@@ -18,7 +19,7 @@ import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
-import university.Department.Department;
+import Business.UniversityModel;
 
 
 
@@ -29,14 +30,12 @@ import university.Department.Department;
  * @author meredith molyneux
  */
 public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
-    
-    
+
     // ATTRIBUTES
     Business business;
     UserAccount loggedIn;
     UniversityModel sharedData = new UniversityModel();    
-    // CONSTRUCTOR
-    
+  
     /**
      * Creates new form ProfileWorkAreaMainFrame
      */
@@ -44,14 +43,11 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         initComponents();
         this.business = ConfigureABusiness.initialize();
         loggedIn = null;
-        this.sharedData = new UniversityModel();;
-        Department liveDept = this.business.getDepartment(); 
+        this.sharedData = new UniversityModel();
+        
     
-    if (liveDept != null) {
-        this.sharedData.setDepartment(liveDept);
-        this.sharedData.setCourseSchedule(liveDept.getCourseSchedule("Fall2026"));
-    }
-    }
+      
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -204,11 +200,10 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         }
 
             // FACULTY
-       
-           
         if (profile instanceof FacultyProfile) {
             FacultyProfile fpp =(FacultyProfile) profile;
-            facultyworkarea = new FacultyWorkAreaJPanel(business,fpp,sharedData, CardSequencePanel);
+            FacultyAccount facultyAccount =(FacultyAccount) useraccount;
+            facultyworkarea = new FacultyWorkAreaJPanel(business,fpp,this.sharedData,facultyAccount, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);

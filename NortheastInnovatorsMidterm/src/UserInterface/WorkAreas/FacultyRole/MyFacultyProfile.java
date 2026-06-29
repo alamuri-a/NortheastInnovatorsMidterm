@@ -5,31 +5,39 @@
 package UserInterface.WorkAreas.FacultyRole;
 
 import Business.Business;
+import Business.Person.Person;
+import Business.Profiles.FacultyAccount;
 import Business.Profiles.FacultyProfile;
 import Business.UniversityModel;
+import Business.UserAccounts.UserAccount;
+import Business.UserAccounts.UserAccountDirectory;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import javax.swing.table.DefaultTableModel;
 
 /*
  *
- * @author mmoly
+ * @author meredith molyneux
  */
 public class MyFacultyProfile extends javax.swing.JPanel {
-       JPanel CardSequencePanel;
-        Business business;
-          private UniversityModel sharedData;
-           FacultyProfile facultyProfile;
+               JPanel CardSequencePanel;
+               Business business;
+              private UniversityModel sharedData;
+               FacultyProfile faculty;
+               FacultyAccount facultyAccount;
+               private boolean isEditable = false; 
     /**
     /**
      * Creates new form MyFacultyProfile
      */
     public MyFacultyProfile(Business b,UniversityModel sharedData,FacultyProfile fpp, JPanel jp)  {
-        this.facultyProfile= fpp;
+        faculty= fpp;
         business = b;
-        this.CardSequencePanel = jp;
+        CardSequencePanel = jp;
         this.sharedData = new UniversityModel();       
         initComponents();
-    
+   
+     updateFields();
 
     }
 
@@ -42,76 +50,174 @@ public class MyFacultyProfile extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        Title = new javax.swing.JLabel();
+        Name = new javax.swing.JLabel();
+        Dept = new javax.swing.JLabel();
         Back = new javax.swing.JButton();
         Save = new javax.swing.JButton();
+        txtName = new javax.swing.JTextField();
+        txtDept = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ScheduleTable = new javax.swing.JTable();
+        PersonalEmail = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
+        PreferredName = new javax.swing.JLabel();
+        txtPreferredName = new javax.swing.JTextField();
+        Name1 = new javax.swing.JLabel();
+        txtRole = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
-        jLabel1.setText("My Faculty Profile");
+        setBackground(new java.awt.Color(204, 255, 204));
 
-        jLabel2.setText("Name");
+        Title.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        Title.setText("My Faculty Profile");
 
-        jLabel3.setText("NUID");
+        Name.setText("Name");
 
-        jLabel4.setText("Department");
+        Dept.setText("Department");
 
-        Back.setText("Back");
+        Back.setText("<<<Back");
         Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BackActionPerformed(evt);
             }
         });
 
-        Save.setText("Save");
+        Save.setText("Save Updates");
+        Save.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Days Availabilty for:");
+
+        ScheduleTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Teaching", "Office Hours"
+            }
+        ));
+        ScheduleTable.setCellSelectionEnabled(true);
+        ScheduleTable.setShowGrid(true);
+        ScheduleTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ScheduleTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(ScheduleTable);
+
+        PersonalEmail.setText("Personal Email");
+
+        PreferredName.setText("Preferred Name");
+
+        Name1.setText("Role");
+
+        jLabel2.setText("click table to edit");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(48, 48, 48)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Name, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Dept)
+                                    .addComponent(Name1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtRole, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
+                                    .addComponent(txtDept, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(PersonalEmail)
+                            .addComponent(PreferredName))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtEmail)
+                            .addComponent(txtPreferredName)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(Title)))
+                .addContainerGap(18, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(23, 23, 23)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(59, 59, 59)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 478, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(34, 34, 34)
                 .addComponent(Back)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(Save)
-                .addGap(25, 25, 25))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(84, 84, 84)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(97, 284, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                .addGap(60, 60, 60))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtEmail, txtPreferredName, txtRole});
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {txtDept, txtName});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(47, 47, 47)
-                .addComponent(jLabel2)
-                .addGap(28, 28, 28)
-                .addComponent(jLabel3)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(Title)
+                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Name)
+                    .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addGap(81, 81, 81)
-                        .addComponent(Back)
-                        .addContainerGap(45, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(Save)
-                        .addGap(33, 33, 33))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Dept)
+                            .addComponent(txtDept, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(40, 40, 40))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(PersonalEmail))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(Name1)
+                                    .addComponent(txtRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(PreferredName))
+                            .addComponent(txtPreferredName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Back)
+                    .addComponent(Save))
+                .addGap(146, 146, 146))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -120,13 +226,166 @@ public class MyFacultyProfile extends javax.swing.JPanel {
         ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
     }//GEN-LAST:event_BackActionPerformed
 
+    private void SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveActionPerformed
+        String PersonalEmail = txtEmail.getText();
+        String PreferredName = txtPreferredName.getText();
+                        
+        DefaultTableModel model = (DefaultTableModel) ScheduleTable.getModel();
+    
+    // Step 1: Clear out the old records for this specific faculty member
+    // Example: "DELETE FROM schedule WHERE faculty_id = ?"
+    System.out.println("Clearing old schedule entries from database...");
+
+    // Step 2: Loop through the table and insert current rows
+    for (int i = 0; i < model.getRowCount(); i++) {
+        String teaching = (String) model.getValueAt(i, 0);
+        String officeHours = (String) model.getValueAt(i, 1);
+        
+        // Skip completely blank structural rows
+        if ((teaching == null || teaching.trim().isEmpty()) && 
+            (officeHours == null || officeHours.trim().isEmpty())) {
+            continue;
+        }
+        
+        // Database insertion mock-up
+        System.out.println("Saving to DB -> Row " + (i+1) + " | Teaching: " + teaching + " | Office Hours: " + officeHours);
+    }
+    
+    javax.swing.JOptionPane.showMessageDialog(this, "Schedule saved successfully!");
+
+    }//GEN-LAST:event_SaveActionPerformed
+
+    private void ScheduleTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ScheduleTableMouseClicked
+        // Toggle the lock state
+    isEditable = !isEditable;
+    
+  
+    }//GEN-LAST:event_ScheduleTableMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
+    private javax.swing.JLabel Dept;
+    private javax.swing.JLabel Name;
+    private javax.swing.JLabel Name1;
+    private javax.swing.JLabel PersonalEmail;
+    private javax.swing.JLabel PreferredName;
     private javax.swing.JButton Save;
+    private javax.swing.JTable ScheduleTable;
+    private javax.swing.JLabel Title;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField txtDept;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtName;
+    private javax.swing.JTextField txtPreferredName;
+    private javax.swing.JTextField txtRole;
     // End of variables declaration//GEN-END:variables
-}
+  
+    
+    private void updateFields() {
+        // Load updated data into fields
+      if (faculty == null || faculty.getPerson() == null) {
+            return;
+        }
+
+        Person p = faculty.getPerson();
+
+        txtName.setText(p.getPersonId());       
+        txtRole.setText(faculty.getRole());
+        txtPreferredName.setText("");
+        txtEmail.setText("");
+        txtDept.setText(sharedData.getDepartmentName());
+
+        
+        txtName.setEditable(false);
+        txtRole.setEditable(false);
+        txtDept.setEditable(false);
+        txtPreferredName.setEditable(true);
+        txtEmail.setEditable(true);
+     
+           
+       // 1. Create a custom model that explicitly allows editing
+        DefaultTableModel model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // Cell only editable if user click update table button
+                return isEditable; 
+               }
+        };
+    
+        // 2. Set the Table model 
+        ScheduleTable.setModel(model);
+        
+        // 3. Define the columns and add your data
+        model.setColumnIdentifiers(new Object[]{ "Teaching", "Office Hours" });
+        // Row 1
+        model.addRow(new Object[]{ "Tuesday 10:00AM - 3:00PM", "Mondays 12:00PM - 4:00PM" });
+        //Row 2
+        model.addRow(new Object[]{ "Thursday 12:00PM - 6:00PM", "Wednesday 10:00AM - 3:00PM" });
+         //Row 3
+        model.addRow(new Object[]{ "Friday 8:00AM - 12:00PM", "" });
+        
+        // 4. Define the action that runs when Enter is pressed
+        javax.swing.AbstractAction enterAction = new javax.swing.AbstractAction() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                int selectedRow = ScheduleTable.getSelectedRow();
+                int rowCount = ScheduleTable.getRowCount();
+
+                // Only trigger if editing is unlocked and user is on the very last row
+                if (isEditable && selectedRow == rowCount - 1) {
+                    DefaultTableModel currentModel = (DefaultTableModel) ScheduleTable.getModel();
+
+                    // Stop any active text editing to commit changes first
+                    if (ScheduleTable.isEditing()) {
+                        ScheduleTable.getCellEditor().stopCellEditing();
+                    }
+
+                    // Add the new row automatically
+                    currentModel.addRow(new Object[]{"", ""});
+
+                    // Move selection and focus to the first cell of your new row
+                    ScheduleTable.setRowSelectionInterval(rowCount, rowCount);
+                    ScheduleTable.setColumnSelectionInterval(0, 0);
+                } else {
+                    // If locked or not on the last row, let Enter behave normally
+                    ScheduleTable.getActionMap().getParent().get(ScheduleTable.getInputMap().get(
+                        javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, 0)
+                    )).actionPerformed(e);
+                }
+            }
+        };
+
+        // Map the Enter key to your custom action
+        ScheduleTable.getInputMap(javax.swing.JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+        .put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_ENTER, 0), "EnterPressed");
+        ScheduleTable.getActionMap().put("EnterPressed", enterAction);
+        
+       // 5. Define the action that runs when the Delete key is pressed
+        javax.swing.AbstractAction deleteAction = new javax.swing.AbstractAction() {
+            @Override
+            public void actionPerformed(java.awt.event.ActionEvent e) {
+                // Only allow deletion if the table is unlocked
+                if (isEditable) {
+                    int selectedRow = ScheduleTable.getSelectedRow();
+                    if (selectedRow != -1) {
+                        DefaultTableModel currentModel = (DefaultTableModel) ScheduleTable.getModel();
+                        currentModel.removeRow(selectedRow);
+                    }
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(ScheduleTable, "Please click 'Update' first to unlock the table.");
+                }
+            }
+        };
+
+        // Map the Delete key to your custom action
+        ScheduleTable.getInputMap(javax.swing.JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT)
+            .put(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_DELETE, 0), "DeletePressed");
+        ScheduleTable.getActionMap().put("DeletePressed", deleteAction);
+ 
+        }       
+ }
+
+

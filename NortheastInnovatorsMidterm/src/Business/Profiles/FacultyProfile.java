@@ -25,20 +25,15 @@ public class FacultyProfile extends Profile {
     String id;
     Department department;
     ArrayList <FacultyAssignment> facultyassignments; 
-       PersonaFacultyProfile personaFacultyProfile; 
-    
-    //Transcript transcript;
-    //EmploymentHistroy employmenthistory;
-
-    
+    PersonaFacultyProfile personaFacultyProfile;
+    FacultyAccount facultyAccount;
+        
     // CONSTRUCTOR
     public FacultyProfile(Person p) {
         super(p);
-            this.facultyassignments = new ArrayList<>(); 
+            this.facultyassignments = new ArrayList<>();
+            this.facultyAccount = facultyAccount;
 
-
-        //transcript = new Transcript(this);
-        //employmenthistory = new EmploymentHistroy();
     }
 
     // Getter and Setter to link and retrieve the library data model
@@ -50,64 +45,57 @@ public class FacultyProfile extends Profile {
         this.personaFacultyProfile = pfp;
     }
     
-
       public  double getProfAverageOverallRating(){
         
         double sum = 0.0;
         //for each facultyassignment extract class rating
         //add them up and divide by the number of teaching assignmnet;
         for(FacultyAssignment fa: facultyassignments){
-            
-            sum = sum + fa.getRating();
-            
-        }
+             sum = sum + fa.getRating();
+               }
         //divide by the total number of faculty assignments
         
         return sum/(facultyassignments.size()*1.0); //this ensure we have double/double
         
     }
 
+    // Inside your updated AssignAsTeacher method:
+    public FacultyAssignment AssignAsTeacher(CourseOffer co) {
+        if (this.personaFacultyProfile == null) {
+            // You may need to adapt this depending on what constructors PersonaFacultyProfile provides
+            // this.personaFaculty = new PersonaFacultyProfile(...); 
+        }
 
-
-
-// Inside your updated AssignAsTeacher method:
-public FacultyAssignment AssignAsTeacher(CourseOffer co) {
-    if (this.personaFacultyProfile == null) {
-        // You may need to adapt this depending on what constructors PersonaFacultyProfile provides
-        // this.personaFaculty = new PersonaFacultyProfile(...); 
-    }
-    
-    // Pass the matching type expected by the library object
-    FacultyAssignment fa = new FacultyAssignment(this.personaFacultyProfile, co); 
-    facultyassignments.add(fa);
-    return fa;
-}
-    
-    public PersonaFacultyProfile getCourseOffer(String courseid){
-        return null; //complete it later
+        // Pass the matching type expected by the library object
+        FacultyAssignment fa = new FacultyAssignment(this.personaFacultyProfile, co); 
+        facultyassignments.add(fa);
+        return fa;
     }
 
-    public boolean isMatch(String id) {
+        public PersonaFacultyProfile getCourseOffer(String courseid){
+            return null; //complete it later
+        }
+
+        public boolean isMatch(String id) {
         if (person.getPersonId().equals(id)) {
             return true;
         }
         return false;
     }
-    
-    // Pass-through helper method to get the name safely
-    public String getFacultyName() {
-        return (person != null) ? person.getPersonId() : "Unknown";
-    }
 
-    public String getNUID() {
-        return id;
-    }
+        // Pass-through helper method to get the name safely
+        public String getFacultyName() {
+            return (person != null) ? person.getPersonId() : "Unknown";
+        }
 
-    public void setNUID(String id) {
-        this.id = id;
-    }
-    
+        public String getID() {
+            return id;
+        }
 
+        public void setID(String id) {
+            this.id = id;
+        }
+   
     
     // METHODS
     @Override

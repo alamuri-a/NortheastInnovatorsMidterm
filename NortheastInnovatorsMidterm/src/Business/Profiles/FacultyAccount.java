@@ -10,23 +10,23 @@ import Business.UserAccounts.UserAccount;
  */
 public class FacultyAccount extends UserAccount{
     // ATTRIBUTES
-    private int NUID;
+    private String ID;
     
     
     // CONSTRUCTOR
-    public FacultyAccount(FacultyProfile p, String un, String pw, int id) {
+    public FacultyAccount(FacultyProfile p, String un, String pw, String id) {
         super(p,un, pw);
         
-        NUID = id;
+        ID = id;
     }
     
     // METHODS
-    public int getNUID() {
-        return NUID;
+    public String getID() {
+        return ID;
     }
     
-    public void setNUID(int NUID) {
-        this.NUID = NUID;
+    public void setID(String ID) {
+        this.ID = ID;
     }
    @Override
 public String getRole() {
