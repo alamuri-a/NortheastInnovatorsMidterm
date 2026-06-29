@@ -3,36 +3,49 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package UserInterface.WorkAreas.StudentRole;
+
 import Business.Business;
 import Business.Profiles.StudentAccount;
 import Business.Profiles.StudentProfile;
 import java.awt.CardLayout;
-import javax.swing.JPanel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
+
 /**
+ * Student panel for registering for and dropping available courses.
  *
- * @author nicholaswoodward
+ * @author Nicholas Woodward
  */
 public class StudentRegistrationJPanel extends javax.swing.JPanel {
-Business business;
-StudentProfile student;
-JPanel CardSequencePanel;
-final StudentAccount studentAccount;
+
+    // ATTRIBUTES
+    private Business business;
+    private StudentProfile student;
+    private JPanel CardSequencePanel;
+    private final StudentAccount studentAccount;
+
+    // CONSTRUCTOR
     /**
-     * Creates new form StudentRegistrationJPanel
+     * Creates a new StudentRegistrationJPanel for an authenticated student.
+     *
+     * @param b business object
+     * @param sa authenticated student account
+     * @param sp student profile
+     * @param csp parent CardLayout panel
      */
-public StudentRegistrationJPanel(Business b, StudentAccount sa, StudentProfile sp, JPanel csp) {
-    business = b;
-    student = sp;
-    CardSequencePanel = csp;
-    this.studentAccount = sa;
+    public StudentRegistrationJPanel(Business b, StudentAccount sa, StudentProfile sp, JPanel csp) {
+        business = b;
+        student = sp;
+        CardSequencePanel = csp;
+        studentAccount = sa;
 
-    if (Business.Authorize(sa, "Student")) initComponents();
-
-    populateCourseTable();
-}
-
+        if (Business.Authorize(sa, "Student")) {
+            initComponents();
+            setBackground(new java.awt.Color(240, 248, 255));
+            populateCourseTable();
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -139,63 +152,89 @@ public StudentRegistrationJPanel(Business b, StudentAccount sa, StudentProfile s
     private javax.swing.JLabel lblTitle;
     private javax.swing.JTable tblCourses;
     // End of variables declaration//GEN-END:variables
+    /**
+     * Populates the registration table with available courses and saved registration status.
+     */
     private void populateCourseTable() {
-    DefaultTableModel model = (DefaultTableModel) tblCourses.getModel();
+        DefaultTableModel model = (DefaultTableModel) tblCourses.getModel();
 
-    model.setRowCount(0);
-    model.setColumnIdentifiers(new Object[]{"Course", "CRN", "Credits", "Status"});
+        model.setRowCount(0);
+        model.setColumnIdentifiers(new Object[]{"Course", "CRN", "Credits", "Status"});
 
-    addCourseRow(model, "INFO5100", "5100", "4");
-    addCourseRow(model, "INFO6205", "6205", "4");
-    addCourseRow(model, "INFO6105", "6105", "4");
-    addCourseRow(model, "DAMG6210", "6210", "4");
-}
-
-private void addCourseRow(DefaultTableModel model, String courseCode, String crn, String credits) {
-    String status = student.isRegisteredForCourse(courseCode) ? "Registered" : "Available";
-    model.addRow(new Object[]{courseCode, crn, credits, status});
-}
-private void registerCourse() {
-    int selectedRow = tblCourses.getSelectedRow();
-
-    if (selectedRow < 0) {
-        JOptionPane.showMessageDialog(this, "Please select a course first.");
-        return;
+        addCourseRow(model, "INFO5100", "5100", "4");
+        addCourseRow(model, "INFO6205", "6205", "4");
+        addCourseRow(model, "INFO6105", "6105", "4");
+        addCourseRow(model, "DAMG6210", "6210", "4");
     }
 
-    String status = tblCourses.getValueAt(selectedRow, 3).toString();
-
-    if (status.equals("Registered")) {
-        JOptionPane.showMessageDialog(this, "You are already registered for this course.");
-        return;
+    /**
+     * Adds one course row to the registration table using the student's saved status.
+     *
+     * @param model registration table model
+     * @param courseCode course identifier
+     * @param crn course registration number
+     * @param credits course credit value
+     */
+    private void addCourseRow(DefaultTableModel model, String courseCode, String crn, String credits) {
+        String status = student.isRegisteredForCourse(courseCode) ? "Registered" : "Available";
+        model.addRow(new Object[]{courseCode, crn, credits, status});
     }
-String courseCode = tblCourses.getValueAt(selectedRow, 0).toString();
-student.registerCourse(courseCode);
-    tblCourses.setValueAt("Registered", selectedRow, 3);
-    JOptionPane.showMessageDialog(this, "Course registered successfully.");
+
+    /**
+     * Registers the selected course for the current student.
+     */
+    private void registerCourse() {
+        int selectedRow = tblCourses.getSelectedRow();
+
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a course first.");
+            return;
+        }
+
+        String status = tblCourses.getValueAt(selectedRow, 3).toString();
+
+        if (status.equals("Registered")) {
+            JOptionPane.showMessageDialog(this, "You are already registered for this course.");
+            return;
+        }
+
+        String courseCode = tblCourses.getValueAt(selectedRow, 0).toString();
+        student.registerCourse(courseCode);
+
+        tblCourses.setValueAt("Registered", selectedRow, 3);
+        JOptionPane.showMessageDialog(this, "Course registered successfully.");
+    }
+
+    /**
+     * Drops the selected course for the current student.
+     */
+    private void dropCourse() {
+        int selectedRow = tblCourses.getSelectedRow();
+
+        if (selectedRow < 0) {
+            JOptionPane.showMessageDialog(this, "Please select a course first.");
+            return;
+        }
+
+        String status = tblCourses.getValueAt(selectedRow, 3).toString();
+
+        if (!status.equals("Registered")) {
+            JOptionPane.showMessageDialog(this, "You are not registered for this course.");
+            return;
+        }
+
+        String courseCode = tblCourses.getValueAt(selectedRow, 0).toString();
+        student.dropCourse(courseCode);
+
+        tblCourses.setValueAt("Available", selectedRow, 3);
+        JOptionPane.showMessageDialog(this, "Course dropped successfully.");
+    }
+
+    /**
+     * Returns the user to the Student Work Area panel.
+     */
+    private void goBack() {
+        CardSequencePanel.remove(this);
+        ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
+    }
 }
-
-private void dropCourse() {
-    int selectedRow = tblCourses.getSelectedRow();
-
-    if (selectedRow < 0) {
-        JOptionPane.showMessageDialog(this, "Please select a course first.");
-        return;
-    }
-
-    String status = tblCourses.getValueAt(selectedRow, 3).toString();
-
-    if (!status.equals("Registered")) {
-        JOptionPane.showMessageDialog(this, "You are not registered for this course.");
-        return;
-    }
-String courseCode = tblCourses.getValueAt(selectedRow, 0).toString();
-student.dropCourse(courseCode);
-    tblCourses.setValueAt("Available", selectedRow, 3);
-    JOptionPane.showMessageDialog(this, "Course dropped successfully.");
-}
-
-private void goBack() {
-    CardSequencePanel.remove(this);
-    ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
-}}

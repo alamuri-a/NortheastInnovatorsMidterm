@@ -25,6 +25,7 @@ public class PersonDirectory {
 
     
     // METHODS
+    // @author Ajay Alamuri
     public ArrayList<Person> getList() {
         return this.personlist;
     }
@@ -43,5 +44,4 @@ public class PersonDirectory {
         }
         return null; //not found after going through the whole list
     }
-    
 }

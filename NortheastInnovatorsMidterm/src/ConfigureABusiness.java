@@ -30,7 +30,6 @@ import university.Department.Department;
  * @author meredith molyneux
  */
 class ConfigureABusiness {
-
     static Business initialize() {
         Business business = new Business("Information Systems");
 

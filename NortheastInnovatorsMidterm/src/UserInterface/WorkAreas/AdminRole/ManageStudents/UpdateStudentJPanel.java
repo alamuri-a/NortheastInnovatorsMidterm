@@ -27,9 +27,13 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
     StudentAccount studentUser;
     final UserAccount user;
     
+    
+    // CONSTRUCTOR
+    
     /**
      * Creates new form UpdateStudentJPanel
      * @param bz
+     * @param u
      * @param sp
      * @param csp
      */
@@ -136,11 +140,12 @@ public class UpdateStudentJPanel extends javax.swing.JPanel {
         // Update fields and notify user, then return to student management page
 
         String name = txtName.getText();
+        String nuidString = txtNUID.getText();
         Integer id = null;
 
-        // Blank checks
-        if (name.isBlank()) {
-            JOptionPane.showMessageDialog(null, "Name cannot be blank.", "Warning", JOptionPane.WARNING_MESSAGE);
+        // Null/Blank checks
+        if (name == null || nuidString == null || name.isBlank() || nuidString.isBlank()) {
+            JOptionPane.showMessageDialog(null, "Name/NUID cannot be blank.", "Warning", JOptionPane.WARNING_MESSAGE);
             return;
         }
         

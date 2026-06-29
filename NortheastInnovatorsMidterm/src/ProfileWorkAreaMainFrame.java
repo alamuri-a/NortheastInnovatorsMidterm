@@ -30,11 +30,12 @@ import university.Department.Department;
 public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     
     
-    // ATTRIBUTE
+    // ATTRIBUTES
     Business business;
     UserAccount loggedIn;
     UniversityModel sharedData = new UniversityModel();    
     // CONSTRUCTOR
+    
     /**
      * Creates new form ProfileWorkAreaMainFrame
      */
@@ -151,6 +152,11 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     private void LoginButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginButtonActionPerformed
         // Authenicate and load user's specific work area
 
+        // Do not login if already logged in and notify user
+        if (this.loggedIn != null) {
+            JOptionPane.showMessageDialog(null, "You are currently logged in, please logout before attempting to login again.", "Warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         
         // Get Username/Password and authenticate
         String un = UserNameTextField.getText();

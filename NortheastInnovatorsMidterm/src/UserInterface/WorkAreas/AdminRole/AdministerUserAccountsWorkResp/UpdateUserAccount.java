@@ -26,6 +26,7 @@ public class UpdateUserAccount extends javax.swing.JPanel {
     UserAccount selecteduseraccount;
     final UserAccount user;
     
+    
     // CONSTRUCTOR
     
     /**
@@ -36,10 +37,10 @@ public class UpdateUserAccount extends javax.swing.JPanel {
      */
     public UpdateUserAccount(UserAccount u, UserAccount sua, JPanel jp) {
         this.user = u;
-        CardSequencePanel = jp;
-        selecteduseraccount= sua;
+        this.CardSequencePanel = jp;
+        this.selecteduseraccount= sua;
         if (Business.Authorize(u,"Admin")) initComponents();
-        //display user details here
+        
         updateFields();
     }
 
@@ -150,7 +151,7 @@ public class UpdateUserAccount extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // Update fields and notify user, then return to user account table page
+        // Update object and notify user, then return to user account table page
 
         // Notify and don't update if user is currently logged in
         if (selecteduseraccount.getStatus()) {
