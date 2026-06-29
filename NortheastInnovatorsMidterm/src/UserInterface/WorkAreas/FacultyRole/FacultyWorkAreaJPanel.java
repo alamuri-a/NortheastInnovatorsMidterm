@@ -11,9 +11,12 @@
 package UserInterface.WorkAreas.FacultyRole;
 
 import Business.Business;
+import Business.Profiles.FacultyProfile;
+import Business.UniversityModel;
 import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
+import university.CourseSchedule.CourseSchedule;
 
 /**
  *
@@ -25,7 +28,9 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     // ATTRIBUTES
     JPanel CardSequencePanel;
     Business business;
-    final UserAccount user;
+    FacultyProfile facultyProfile;
+    private UniversityModel sharedData;
+    //final UserAccount user;
 
     
     // CONSTRUCTOR
@@ -36,12 +41,20 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
      * @param u
      * @param clp
      */
-    public FacultyWorkAreaJPanel(Business b, UserAccount u, JPanel clp) {
-        this.user = u;
-        business = b;
-        this.CardSequencePanel = clp;
-        if (Business.Authorize(u,"Faculty")) initComponents();
+    public FacultyWorkAreaJPanel(Business b,FacultyProfile fpp,UniversityModel sharedData, JPanel jp) {
+        this.facultyProfile= fpp;
+        this.business = b;
+        this.CardSequencePanel = jp;
+        this.sharedData = new UniversityModel();       
+        initComponents();
+    
     }
+    //public FacultyWorkAreaJPanel(Business b, UserAccount u, JPanel clp) {
+     //   this.user = u;
+      //  business = b;
+      //  this.CardSequencePanel = clp;
+       // if (Business.Authorize(u,"Faculty")) initComponents();
+    //}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -156,7 +169,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageCoursesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCoursesIdentifyResourceAssetsActionPerformed
-    ManageCourseJPanel profilePanel = new ManageCourseJPanel(business, user, CardSequencePanel);
+    ManageCoursesJPanel profilePanel = new ManageCoursesJPanel(business,sharedData,facultyProfile, CardSequencePanel);
 
     CardSequencePanel.add("ManageCourse", profilePanel);
 
@@ -164,7 +177,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnManageCoursesIdentifyResourceAssetsActionPerformed
 
     private void btnManageStudentsProfilesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageStudentsProfilesActionPerformed
-    ManageStudentProfileJPanel profilePanel = new ManageStudentProfileJPanel(business, user, CardSequencePanel);
+    ManageStudentProfileJPanel profilePanel = new ManageStudentProfileJPanel(business,sharedData,facultyProfile, CardSequencePanel);
 
     CardSequencePanel.add("ManageStudentProfile", profilePanel);
 
@@ -173,7 +186,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnMyProfileIdentifyEventsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMyProfileIdentifyEventsActionPerformed
         // Load my profile pane
-     MyFacultyProfile profilePanel = new MyFacultyProfile(business, user, CardSequencePanel);
+     MyFacultyProfile profilePanel = new MyFacultyProfile(business,sharedData,facultyProfile, CardSequencePanel);
 
     CardSequencePanel.add("MyFacultyProfile", profilePanel);
 
@@ -183,7 +196,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     private void btnPerformanceReportsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPerformanceReportsActionPerformed
         // Load performance reports pane
                 // Load my profile pane
-     PerformanceReportsPanel profilePanel = new PerformanceReportsPanel(business, user, CardSequencePanel);
+     PerformanceReportsPanel profilePanel = new PerformanceReportsPanel(business,sharedData,facultyProfile, CardSequencePanel);
 
     CardSequencePanel.add("PerformanceReports", profilePanel);
 

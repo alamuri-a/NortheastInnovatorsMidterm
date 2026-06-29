@@ -17,11 +17,17 @@ import Business.Profiles.StudentProfile;
 
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
+import university.CourseCatalog.Course;
+import university.CourseCatalog.CourseCatalog;
+import university.CourseSchedule.CourseOffer;
+import university.CourseSchedule.CourseSchedule;
+import university.Department.Department;
 
 
 /**
  *
  * @author kal bugrara
+ * @author meredith molyneux
  */
 class ConfigureABusiness {
     static Business initialize() {
@@ -55,8 +61,59 @@ class ConfigureABusiness {
         UserAccountDirectory uadirectory = business.getUserAccountDirectory();
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); // Admin
         UserAccount ua4 = uadirectory.newStudentAccount(studentprofile0, "adam", "****", 1); // Student
-        UserAccount ua5 = uadirectory.newUserAccount(facultyprofile0, "jackW", "****"); //Faculty
+        UserAccount ua5 = uadirectory.newFacultyAccount(facultyprofile0, "jackW", "****",1);//Faculty
+           
+       System.out.println("ConfigureABusiness FacultyProfile complete: " + facultyprofile0.getFacultyName()); 
 
-        return business;
-    }
+        // 5. Initialize University Structure (Ensure Department registers to Business)
+        Department department = new Department("Information Systems"); 
+        CourseCatalog coursecatalog = department.getCourseCatalog(); 
+        Course course = coursecatalog.newCourse("app eng", "info 5100", 4); 
+
+        // 6. Build Schedule Matrix explicitly for Fall2026
+        CourseSchedule courseschedule = department.newCourseSchedule("Fall2026"); 
+        CourseOffer courseoffer = courseschedule.newCourseOffer("info 5100"); 
+
+        // 7. Verify object instantiation state before assigning seats or teacher mapping
+        if (courseoffer != null) {
+            courseoffer.generatSeats(10); 
+
+            // Connect the layout pipeline via your static helper tool line
+            ConfigureABusiness.assignFacultyToCourse(ua5, courseoffer);
+        } else {
+            System.out.println("❌ ERROR: CourseOffer initialization failed inside data block!");
+        }
+
+        return business; 
+
+        }
+        public static boolean assignFacultyToCourse(UserAccount ua, CourseOffer courseOffer) {
+            System.out.println("[SYSTEM LOG] Initiating Faculty Course Assignment...");
+            System.out.println("🔄 Checking profile type structure...");
+
+            // 1. Core Object Guard Rails
+            if (ua == null || courseOffer == null) {
+                System.out.println("❌ Assignment Failed: User Account or Course Offer missing (Null).");
+                return false;
+            }
+
+            // 2. STRUCTURAL CHECK: Bypass role text string parsing errors completely
+            if (ua.getAssociatedPersonProfile() instanceof FacultyProfile) {
+                FacultyProfile facultyProfile = (FacultyProfile) ua.getAssociatedPersonProfile();
+
+                // Execute assignment linkage step
+                facultyProfile.AssignAsTeacher(courseOffer);
+
+                System.out.println("👤 Verified Profile Structural Type: [FacultyProfile]");
+                System.out.println("✅ Successfully assigned course: " + courseOffer.getCourseNumber());
+                System.out.println("[SYSTEM LOG] Faculty assignment step finalized.");
+                return true;
+            } else {
+                System.out.println("❌ Assignment Failed: Account profile is an instance of " + 
+                                   (ua.getAssociatedPersonProfile() != null ? ua.getAssociatedPersonProfile().getClass().getSimpleName() : "Null"));
+                return false;
+
+            }}
+        
+     
 }

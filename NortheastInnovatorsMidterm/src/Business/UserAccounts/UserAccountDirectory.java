@@ -5,6 +5,8 @@
  */
 package Business.UserAccounts;
 
+import Business.Profiles.FacultyAccount;
+import Business.Profiles.FacultyProfile;
 import Business.Profiles.Profile;
 import Business.Profiles.StudentAccount;
 import Business.Profiles.StudentProfile;
@@ -41,6 +43,11 @@ public class UserAccountDirectory {
         useraccountlist.add(ua);
         return ua;
     }
+        public UserAccount newFacultyAccount(FacultyProfile p, String un, String pw, int id) {
+        UserAccount ua = new FacultyAccount(p,  un,  pw, id);
+        useraccountlist.add(ua);
+        return ua;
+    }
     
     public void deleteUserAccount(UserAccount ua) {
         useraccountlist.remove(ua);
@@ -63,7 +70,6 @@ public class UserAccountDirectory {
         }
         return null; //not found after going through the whole list
     }
-    
     public ArrayList<UserAccount> getUserAccountList() {
         return useraccountlist;
     }

@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -8,23 +8,24 @@ package Business;
 import Business.Profiles.EmployeeProfile;
 import Business.Profiles.FacultyProfile;
 import Business.Profiles.Profile;
-import Business.Profiles.StudentProfile;
 import Business.Profiles.StudentAccount;
-
+import Business.Profiles.StudentProfile;
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
-
 import UserInterface.WorkAreas.AdminRole.AdminRoleWorkAreaJPanel;
 import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
 import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
+import university.Department.Department;
+
 
 /**
  *
  * @author kal bugrara
  * @author Ajay Alamuri
+ * @author meredith molyneux
  */
 public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     
@@ -32,8 +33,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
     // ATTRIBUTES
     Business business;
     UserAccount loggedIn;
-    
-    
+    UniversityModel sharedData = new UniversityModel();    
     // CONSTRUCTOR
     
     /**
@@ -41,10 +41,16 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
      */
     public ProfileWorkAreaMainFrame() {
         initComponents();
-        business = ConfigureABusiness.initialize();
+        this.business = ConfigureABusiness.initialize();
         loggedIn = null;
+        this.sharedData = new UniversityModel();;
+        Department liveDept = this.business.getDepartment(); 
+    
+    if (liveDept != null) {
+        this.sharedData.setDepartment(liveDept);
+        this.sharedData.setCourseSchedule(liveDept.getCourseSchedule("Fall2026"));
     }
-
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -190,19 +196,24 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
         if (profile instanceof StudentProfile) {
             StudentProfile spp = (StudentProfile) profile;
             StudentAccount studentAccount = (StudentAccount) useraccount;
-studentworkareajpanel = new StudentWorkAreaJPanel(business, spp, studentAccount, CardSequencePanel);
+            studentworkareajpanel = new StudentWorkAreaJPanel(business, spp, studentAccount, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("student", studentworkareajpanel);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
         }
 
             // FACULTY
+       
+           
         if (profile instanceof FacultyProfile) {
-            facultyworkarea = new FacultyWorkAreaJPanel(business, useraccount, CardSequencePanel);
+            FacultyProfile fpp =(FacultyProfile) profile;
+            facultyworkarea = new FacultyWorkAreaJPanel(business,fpp,sharedData, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);
         }
+          
+
     }//GEN-LAST:event_LoginButtonActionPerformed
 
     private void PasswordTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordTextFieldActionPerformed
@@ -285,4 +296,7 @@ studentworkareajpanel = new StudentWorkAreaJPanel(business, spp, studentAccount,
     private javax.swing.JLabel lblUserName;
     private javax.swing.JLabel lblWelcome;
     // End of variables declaration//GEN-END:variables
+    
+    
+    // EXTRA METHODS
 }
