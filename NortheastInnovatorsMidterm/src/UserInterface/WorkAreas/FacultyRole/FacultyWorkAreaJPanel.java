@@ -30,7 +30,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     Business business;
     FacultyProfile facultyProfile;
     private UniversityModel sharedData;
-    //final UserAccount user;
+    final UserAccount user;
 
     
     // CONSTRUCTOR
@@ -39,22 +39,19 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
      * Creates new form FacultyWorkAreaJPanel
      * @param b
      * @param u
-     * @param clp
+     * @param jp
+     * @param sharedData
+     * @param fpp
      */
-    public FacultyWorkAreaJPanel(Business b,FacultyProfile fpp,UniversityModel sharedData, JPanel jp) {
+    public FacultyWorkAreaJPanel(Business b,FacultyProfile fpp,UniversityModel sharedData,UserAccount u, JPanel jp) {
+        this.user = u;
         this.facultyProfile= fpp;
         this.business = b;
         this.CardSequencePanel = jp;
-        this.sharedData = new UniversityModel();       
-        initComponents();
+        this.sharedData = sharedData;       
+        if (Business.Authorize(u,"Faculty"))initComponents();
     
     }
-    //public FacultyWorkAreaJPanel(Business b, UserAccount u, JPanel clp) {
-     //   this.user = u;
-      //  business = b;
-      //  this.CardSequencePanel = clp;
-       // if (Business.Authorize(u,"Faculty")) initComponents();
-    //}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -130,33 +127,36 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
         });
 
         lblTitle.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        lblTitle.setText("My Faculty Profie");
+        lblTitle.setText("Faculty Work Area");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(101, 101, 101)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnManageCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(75, 75, 75)
-                            .addComponent(btnManageStudentsProfiles, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnMyProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnPerformanceReports, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(632, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnManageCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(75, 75, 75)
+                                .addComponent(btnManageStudentsProfiles, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(btnMyProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnPerformanceReports, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(17, 17, 17)
+                        .addComponent(lblTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addContainerGap()
                 .addComponent(lblTitle)
-                .addGap(76, 76, 76)
+                .addGap(93, 93, 93)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnManageCourses, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnManageStudentsProfiles, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -169,7 +169,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageCoursesIdentifyResourceAssetsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCoursesIdentifyResourceAssetsActionPerformed
-    ManageCoursesJPanel profilePanel = new ManageCoursesJPanel(business,sharedData,facultyProfile, CardSequencePanel);
+    ManageCoursesJPanel profilePanel = new ManageCoursesJPanel(business,this.sharedData,facultyProfile, CardSequencePanel);
 
     CardSequencePanel.add("ManageCourse", profilePanel);
 
