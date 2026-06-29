@@ -153,7 +153,7 @@ public class ManageStudentsJPanel extends javax.swing.JPanel {
         }
 
         // Find the corresponding student profile and corresponding null check
-        StudentDirectory sd = business.getStudentDirectory();
+        StudentDirectory sd = business.getDepartment().getStudentDirectory();
         StudentProfile selectedStudent =  sd.findStudent((String) tblStudents.getValueAt(selectedRow, 0));
         if (selectedStudent == null) {
             JOptionPane.showMessageDialog(null, "Profile could not be found for selected student.",  "Warning", JOptionPane.WARNING_MESSAGE);
@@ -176,7 +176,7 @@ public class ManageStudentsJPanel extends javax.swing.JPanel {
         }
         
         // Find the corresponding student profile and corresponding null check
-        StudentDirectory sd = business.getStudentDirectory();
+        StudentDirectory sd = business.getDepartment().getStudentDirectory();
         StudentProfile selectedStudent =  sd.findStudent((String) tblStudents.getValueAt(selectedRow, 0));
         if (selectedStudent == null) {
             JOptionPane.showMessageDialog(null, "Profile could not be found for selected student.",  "Warning", JOptionPane.WARNING_MESSAGE);
@@ -211,7 +211,7 @@ public class ManageStudentsJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         
         // Add each entry to table
-        StudentDirectory sd = business.getStudentDirectory();
+        StudentDirectory sd = business.getDepartment().getStudentDirectory();
         for (StudentProfile sp : sd.getList()) {
             Object[] row = new Object[1];
             row[0] = sp.getPerson().getPersonId();

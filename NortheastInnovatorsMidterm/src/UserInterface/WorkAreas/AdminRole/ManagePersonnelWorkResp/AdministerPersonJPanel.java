@@ -140,10 +140,10 @@ public class AdministerPersonJPanel extends javax.swing.JPanel {
         
         switch (role) {
             case "Student":
-                business.getStudentDirectory().newStudentProfile(person);
+                business.getDepartment().getStudentDirectory().newStudentProfile(person);
                 break;
             case "Faculty":
-                business.getFacultyDirectory().newFacultyProfile(person);
+                business.getDepartment().getFacultyDirectory().newFacultyProfile(person);
                 break;
             case "Admin":
                 business.getEmployeeDirectory().newEmployeeProfile(person);

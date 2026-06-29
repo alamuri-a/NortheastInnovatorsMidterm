@@ -207,10 +207,10 @@ public class CreateUserAccount extends javax.swing.JPanel {
         Profile p = null;
         switch (role) {
             case "Student":
-                p = business.getStudentDirectory().findStudent(person);
+                p = business.getDepartment().getStudentDirectory().findStudent(person);
                 break;
             case "Faculty":
-                p = business.getFacultyDirectory().findEmployee(person);
+                p = business.getDepartment().getFacultyDirectory().findEmployee(person);
                 break;
             case "Admin":
                 p = business.getEmployeeDirectory().findEmployee(person);

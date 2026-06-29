@@ -154,7 +154,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         }
 
         // Find the corresponding Faculty profile and corresponding null check
-        FacultyDirectory fd = business.getFacultyDirectory();
+        FacultyDirectory fd = business.getDepartment().getFacultyDirectory();
         FacultyProfile selectedFaculty =  fd.findEmployee((String) tblFaculty.getValueAt(selectedRow, 0));
         if (selectedFaculty == null) {
             JOptionPane.showMessageDialog(null, "Profile could not be found for selected Faculty.",  "Warning", JOptionPane.WARNING_MESSAGE);
@@ -177,7 +177,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         }
         
         // Find the corresponding Faculty profile and corresponding null check
-        FacultyDirectory fd = business.getFacultyDirectory();
+        FacultyDirectory fd = business.getDepartment().getFacultyDirectory();
         FacultyProfile selectedFaculty =  fd.findEmployee((String) tblFaculty.getValueAt(selectedRow, 0));
         if (selectedFaculty == null) {
             JOptionPane.showMessageDialog(null, "Profile could not be found for selected Faculty.",  "Warning", JOptionPane.WARNING_MESSAGE);
@@ -211,7 +211,7 @@ public class ManageFacultyJPanel extends javax.swing.JPanel {
         model.setRowCount(0);
         
         // Add each entry to table
-        FacultyDirectory fd = business.getFacultyDirectory();
+        FacultyDirectory fd = business.getDepartment().getFacultyDirectory();
         for (FacultyProfile fp : fd.getFacultyList()) {
             Object[] row = new Object[1];
             row[0] = fp.getPerson().getPersonId();

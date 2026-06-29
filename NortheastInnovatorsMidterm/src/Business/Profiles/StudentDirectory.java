@@ -6,9 +6,9 @@
 package Business.Profiles;
 
 import Business.Person.Person;
+import University.Department.Department;
 
 import java.util.ArrayList;
-import Business.Profiles.StudentProfile;
 
 
 /**
@@ -20,10 +20,10 @@ public class StudentDirectory {
 
     // ATTRIBUTE
     ArrayList<StudentProfile> studentlist;
-
+    Department department;
     
     // CONSTRUCTOR
-    public StudentDirectory() {
+    public StudentDirectory(Department dep) {
         studentlist = new ArrayList();
     }
 

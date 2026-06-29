@@ -5,15 +5,12 @@
  */
 package Business;
 
-import Business.Person.PersonDirectory;
 import Business.Profiles.EmployeeDirectory;
-import Business.Profiles.FacultyDirectory;
 import Business.Profiles.StudentAccount;
-import Business.Profiles.StudentDirectory;
 import Business.UserAccounts.UserAccount;
 
 import Business.UserAccounts.UserAccountDirectory;
-import university.Department.Department;
+import University.Department.Department;
 
 /**
  *
@@ -23,45 +20,26 @@ public class Business {
     
     
     // ATTRIBUTES
-    String name;
-    PersonDirectory persondirectory; // All Person profiles regardless of the role
     EmployeeDirectory employeedirectory; // Admin profile list
     UserAccountDirectory useraccountdirectory; // User account list
-    StudentDirectory studentdirectory; // Student profile list
-    FacultyDirectory facultydirectory;//Faculty profile list 
-    private Department department;
+    Department department;
     
     // CONSTRUCTOR
     public Business(String n) {
-        name = n;
-
-        persondirectory = new PersonDirectory();
+        department = new Department(n);
+        
         employeedirectory = new EmployeeDirectory(this);
         useraccountdirectory = new UserAccountDirectory();
-        studentdirectory = new StudentDirectory();
-        facultydirectory= new FacultyDirectory();
-         
     }
 
     
     // METHODS
-    public PersonDirectory getPersonDirectory() {
-        return persondirectory;
-    }
     public UserAccountDirectory getUserAccountDirectory() {
         return useraccountdirectory;
     }
 
     public EmployeeDirectory getEmployeeDirectory() {
         return employeedirectory;
-    }
-    
-    public StudentDirectory getStudentDirectory(){
-        return studentdirectory;
-    }
-    
-    public FacultyDirectory getFacultyDirectory() {
-        return facultydirectory;
     }
     
     // @author Ajay Alamuri
@@ -82,7 +60,7 @@ public class Business {
     }
   
 
-        // Add this Getter and Setter inside Business.java
+    // Add this Getter and Setter inside Business.java
     public Department getDepartment() {
         return this.department;
     }

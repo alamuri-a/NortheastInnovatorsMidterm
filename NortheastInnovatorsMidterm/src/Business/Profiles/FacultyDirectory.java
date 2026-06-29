@@ -7,6 +7,7 @@ package Business.Profiles;
 
 import Business.Business;
 import Business.Person.Person;
+import University.Department.Department;
 
 import java.util.ArrayList;
 
@@ -18,6 +19,7 @@ public class FacultyDirectory {
 
     Business business;
     ArrayList<FacultyProfile> facultylist;
+    Department department;
 
     public ArrayList<FacultyProfile> getFacultyList() {
         return facultylist;
@@ -27,9 +29,9 @@ public class FacultyDirectory {
         this.facultylist = facultylist;
     }
 
-    public FacultyDirectory() {
+    public FacultyDirectory(Department dept) {
         facultylist = new ArrayList();
-
+        this.department = dept;
     }
     
     public void deleteFacultyProfile(FacultyProfile fp) {

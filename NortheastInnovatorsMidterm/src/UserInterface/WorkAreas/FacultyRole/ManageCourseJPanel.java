@@ -4,20 +4,16 @@
  */
 package UserInterface.WorkAreas.FacultyRole;
 
-import Business.Person.Person;
-import Business.Profiles.FacultyProfile;
 import Business.UserAccounts.UserAccount;
 import javax.swing.table.DefaultTableModel;
 import Business.Business;
+import Business.Profiles.FacultyProfile;
+import University.CourseCatalog.Course;
+import University.CourseSchedule.CourseOffer;
+import University.CourseSchedule.CourseSchedule;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
 import javax.swing.JTable;
-import university.CourseCatalog.Course;
-import university.CourseCatalog.CourseCatalog;
-import university.CourseSchedule.CourseOffer;
-import university.CourseSchedule.CourseSchedule;
-import university.CourseSchedule.Seats;
-import university.Department.Department;
 
 /**
  *

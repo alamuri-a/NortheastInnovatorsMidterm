@@ -13,10 +13,8 @@ package UserInterface.WorkAreas.FacultyRole;
 import Business.Business;
 import Business.Profiles.FacultyProfile;
 import Business.UniversityModel;
-import Business.UserAccounts.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JPanel;
-import university.CourseSchedule.CourseSchedule;
 
 /**
  *
@@ -41,7 +39,7 @@ public class FacultyWorkAreaJPanel extends javax.swing.JPanel {
      * @param u
      * @param clp
      */
-    public FacultyWorkAreaJPanel(Business b,FacultyProfile fpp,UniversityModel sharedData, JPanel jp) {
+    public FacultyWorkAreaJPanel(Business b,FacultyProfile fpp, JPanel jp) {
         this.facultyProfile= fpp;
         this.business = b;
         this.CardSequencePanel = jp;

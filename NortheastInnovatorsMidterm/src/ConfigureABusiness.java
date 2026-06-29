@@ -17,11 +17,11 @@ import Business.Profiles.StudentProfile;
 
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
-import university.CourseCatalog.Course;
-import university.CourseCatalog.CourseCatalog;
-import university.CourseSchedule.CourseOffer;
-import university.CourseSchedule.CourseSchedule;
-import university.Department.Department;
+import University.CourseCatalog.Course;
+import University.CourseCatalog.CourseCatalog;
+import University.CourseSchedule.CourseOffer;
+import University.CourseSchedule.CourseSchedule;
+import University.Department.Department;
 
 
 /**
@@ -34,7 +34,7 @@ class ConfigureABusiness {
         Business business = new Business("Information Systems");
 
         // Create Person Directory (Container for Persons)
-        PersonDirectory persondirectory = business.getPersonDirectory();
+        PersonDirectory persondirectory = business.getDepartment().getPersonDirectory();
         
         // Initialize demo Person data
         Person person001 = persondirectory.newPerson("John Smith");
@@ -50,23 +50,21 @@ class ConfigureABusiness {
         EmployeeProfile employeeprofile0 = employeedirectory.newEmployeeProfile(person001);
         
         // Create Student directory + initialize demo Student profile
-        StudentDirectory studentdirectory = business.getStudentDirectory();
+        StudentDirectory studentdirectory = business.getDepartment().getStudentDirectory();
         StudentProfile studentprofile0 = studentdirectory.newStudentProfile(person003);
         
-          // Create Faculty directory + initialize demo Faculty profile
-        FacultyDirectory facultydirectory = business.getFacultyDirectory();
+        // Create Faculty directory + initialize demo Faculty profile
+        FacultyDirectory facultydirectory = business.getDepartment().getFacultyDirectory();
         FacultyProfile facultyprofile0 = facultydirectory.newFacultyProfile(person007);
    
         // Create User accounts for demo profiles
         UserAccountDirectory uadirectory = business.getUserAccountDirectory();
         UserAccount ua3 = uadirectory.newUserAccount(employeeprofile0, "admin", "****"); // Admin
         UserAccount ua4 = uadirectory.newStudentAccount(studentprofile0, "adam", "****", 1); // Student
-        UserAccount ua5 = uadirectory.newFacultyAccount(facultyprofile0, "jackW", "****",1);//Faculty
-           
-       System.out.println("ConfigureABusiness FacultyProfile complete: " + facultyprofile0.getFacultyName()); 
+        UserAccount ua5 = uadirectory.newFacultyAccount(facultyprofile0, "jackW", "****",1); //Faculty
 
         // 5. Initialize University Structure (Ensure Department registers to Business)
-        Department department = new Department("Information Systems"); 
+        Department department = business.getDepartment(); 
         CourseCatalog coursecatalog = department.getCourseCatalog(); 
         Course course = coursecatalog.newCourse("app eng", "info 5100", 4); 
 

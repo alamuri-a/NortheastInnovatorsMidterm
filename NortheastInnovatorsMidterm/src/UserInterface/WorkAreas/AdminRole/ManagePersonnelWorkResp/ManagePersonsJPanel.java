@@ -158,7 +158,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         }
         
         // Add to directory
-        business.getPersonDirectory().newPerson(name);
+        business.getDepartment().getPersonDirectory().newPerson(name);
         
         // Notify success
         JOptionPane.showMessageDialog(null, "Successfully registered person!", "Success", JOptionPane.INFORMATION_MESSAGE);
@@ -184,7 +184,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         
         model.setRowCount(0);
         
-        for (Person p : business.getPersonDirectory().getList()) {
+        for (Person p : business.getDepartment().getPersonDirectory().getList()) {
             Object[] row = new Object[1];
             
             row[0] = p;

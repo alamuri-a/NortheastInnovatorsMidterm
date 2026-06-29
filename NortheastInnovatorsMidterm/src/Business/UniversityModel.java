@@ -1,7 +1,7 @@
 package Business;
 
-import university.CourseSchedule.CourseSchedule;
-import university.Department.Department;
+import University.CourseSchedule.CourseSchedule;
+import University.Department.Department;
 
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license

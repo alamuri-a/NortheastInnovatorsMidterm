@@ -12,13 +12,13 @@ import Business.Profiles.StudentAccount;
 import Business.Profiles.StudentProfile;
 import Business.UserAccounts.UserAccount;
 import Business.UserAccounts.UserAccountDirectory;
+import University.Department.Department;
 import UserInterface.WorkAreas.AdminRole.AdminRoleWorkAreaJPanel;
 import UserInterface.WorkAreas.FacultyRole.FacultyWorkAreaJPanel;
 import UserInterface.WorkAreas.StudentRole.StudentWorkAreaJPanel;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
-import university.Department.Department;
 
 
 /**
@@ -207,7 +207,7 @@ public class ProfileWorkAreaMainFrame extends javax.swing.JFrame {
            
         if (profile instanceof FacultyProfile) {
             FacultyProfile fpp =(FacultyProfile) profile;
-            facultyworkarea = new FacultyWorkAreaJPanel(business,fpp,sharedData, CardSequencePanel);
+            facultyworkarea = new FacultyWorkAreaJPanel(business,fpp, CardSequencePanel);
             CardSequencePanel.removeAll();
             CardSequencePanel.add("faculty", facultyworkarea);
             ((CardLayout) CardSequencePanel.getLayout()).next(CardSequencePanel);

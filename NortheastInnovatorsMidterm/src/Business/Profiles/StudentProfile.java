@@ -1,6 +1,8 @@
 package Business.Profiles;
 
 import Business.Person.Person;
+import University.CourseSchedule.CourseLoad;
+import University.CourseSchedule.SeatAssignment;
 import java.util.ArrayList;
 
 /**
@@ -12,6 +14,9 @@ public class StudentProfile extends Profile {
 
     // ATTRIBUTES
     Person person;
+    
+    Transcript transcript;
+    
     ArrayList<String> registeredCourses;
     ArrayList<String> submittedAssignments;
 
@@ -20,6 +25,7 @@ public class StudentProfile extends Profile {
         super(p);
         registeredCourses = new ArrayList<String>();
         submittedAssignments = new ArrayList<String>();
+        this.transcript = new Transcript(this); // Two-way link to Transcript object
     }
 
     // METHODS
@@ -86,5 +92,19 @@ public class StudentProfile extends Profile {
      */
     public ArrayList<String> getSubmittedAssignments() {
         return submittedAssignments;
+    }
+    
+    // AJAY TEST
+    
+    // Get list of courses
+    public ArrayList<SeatAssignment> getCourseList() {
+        return transcript.getCourseList();
+    }
+    
+    /*
+     * Get current course load
+    */
+    public CourseLoad getCurrentCourseLoad() {
+        return this.transcript.getCurrentCourseLoad();
     }
 }
