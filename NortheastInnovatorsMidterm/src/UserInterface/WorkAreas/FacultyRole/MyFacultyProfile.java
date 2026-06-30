@@ -296,7 +296,7 @@ public class MyFacultyProfile extends javax.swing.JPanel {
         txtRole.setText(faculty.getRole());
         txtPreferredName.setText("");
         txtEmail.setText("");
-        txtDept.setText(sharedData.getDepartmentName());
+        txtDept.setText("Information Systems");
 
         
         txtName.setEditable(false);

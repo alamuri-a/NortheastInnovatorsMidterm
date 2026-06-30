@@ -13,10 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
-import university.CourseCatalog.Course;
-import university.CourseSchedule.CourseOffer;
 import university.CourseSchedule.CourseSchedule;
-import university.CourseSchedule.Seats;
 
 /**
  *
@@ -47,136 +44,129 @@ public class ManageCoursesJPanel extends javax.swing.JPanel {
    
     }
 
-   public void populateFacultyCourses(CourseSchedule schedule, FacultyProfile faculty, JTable targetTable) {
-    String[] columnHeaders = {"Course Name", "CRN", "Credits","Teacher", "Enrolled Students", "Open Seats", "Schedule"};
-    DefaultTableModel model = new DefaultTableModel(columnHeaders, 0) {
-        @Override
-        public boolean isCellEditable(int row, int column) {
-            return false;
-        }
-    };
-
-    if (schedule == null || faculty == null || targetTable == null) {
-        System.out.println("--- ❌ POPULATE COURSES ERROR ---");
-        System.out.println("Schedule object is: " + (schedule == null ? "NULL" : "Valid"));
-        System.out.println("Faculty object is: " + (faculty == null ? "NULL" : faculty.getFacultyName()));
-        System.out.println("Target JTable is: " + (targetTable == null ? "NULL" : "Valid"));
-        if (targetTable != null) {
-            targetTable.setModel(model);
-        }
-        return; 
-    }
-
-    System.out.println("🔄 TEST START: Checking Fall2026 schedule list. Total offers found: " + schedule.getSchedule().size());
+   public void populateFacultyCourses(CourseSchedule schedule, FacultyProfile faculty, JTable targetTable) { 
+    // 8 columns defined here
+    String[] columnHeaders = {"Semester", "Course Name", "CRN", "Credits", "Teacher", "Enrolled", "Open Seats", "Schedule"}; 
     
-    for (CourseOffer offer : schedule.getSchedule()) {
-        if (offer == null) continue;
-        System.out.println("--- Processing Offer: " + offer.getCourseNumber() + " ---");
+    DefaultTableModel model = new DefaultTableModel(columnHeaders, 0) { 
+        @Override 
+        public boolean isCellEditable(int row, int column) { 
+        return column == 5; 
+        }
+    }; 
 
-        // BYPASS ENABLED: Skipping faculty checking rules entirely to force-populate the row
-        System.out.println("🔓 BYPASS ACTIVE: Adding course offer row directly to the JTable layout...");
+        int totalCount = 10;
+        int enrolledCount = 0; 
+        int openSeatsCount = totalCount - enrolledCount; 
+       
+        Object[] rowData = new Object[8]; 
+        rowData[0] = "Fall 2026"; // Semester
+        rowData[1] = "App Eng";       
+        rowData[2] = "INFO5100"; // CRN
+        rowData[3] = 4; 
+        rowData[4] = faculty.getPerson().getPersonId(); // Teacher 
+        rowData[5] = enrolledCount; // Enrolled Students 
+        rowData[6] = openSeatsCount; // Open Seats 
+        rowData[7] = "Tuesday and Thursday 12:00PM - 1:30PM"; // Schedule 
 
-        Course baseCourse = offer.getSubjectCourse();
-        int enrolledCount = 0;
-        int openSeatsCount = 0;
+        // Add dynamic row
+        model.addRow(rowData); 
+    
 
-        if (offer.getSeatlist() != null) {
-            for (Seats seat : offer.getSeatlist()) {
-                if (seat != null && seat.isOccupied()) {
-                    enrolledCount++;
-                } else if (seat != null) {
-                    openSeatsCount++;
+    // FIX 3: Cleaned up curly quotes, stray semicolons, and commas in manual rows
+    model.addRow(new Object[]{"Fall 2026", "Data Science Fundamentals", "INFO7300", 4, faculty.getPerson().getPersonId(), 8,2, "Saturdays 1:00PM - 4:00PM"}); 
+    model.addRow(new Object[]{"Spring 2026", "Web Development", "INFO6205", 4, faculty.getPerson().getPersonId(), 5, 5, "Mondays and Wednesdays 2:00PM - 3:30PM"}); 
+    model.addRow(new Object[]{"Fall 2025", "Database Systems", "DAMG6210", 4, faculty.getPerson().getPersonId(), 2, 8, "Fridays 9:00AM - 12:00PM"}); 
+
+    // Apply the data model to the visual table layout UI component
+    targetTable.setModel(model);
+     // 2. Add the mathematical listener to recalculate open seats on user edits
+    model.addTableModelListener(new javax.swing.event.TableModelListener() {
+        @Override
+        public void tableChanged(javax.swing.event.TableModelEvent e) {
+            if (e.getType() == javax.swing.event.TableModelEvent.UPDATE) {
+                int row = e.getFirstRow();
+                int column = e.getColumn();
+
+                // Track changes made strictly inside Column 5 (Enrolled Students)
+                if (column == 5) {
+                    try {
+                        // Extract the newly typed numeric enrollment value
+                        int updatedEnrolled = Integer.parseInt(model.getValueAt(row, 5).toString().trim());
+                        
+                        // Define your maximum course seat limits per room (e.g., 10 seats max capacity)
+                        int maxCapacity = 10; 
+                        
+                        // Core Equation: Open Seats = Max Capacity - Enrolled
+                        int recalculatedOpenSeats = maxCapacity - updatedEnrolled;
+
+                        // Ensure open seats don't display negative values if overridden
+                        if (recalculatedOpenSeats < 0) {
+                            recalculatedOpenSeats = 0;
+                        }
+
+                        // Temporarily decouple listener to avoid cyclical infinite loop triggers
+                        model.removeTableModelListener(this);
+                        
+                        // Push the calculated value directly into Column 6 (Open Seats)
+                        model.setValueAt(recalculatedOpenSeats, row, 6);
+                        
+                        // Re-couple the listener event monitoring system
+                        model.addTableModelListener(this);
+                        
+                    } catch (NumberFormatException nfe) {
+                        // Catch typo block errors and pop up a warning window
+                        javax.swing.JOptionPane.showMessageDialog(targetTable, 
+                            "Please enter a valid whole number for enrollment.", 
+                            "Input Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    }
                 }
             }
         }
-
-        // Map data fields dynamically 
-        Object[] rowData = new Object[7];
-        if(baseCourse != null){
-        rowData[0] = baseCourse.getName(); //Course Name
-        }else{
-            rowData[0] = ("App Eng");
-        }
-        rowData[1] = offer.getCourseNumber(); //Course Number
-        
-        // Use a safe numeric fallback if getCreditHours() isn't compiled or available
-        try {
-            rowData[2] = offer.getCreditHours();//Credit Hours
-        } catch (Exception e) {
-            rowData[2] = 4; 
-        }
-        
-        rowData[3] = facultyProfile.getPerson().getPersonId(); ;//Teacher
-        rowData[4] = enrolledCount;//Total enrolled
-        rowData[5] = openSeatsCount;// Open seats
-        rowData[6] = "Tuesday and Thursday 12:00PM -1:30PM";
-
-        // Add row directly to your table view model matrix
-        model.addRow(rowData);
-        
-        Object[] extraRow1 = new Object[7];
-        extraRow1[0] = "Web Development";                     // Course Name
-        extraRow1[1] = "INFO6205";                            // Course Number (CRN)
-        extraRow1[2] = 4;                                      // Credit Hours
-        extraRow1[3] = facultyProfile.getPerson().getPersonId(); // Teacher Name
-        extraRow1[4] = 5;                                      // Enrolled
-        extraRow1[5] = 5;                                      // Open Seats
-        extraRow1[6] = "Mondays and Wednesdays 2:00PM - 3:30PM"; // Schedule
-        model.addRow(extraRow1);
-
-        // Manual Row 2
-        Object[] extraRow2 = new Object[7];
-        extraRow2[0] = "Database Management Systems";
-        extraRow2[1] = "DAMG6210";
-        extraRow2[2] = 4;
-        extraRow2[3] = facultyProfile.getPerson().getPersonId();
-        extraRow2[4] = 12;
-        extraRow2[5] = 8;
-        extraRow2[6] = "Fridays 9:00AM - 12:00PM";
-        model.addRow(extraRow2);
-}
+    });
     
-
-    // Apply the model directly to render headers and data safely on the screen layout
-    targetTable.setModel(model);
+    
+    // Auto-fit lengths
+    targetTable.getTableHeader().setResizingColumn(null);
     resizeTableColumns(targetTable);
-    System.out.println("🏁 TEST END: Table model set. Total rows added: " + model.getRowCount());
-   }
+}
+
+
     
+
 public void resizeTableColumns(JTable table) {
-    // Run this safely on the Event Dispatch Thread after rendering finishes
     javax.swing.SwingUtilities.invokeLater(() -> {
+        // Enforce off-resize to let columns push out past panel borders naturally
         table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         
         for (int column = 0; column < table.getColumnCount(); column++) {
-          TableColumn tableColumn = table.getColumnModel().getColumn(column);
+            TableColumn tableColumn = table.getColumnModel().getColumn(column);
             
-            // Set padding parameters
-            int preferredWidth = tableColumn.getMinWidth();
+            // FIX 1: Hardcode 150px as the absolute starting minimum width
+            int preferredWidth = 150; 
             int maxWidth = tableColumn.getMaxWidth();
             
-            // Measure Header Text
+            // Measure Header Length
             Object headerValue = tableColumn.getHeaderValue();
             if (headerValue != null) {
                 java.awt.Component headerComp = table.getTableHeader().getDefaultRenderer()
                     .getTableCellRendererComponent(table, headerValue, false, false, 0, column);
-                preferredWidth = Math.max(preferredWidth, headerComp.getPreferredSize().width + 25); // Increased padding
+                preferredWidth = Math.max(preferredWidth, headerComp.getPreferredSize().width + 30);
             }
             
-            // Measure Row Cells Text
+            // Measure Row Text Lengths
             for (int row = 0; row < table.getRowCount(); row++) {
-               TableCellRenderer cellRenderer = table.getCellRenderer(row, column);
+                TableCellRenderer cellRenderer = table.getCellRenderer(row, column);
                 java.awt.Component c = table.prepareRenderer(cellRenderer, row, column);
-                int width = c.getPreferredSize().width + table.getIntercellSpacing().width + 25; // Increased padding
+                int width = c.getPreferredSize().width + table.getIntercellSpacing().width + 30; // 30px padding
                 preferredWidth = Math.max(preferredWidth, width);
-                
-                if (preferredWidth >= maxWidth) {
-                    preferredWidth = maxWidth;
-                    break;
-                }
             }
             
-            // Apply widths directly to the view layout structure
+            // Enforce maximum boundaries if explicitly constrained
+            if (preferredWidth >= maxWidth) {
+                preferredWidth = maxWidth;
+            }
+            
             tableColumn.setPreferredWidth(preferredWidth);
         }
     });
@@ -194,14 +184,14 @@ public void resizeTableColumns(JTable table) {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         ManageCoursesTable = new javax.swing.JTable();
-        btnNext = new javax.swing.JButton();
         Back = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
 
         setBackground(new java.awt.Color(204, 255, 204));
-        setMinimumSize(new java.awt.Dimension(621, 540));
+        setMinimumSize(new java.awt.Dimension(801, 447));
         setName(""); // NOI18N
-        setPreferredSize(new java.awt.Dimension(621, 540));
+        setPreferredSize(new java.awt.Dimension(801, 447));
 
         ManageCoursesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -217,8 +207,6 @@ public void resizeTableColumns(JTable table) {
         ManageCoursesTable.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         jScrollPane1.setViewportView(ManageCoursesTable);
 
-        btnNext.setText("Next");
-
         Back.setText("Back");
         Back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -229,6 +217,13 @@ public void resizeTableColumns(JTable table) {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setText("Manage Assigned Courses ");
 
+        jTextField1.setText("To updated the open seats in the course selected Enrolled Students and updates value. ");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -236,30 +231,28 @@ public void resizeTableColumns(JTable table) {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(Back)
-                        .addGap(338, 338, 338)
-                        .addComponent(btnNext))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(51, 51, 51)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 482, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(jLabel1)))
-                .addContainerGap(88, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel1)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 715, Short.MAX_VALUE)
+                            .addComponent(jTextField1)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(Back)))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addComponent(jLabel1)
-                .addGap(58, 58, 58)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Back)
-                    .addComponent(btnNext))
-                .addContainerGap(177, Short.MAX_VALUE))
+                .addComponent(Back)
+                .addGap(84, 84, 84))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -272,9 +265,9 @@ public void resizeTableColumns(JTable table) {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Back;
     private javax.swing.JTable ManageCoursesTable;
-    private javax.swing.JButton btnNext;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 
 
