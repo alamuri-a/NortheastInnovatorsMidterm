@@ -195,7 +195,7 @@ Throughout the development of this project, the team encountered several technic
 | Challenge | Solution |
 |-----------|----------|
 | Lack of familiarity with GitHub-based collaboration | Wrote a master list of relevant commands with examples and explanations of behavior |
-| TBD | TBD |
+| Working asychronously while simulataneously building packages that may not work together | Communication and agreeing on standard methods and features |
 | TBD | TBD |
 | TBD | TBD |
 
@@ -218,7 +218,7 @@ The following table summarizes each team member's responsibilities and contribut
 
 | Team Member | Assigned Use Case | Coding Contributions | Documentation | Testing | Other Contributions |
 |-------------|-------------------|----------------------|---------------|---------|---------------------|
-| Nicholas Woodward | Student | README, student-coursework, student-graduation-audit, student-manage-profile | TBD |   Tested Student UX | TBD |
+| Nicholas Woodward | Student | README, student-coursework, student-graduation-audit, student-manage-profile | PR and commits |   Tested Student UX | Assisted with power point presentation |
 | Meredith Molyneux | Faculty | TBD | TBD | TBD | TBD |
 | Ajay Alamuri | Admin | clean-formatting, logout, manage-users, manage-persons, admin-profile, admin-manage-students, admin-manage-faculty, admin-formatting-bugfix, authorization | Functional comments | Tested Login/Logout Process, Admin UX | Explained Git commands |
 
