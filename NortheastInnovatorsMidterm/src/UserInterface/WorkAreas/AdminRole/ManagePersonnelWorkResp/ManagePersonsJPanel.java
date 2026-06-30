@@ -134,7 +134,7 @@ public class ManagePersonsJPanel extends javax.swing.JPanel {
         }
 
         // Null check
-        Person selectedPerson = business.getPersonDirectory().findPerson((Person) tblPersons.getValueAt(selectedRow, 0)));
+        Person selectedPerson = (Person) tblPersons.getValueAt(selectedRow, 0);
         if (selectedPerson == null) {
             JOptionPane.showMessageDialog(null, "Failed to get selected person's information.", "Warning", JOptionPane.WARNING_MESSAGE);
             refreshTable();
