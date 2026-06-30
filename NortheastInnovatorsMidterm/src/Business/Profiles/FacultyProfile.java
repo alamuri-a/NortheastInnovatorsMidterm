@@ -1,3 +1,4 @@
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -5,12 +6,18 @@
  */
 package Business.Profiles;
 
+
+
+
 import Business.Person.Person;
 import java.util.ArrayList;
 import university.CourseSchedule.CourseOffer;
 import university.Department.Department;
 import university.Persona.Faculty.FacultyAssignment;
 import university.Persona.Faculty.PersonaFacultyProfile;
+
+
+
 
 /**
  *
@@ -25,8 +32,8 @@ public class FacultyProfile extends Profile {
     String id;
     Department department;
     ArrayList <FacultyAssignment> facultyassignments; 
-    PersonaFacultyProfile personaFacultyProfile;
     FacultyAccount facultyAccount;
+    private PersonaFacultyProfile personafacultyProfile;
         
     // CONSTRUCTOR
     public FacultyProfile(Person p) {
@@ -36,15 +43,7 @@ public class FacultyProfile extends Profile {
 
     }
 
-    // Getter and Setter to link and retrieve the library data model
-    public PersonaFacultyProfile getPersonaFacultyProfile() {
-        return personaFacultyProfile;
-    }
-
-    public void setPersonaFacultyProfile(PersonaFacultyProfile pfp) {
-        this.personaFacultyProfile = pfp;
-    }
-    
+   
       public  double getProfAverageOverallRating(){
         
         double sum = 0.0;
@@ -61,13 +60,13 @@ public class FacultyProfile extends Profile {
 
     // Inside your updated AssignAsTeacher method:
     public FacultyAssignment AssignAsTeacher(CourseOffer co) {
-        if (this.personaFacultyProfile == null) {
+        if (this.personafacultyProfile == null) {
             // You may need to adapt this depending on what constructors PersonaFacultyProfile provides
             // this.personaFaculty = new PersonaFacultyProfile(...); 
         }
 
         // Pass the matching type expected by the library object
-        FacultyAssignment fa = new FacultyAssignment(this.personaFacultyProfile, co); 
+        FacultyAssignment fa = new FacultyAssignment(this.personafacultyProfile, co); 
         facultyassignments.add(fa);
         return fa;
     }
@@ -97,3 +96,4 @@ public class FacultyProfile extends Profile {
     }
 
 }
+

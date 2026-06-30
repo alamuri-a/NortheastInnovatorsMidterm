@@ -1,9 +1,6 @@
 package Business;
 
 import java.util.ArrayList;
-import university.CourseCatalog.Course;
-import university.CourseSchedule.CourseLoad;
-import university.CourseSchedule.CourseOffer;
 import university.CourseSchedule.CourseSchedule;
 import university.CourseSchedule.SeatAssignment;
 import university.CourseSchedule.Seats;
