@@ -184,6 +184,7 @@ Authentication and authorization were verified by confirming that each user role
 
 ### Demo Accounts
 | Role  | Username  | Password  |
+|-------|-----------|-----------|
 | Admin | admin | ****  |
 | Student | adam  | ****  |
 | Faculty | jackW | ****  |
@@ -220,6 +221,6 @@ The following table summarizes each team member's responsibilities and contribut
 |-------------|-------------------|----------------------|---------------|---------|---------------------|
 | Nicholas Woodward | Student | README, student-coursework, student-graduation-audit, student-manage-profile | PR and commits |   Tested Student UX | Assisted with power point presentation |
 | Meredith Molyneux | Faculty | TBD | TBD | TBD | TBD |
-| Ajay Alamuri | Admin | clean-formatting, logout, manage-users, manage-persons, admin-profile, admin-manage-students, admin-manage-faculty, admin-formatting-bugfix, authorization | Functional comments | Tested Login/Logout Process, Admin UX | Explained Git commands |
+| Ajay Alamuri | Admin | clean-formatting, logout, manage-users, manage-persons, admin-profile, admin-manage-students, admin-manage-faculty, admin-formatting-bugfix, authorization | Functional comments, PR reviews | Tested Login/Logout Process, Admin UX | Explained Git commands |
 
 Each team member contributed to project planning, GitHub collaboration, code reviews, and integration testing throughout the development of the Digital University System.
