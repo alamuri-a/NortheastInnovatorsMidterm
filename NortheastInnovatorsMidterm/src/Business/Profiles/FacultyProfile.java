@@ -76,13 +76,6 @@ public class FacultyProfile extends Profile {
             return null; //complete it later
         }
 
-        public boolean isMatch(String id) {
-        if (person.getPersonId().equals(id)) {
-            return true;
-        }
-        return false;
-    }
-
         // Pass-through helper method to get the name safely
         public String getFacultyName() {
             return (person != null) ? person.getPersonId() : "Unknown";
