@@ -4,7 +4,7 @@
 | Team Member | NUID | Assigned Role | Responsibilities |
 |-------------|------|---------------|------------------|
 | Nicholas Woodward | 002478780 | Student | README, Student Use Case Functionality |
-| Meredith Molyneux| 003978998 | Faculty| XXXX |
+| Meredith Molyneux| 003978998 | Faculty| Faculty Use Case Functionality, Setting up UniversityData Model |
 | Ajay Alamuri | 003915177 | Admin | Formatting, Admin Use Case Functionality, Authentication/Authorization |
 
 ## Project Overview
@@ -197,8 +197,7 @@ Throughout the development of this project, the team encountered several technic
 |-----------|----------|
 | Lack of familiarity with GitHub-based collaboration | Wrote a master list of relevant commands with examples and explanations of behavior |
 | Working asychronously while simulataneously building packages that may not work together | Communication and agreeing on standard methods and features |
-| TBD | TBD |
-| TBD | TBD |
+| Issues integrating the University Model | Realized it was the wrong file being imported which wasn't showing in the gitscope|
 
 ## Future Enhancements
 
@@ -220,7 +219,7 @@ The following table summarizes each team member's responsibilities and contribut
 | Team Member | Assigned Use Case | Coding Contributions | Documentation | Testing | Other Contributions |
 |-------------|-------------------|----------------------|---------------|---------|---------------------|
 | Nicholas Woodward | Student | README, student-coursework, student-graduation-audit, student-manage-profile | PR and commits |   Tested Student UX | Assisted with power point presentation |
-| Meredith Molyneux | Faculty | TBD | TBD | TBD | TBD |
+| Meredith Molyneux | Faculty | Faculty_managestudents_performanceReports,MyFacultyProfile,MMolyneux-FacultyRole-WorkArea,MMolyneux-feat-3,MMolyneux-feat-2,MMolyneux721-feat-1 | PR and commits | Tested Faculty UX | UniversityDataModel |
 | Ajay Alamuri | Admin | clean-formatting, logout, manage-users, manage-persons, admin-profile, admin-manage-students, admin-manage-faculty, admin-formatting-bugfix, authorization | Functional comments, PR reviews | Tested Login/Logout Process, Admin UX | Explained Git commands |
 
 Each team member contributed to project planning, GitHub collaboration, code reviews, and integration testing throughout the development of the Digital University System.
